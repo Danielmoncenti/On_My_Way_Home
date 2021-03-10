@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 502109296738468680}
   - component: {fileID: 502109296738468683}
   - component: {fileID: 502109296738468682}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Gout
   m_TagString: Gout
   m_Icon: {fileID: 0}

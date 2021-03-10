@@ -19,6 +19,7 @@ TagManager:
   - Mole
   - Rock
   - Button
+  - GameManager
   layers:
   - Default
   - TransparentFX
@@ -29,16 +30,16 @@ TagManager:
   - 
   - 
   - Spikey
-  - Puas
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Spikes
+  - Rat
+  - Bat
+  - Cocrodile
+  - Lobster
+  - Mole
+  - Gout
+  - Cristal
+  - JawTrap
+  - Thorms
   - 
   - 
   - 

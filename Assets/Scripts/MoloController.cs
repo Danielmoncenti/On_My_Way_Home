@@ -10,7 +10,7 @@ public class MoloController : MonoBehaviour
     private Rigidbody2D rbMole;
 
     private float shootTime = 0;
-    private bool shooted = false;
+    //private bool shooted = false;
 
     // Start is called before the first frame update
     void Start() {

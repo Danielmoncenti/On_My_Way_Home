@@ -12,7 +12,7 @@ public class BatController : MonoBehaviour
 
     private Rigidbody2D rigidBody;
 
-    private float positionX;
+    //private float positionX;
     private float positionY;
 
     // Start is called before the first frame update
@@ -39,7 +39,7 @@ public class BatController : MonoBehaviour
 
         currentSpeedV = -baseSpeed;
 
-        positionX = transform.position.x;
+        //positionX = transform.position.x;
         positionY = transform.position.y;
 
     }
@@ -73,7 +73,7 @@ public class BatController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Tilemap")
         {
-            currentSpeedH *= -1;
+            //currentSpeedH *= -1;
             currentSpeedV *= -1;
         }
         if (collision.gameObject.tag == "Puas")
