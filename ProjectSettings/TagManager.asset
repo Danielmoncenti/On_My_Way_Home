@@ -4,21 +4,20 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Tilemap
-  - Spikey
+  - JawTrap
+  - Shadow
+  - Thorns
+  - Mole
+  - Wall
+  - Button
+  - Rock
   - Puas
   - Rat
-  - Wall
   - Bat
-  - Gout
   - Dash
-  - Shadow
-  - JawTrap
-  - Thorns
   - Cristal
-  - Mole
-  - Rock
-  - Button
+  - Gout
+  - Spikey
   layers:
   - Default
   - TransparentFX
@@ -28,8 +27,8 @@ TagManager:
   - UI
   - 
   - 
-  - Spikey
-  - Puas
+  - 
+  - 
   - 
   - 
   - 
