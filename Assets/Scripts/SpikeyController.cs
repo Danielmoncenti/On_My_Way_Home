@@ -42,6 +42,8 @@ public class SpikeyController : MonoBehaviour
     public GameObject dashtrigger;
     public GameObject shadow;
 
+    Vector3 Spikeyscale;
+
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +53,7 @@ public class SpikeyController : MonoBehaviour
           shadowExists=false;
           isdashing = false;
         stucked = false;
+        Spikeyscale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -167,7 +170,7 @@ public class SpikeyController : MonoBehaviour
             maxSpeed = 130.0f;
         }
 
-
+        transform.localScale = Spikeyscale;
     }
     private void cancelDash()
     {
@@ -293,9 +296,11 @@ public class SpikeyController : MonoBehaviour
                     break;
                 case Direction.RIGHT:
                     rigidBody.AddForce(transform.right * baseSpeed * delta);
+                    Spikeyscale.x = 1;
                     break;
                 case Direction.LEFT:
                     rigidBody.AddForce((transform.right * baseSpeed * delta) * -1);
+                    Spikeyscale.x = -1;
                     break;
             }
         

@@ -18,6 +18,7 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         cameraPos = new Vector3(Spikey.transform.position.x, Spikey.transform.position.y + 40, -10.0f);
         transform.position = Vector3.SmoothDamp(gameObject.transform.position, cameraPos, ref velocity, dampTime);
     }
