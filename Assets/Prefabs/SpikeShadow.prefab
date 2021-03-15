@@ -97,6 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 593a6f82dec58834c880b7364cb35e1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  erizo: {fileID: 3751320106580556463, guid: ae037e2e96dec9e409553190f936d51b, type: 3}
+  TotalTime: 0.1
+  startReturn: 0
 --- !u!50 &4512199868017588351
 Rigidbody2D:
   serializedVersion: 4

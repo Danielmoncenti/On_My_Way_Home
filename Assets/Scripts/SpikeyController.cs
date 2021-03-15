@@ -10,7 +10,7 @@ public class SpikeyController : MonoBehaviour
     private float baseSpeed = 90.0f;
     public float maxSpeed = 130.0f;
     public float dashspeed;
-    private bool shadowExists;
+    public bool shadowExists;
     public bool isdashing;
     public bool stucked;
     public float stuckedtimer = 0;
@@ -41,6 +41,7 @@ public class SpikeyController : MonoBehaviour
     public GameObject pua;
     public GameObject dashtrigger;
     public GameObject shadow;
+    private ShadowController shadowcontroller;
 
     Vector3 Spikeyscale;
 
@@ -131,7 +132,8 @@ public class SpikeyController : MonoBehaviour
                 {
                     if (shadowExists == true && isdashing == false)
                     {
-                        shadowAttack();
+                        shadowcontroller.startReturn = true;
+                        
                     }
                 }
             }
@@ -180,10 +182,7 @@ public class SpikeyController : MonoBehaviour
         rigidBody.gravityScale = 100;
     }
   
-    private void shadowAttack()
-    {
-       
-    }
+  
     private bool Walk()
     {
         currentSpeedH = rigidBody.velocity.x;
@@ -251,6 +250,8 @@ public class SpikeyController : MonoBehaviour
         {
             isdashing = true;
              shadowOndash= Instantiate(shadow, transform.position, transform.rotation);
+            shadowcontroller = shadowOndash.GetComponent<ShadowController>();
+            shadowcontroller.erizo = this.gameObject;
             if (Dashdirection == Direction.RIGHT)
             {
                 limitdash = Instantiate(dashtrigger, transform.position + transform.right * 200, transform.rotation);
@@ -273,9 +274,12 @@ public class SpikeyController : MonoBehaviour
     
     private void goToshadow()
     {
-        rigidBody.transform.position = shadowOndash.transform.position;
-        Destroy(shadowOndash);
-        shadowExists = false;
+        if (shadowExists == true)
+        {
+            rigidBody.transform.position = shadowOndash.transform.position;
+            Destroy(shadowOndash);
+            shadowExists = false;
+        }
     }
 
     private void FixedUpdate()
@@ -347,6 +351,7 @@ public class SpikeyController : MonoBehaviour
         {
             cancelDash();
         }
+
         if (collision.gameObject.tag == "JawTrap")
         {
             cancelDash();
