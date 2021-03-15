@@ -7,20 +7,14 @@ TagManager:
   - Tilemap
   - Spikey
   - Puas
-  - Rat
   - Wall
-  - Bat
-  - Gout
   - Dash
   - Shadow
-  - JawTrap
-  - Thorns
-  - Cristal
-  - Mole
   - Rock
   - Button
   - GameManager
-  - Random
+  - Enemies
+  - JawTrap
   layers:
   - Default
   - TransparentFX
@@ -32,15 +26,15 @@ TagManager:
   - 
   - Spikey
   - Spikes
-  - Rat
-  - Bat
-  - Cocrodile
-  - Lobster
-  - Mole
-  - Gout
-  - Cristal
-  - JawTrap
-  - Thorms
+  - Enemies
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
