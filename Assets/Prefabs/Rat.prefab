@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 226023265896148515}
   m_Layer: 10
   m_Name: Rat
-  m_TagString: Rat
+  m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,3 +144,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1164a6e2248a877438b902d511cf3064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSpeedH: 0
+  Spikey: {fileID: 3751320106580556463, guid: ae037e2e96dec9e409553190f936d51b, type: 3}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5562114620298237566}
   - component: {fileID: 7396717497454188353}
   - component: {fileID: 1340686557463750297}
-  m_Layer: 17
+  m_Layer: 10
   m_Name: JaxTrap
   m_TagString: JawTrap
   m_Icon: {fileID: 0}

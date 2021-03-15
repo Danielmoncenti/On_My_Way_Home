@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4639391473408964283}
   - component: {fileID: 4860458122466498292}
   - component: {fileID: 5231429831960380337}
-  m_Layer: 18
+  m_Layer: 10
   m_Name: Thorns
-  m_TagString: Thorns
+  m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

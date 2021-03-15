@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1612003776701325731}
   - component: {fileID: 679643465010824580}
   - component: {fileID: 629005865813841613}
-  m_Layer: 16
+  m_Layer: 10
   m_Name: CristalShards
-  m_TagString: Cristal
+  m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
