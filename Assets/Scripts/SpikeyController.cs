@@ -20,8 +20,9 @@ public class SpikeyController : MonoBehaviour
     public float thrust = 25.0f;
 
     private bool canWalk = true;
-    public bool canJump = false;
-    private bool canClimb = false;
+    public bool Jumping = true;
+    public bool canClimb = false;
+    public bool climbing = false;
 
     KeyCode upButton = KeyCode.W;
     KeyCode downButton = KeyCode.S;
@@ -32,7 +33,9 @@ public class SpikeyController : MonoBehaviour
     KeyCode dashButton = KeyCode.K;
     KeyCode shadowButton = KeyCode.Q;
     KeyCode sprintButton = KeyCode.J;
+    KeyCode climbButton = KeyCode.H;
 
+    private BoxCollider2D bc2d;
     private Rigidbody2D rigidBody;
     private GameObject shadowOndash;
     private GameObject limitdash;
@@ -50,9 +53,10 @@ public class SpikeyController : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        bc2d = GetComponent<BoxCollider2D>();
         //audio = GetComponent<AudioSource>();        
-          shadowExists=false;
-          isdashing = false;
+        shadowExists=false;
+        isdashing = false;
         stucked = false;
         Spikeyscale = transform.localScale;
     }
@@ -60,25 +64,27 @@ public class SpikeyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+  
         
         SpikeyDirection = Direction.NONE;
         if (stucked == false)
         {
+            
             if (isdashing == false)
             {
-                if (Input.GetKeyDown(upButton) && Climb())
+                if (Input.GetKey(upButton) && climbing==true)
                 {
                     SpikeyDirection = Direction.UP;
 
                 }
-                else if (Input.GetKeyDown(downButton) && Climb())
+                else if (Input.GetKey(downButton) && climbing==true)
                 {
 
                     SpikeyDirection = Direction.DOWN;
 
                 }
 
-                if (Input.GetKey(rightButton))
+                if (Input.GetKey(rightButton) && climbing==false)
                 {
                     //transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
                     currentSpeedH = rigidBody.velocity.x;
@@ -97,7 +103,7 @@ public class SpikeyController : MonoBehaviour
                         Dashdirection = Direction.RIGHT;
                     }
                 }
-                else if (Input.GetKey(leftButton))
+                else if (Input.GetKey(leftButton) && climbing==false)
                 {
                     //transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
                     currentSpeedH = rigidBody.velocity.x;
@@ -118,7 +124,7 @@ public class SpikeyController : MonoBehaviour
                     }
                 }
 
-                if (Input.GetKeyDown(spaceButton) && canJump)
+                if (Input.GetKeyDown(spaceButton) && Jumping==false)
                 {
                     jump();
                 }
@@ -151,6 +157,27 @@ public class SpikeyController : MonoBehaviour
 
                 }
             }
+            if (Input.GetKey(climbButton))
+            {
+                if (canClimb == true)
+                {
+                    
+                    climbing = true;
+                    
+                    rigidBody.gravityScale = 0;
+                }
+            
+            }
+            if (Input.GetKeyUp(climbButton))
+            {
+                if (climbing == true)
+                {
+                    climbing = false;
+                    rigidBody.gravityScale = 100;
+                }
+
+            }
+
 
         }
         
@@ -198,19 +225,15 @@ public class SpikeyController : MonoBehaviour
         return canWalk;
     }
 
-    private bool Climb()
+    private bool checkRaycastWithScenarioJump(RaycastHit2D[] hits)
     {
-        currentSpeedV = rigidBody.velocity.y;
-
-        if (currentSpeedV > baseSpeed)
+        foreach (RaycastHit2D hit in hits)
         {
-            canClimb = false;
+            if (hit.collider != null) {
+                if (hit.collider.gameObject.tag == "Tilemap" || hit.collider.gameObject.tag=="Wall") { return true; }
+            }
         }
-        else
-        {
-            canClimb = true;
-        }
-        return canClimb;
+        return false;
     }
 
     private void jump()
@@ -218,7 +241,7 @@ public class SpikeyController : MonoBehaviour
         // rigidBody.transform.position.y = new Vector3(transform.position.x, transform.position.y + 5, 0);
         float delta = Time.fixedDeltaTime * 1000;
         rigidBody.AddForce(transform.up * thrust * delta, ForceMode2D.Impulse);
-        canJump = false;
+        Jumping = true;
 
     }
     private void attack()
@@ -267,9 +290,9 @@ public class SpikeyController : MonoBehaviour
                 rigidBody.gravityScale = 0;
             }
         }
-    
 
 
+        
     }
     
     private void goToshadow()
@@ -293,11 +316,11 @@ public class SpikeyController : MonoBehaviour
             {
                 default: break;
                 case Direction.UP:
-                    rigidBody.AddForce(transform.up * baseSpeed * delta);
+                    rigidBody.velocity=new Vector2(0,90);
                     break;
                 case Direction.DOWN:
-                    rigidBody.AddForce((transform.up * baseSpeed * delta) * -1);
-                    break;
+                rigidBody.velocity = new Vector2(0, -90);
+                break;
                 case Direction.RIGHT:
                     rigidBody.AddForce(transform.right * baseSpeed * delta);
                     Spikeyscale.x = 1;
@@ -306,26 +329,56 @@ public class SpikeyController : MonoBehaviour
                     rigidBody.AddForce((transform.right * baseSpeed * delta) * -1);
                     Spikeyscale.x = -1;
                     break;
+            case Direction.NONE:
+                if (climbing == true)
+                {
+                    rigidBody.velocity = new Vector2(0, 0);
+                }
+                break;
             }
         
     }
 
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Tilemap" || collision.gameObject.tag == "Wall")
+        {
+            if (Jumping == true)
+            {
+                bool col1 = false;
+                bool col2 = false;
+                bool col3 = false;
+                float centerx = (bc2d.bounds.min.x + bc2d.bounds.max.x) / 2;
+                Vector2 centerPosition = new Vector2(centerx, bc2d.bounds.min.y);
+                Vector2 leftPosition = new Vector2(bc2d.bounds.min.x + 3, bc2d.bounds.min.y);
+                Vector2 rightPosition = new Vector2(bc2d.bounds.max.x - 3, bc2d.bounds.min.y);
+
+                RaycastHit2D[] hits = Physics2D.RaycastAll(centerPosition, -Vector2.up, 2);
+                if (checkRaycastWithScenarioJump(hits)) { col1 = true; }
+                hits = Physics2D.RaycastAll(leftPosition, -Vector2.up, 2);
+                if (checkRaycastWithScenarioJump(hits)) { col2 = true; }
+                hits = Physics2D.RaycastAll(rightPosition, -Vector2.up, 2);
+                if (checkRaycastWithScenarioJump(hits)) { col3 = true; }
+
+                if (col1 || col2 || col3) { Jumping = false; }
+
+            }
+        }
+
+
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Tilemap")
-        {
-            canJump = true;
-        }
-
-        if (collision.gameObject.tag == "Nombre del gameobject qe permite escalar")
-        {
-            canClimb = true;
-        }
-
+        
+    
         if (collision.gameObject.tag == "Wall" && isdashing == true)
         {
             cancelDash();
+        }
+        if (collision.gameObject.tag == "Wall")
+        {
+            canClimb = true;
         }
         if (collision.gameObject.tag == "Rat")
         {
@@ -362,6 +415,25 @@ public class SpikeyController : MonoBehaviour
         if (collision.gameObject.tag == "Enemies")
         {
             Destroy(gameObject);
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Tilemap")
+        {
+            Jumping = true;
+        }
+        if (collision.gameObject.tag == "Wall" )
+        {
+            Jumping = true;
+            canClimb = false;
+            if (climbing == true)
+            {
+                
+                climbing = false;
+                rigidBody.gravityScale = 100;
+
+            }
         }
     }
 }
