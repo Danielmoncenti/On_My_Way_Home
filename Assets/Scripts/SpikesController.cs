@@ -26,27 +26,7 @@ public class SpikesController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else if (collision.gameObject.tag == "Rat")
-        {
-            Destroy(gameObject);
-        }
-        else if (collision.gameObject.tag == "Bat")
-        {
-            Destroy(gameObject);
-        }
-        else if (collision.gameObject.tag == "Crocodile")
-        {
-            Destroy(gameObject);
-        }
-        else if (collision.gameObject.tag == "Lobster")
-        {
-            Destroy(gameObject);
-        }
-        else if (collision.gameObject.tag == "Mole")
-        {
-            Destroy(gameObject);
-        }
-        else if (collision.gameObject.tag == "Gout")
+        else if (collision.gameObject.tag == "Enemies")
         {
             Destroy(gameObject);
         }

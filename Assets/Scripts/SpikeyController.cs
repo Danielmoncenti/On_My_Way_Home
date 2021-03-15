@@ -359,19 +359,7 @@ public class SpikeyController : MonoBehaviour
             stucked = true;
             
         }
-        if (collision.gameObject.tag == "Rock")
-        {
-            Destroy(gameObject);
-        }
-        if (collision.gameObject.tag == "Thorns")
-        {
-            Destroy(gameObject);
-        }
-        if (collision.gameObject.tag == "Cristal")
-        {
-            Destroy(gameObject);
-        }
-        if (collision.gameObject.tag == "Gout")
+        if (collision.gameObject.tag == "Enemies")
         {
             Destroy(gameObject);
         }
