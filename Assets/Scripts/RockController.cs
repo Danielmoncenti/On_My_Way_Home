@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RockController : MonoBehaviour
 {
-
     private Rigidbody2D _rb2d;
     public Rigidbody2D rb2d
     {
@@ -14,6 +13,7 @@ public class RockController : MonoBehaviour
             return _rb2d;
         }
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,18 +23,20 @@ public class RockController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
+
     public void setVelocity(Vector2 _velocity)
     {
-
-
         rb2d.velocity = _velocity;
-
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Scenario")
+        if (collision.gameObject.tag == "Tilemap")
+        {
+            Destroy(gameObject);
+        }
+        else  if (collision.gameObject.tag == "Spikey")
         {
             Destroy(gameObject);
         }

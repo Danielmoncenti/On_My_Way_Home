@@ -44,7 +44,7 @@ public class GameManagerController : MonoBehaviour
         {
 
         }
-        cameraPos = new Vector3(Spikey.transform.position.x, Spikey.transform.position.y /*+ 60*/, -10.0f);
+        cameraPos = new Vector3(Spikey.transform.position.x, Spikey.transform.position.y + 60, -10.0f);
         camera.transform.position = cameraPos;
     }
 }

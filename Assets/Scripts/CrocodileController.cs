@@ -9,7 +9,7 @@ public class CrocodileController : MonoBehaviour
     public float currentSpeedV = 0.0f;
     public bool canAttack = false;
 
-    private int crocodileRadius = 300;
+    //private int crocodileRadius = 250;
     [SerializeField] GameObject Spikey;
 
     private Rigidbody2D rigidBody;
@@ -37,40 +37,46 @@ public class CrocodileController : MonoBehaviour
     {
         transform.localScale = crocodileScale;
 
-        if (checkSpikeyPosition())
-        {
-            currentSpeedH = 0.0f;
-            canAttack = true;
-        }
-        else if (!checkSpikeyPosition())
-        {
-            currentSpeedH = -baseSpeed;
-            canAttack = false;
-        }
+        //if (checkSpikeyPosition())
+        //{
+        //    currentSpeedH = 0.0f;
+        //    float delta = Time.deltaTime * 1000;
+        //    if (delta > 2000)
+        //    {
+        //        currentSpeedH = -baseSpeed;
+        //    }
+        //    canAttack = true;
+        //}
+        //else if (!checkSpikeyPosition() && canAttack)
+        //{
+        //    currentSpeedH = -baseSpeed;
+        //    canAttack = false;
+        //}
     }
 
     private void FixedUpdate()
     {
         float delta = Time.fixedDeltaTime * 1000;
 
-        if (canAttack)
-        {
-            if (delta >= 1000)
-            {
-                currentSpeedV += 5;
-                if (delta >= 2000)
-                {
-                    currentSpeedV -= 5;
-                    delta = 0;
-                }
-            }
-            else if (!canAttack)
-            {
-                currentSpeedV = 0;
-            }
-        }
+       //if (canAttack)
+       //{
+       //    currentSpeedV += 50;
+       //   //if (delta >= 1000)
+       //   //{
+       //   //    currentSpeedV += 5;
+       //   //    if (delta >= 2000)
+       //   //    {
+       //   //        currentSpeedV -= 5;
+       //   //        delta = 0;
+       //   //    }
+       //   //}
+       //   //else if (!canAttack)
+       //   //{
+       //   //    currentSpeedV = 0;
+       //   //}
+       //}
 
-        rigidBody.velocity = new Vector2(currentSpeedH, 0.0f) * delta;
+        rigidBody.velocity = new Vector2(currentSpeedH, currentSpeedV) * delta;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -85,8 +91,8 @@ public class CrocodileController : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private bool checkSpikeyPosition()
+    /*private bool checkSpikeyPosition()
     {
         return Vector2.Distance(this.transform.position, Spikey.transform.position) <= this.crocodileRadius;
-    }
+    }*/
 }

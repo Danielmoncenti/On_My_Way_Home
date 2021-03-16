@@ -89,12 +89,12 @@ public class RatController : MonoBehaviour
 
         if (currentSpeedH == baseSpeed)
         {
-            RaycastHit2D hits = Physics2D.Raycast(rightPosition, Vector2.right, 150);
+            RaycastHit2D hits = Physics2D.Raycast(rightPosition, Vector2.right, 200);
             if (checkRaycastWithScenario(hits)) { rightCollision = true; }
         }
         else if (currentSpeedH == -baseSpeed)
         {
-            RaycastHit2D hits = Physics2D.Raycast(leftPosition, -Vector2.right, 150);
+            RaycastHit2D hits = Physics2D.Raycast(leftPosition, -Vector2.right, 200);
             if (checkRaycastWithScenario(hits)) { leftCollision = true; }
         }
         

@@ -13,26 +13,25 @@ public class MoloController : MonoBehaviour
     private int center;
     public GameObject erizo;
     public GameObject rock;
-    public float turretRadius;
+    private float turretRadius;
     private float timer;
-    public float bulletSpeed;
+    private float bulletSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        bulletSpeed = 250;
+        turretRadius = 350;
         timer = 0;
         rb2d = GetComponent<Rigidbody2D>();
    
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        if (checkShipPosition() == true)
+        if (checkShipPosition())
         {
 
             timer += Time.deltaTime;
