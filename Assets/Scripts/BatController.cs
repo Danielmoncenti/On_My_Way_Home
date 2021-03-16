@@ -41,8 +41,7 @@ public class BatController : MonoBehaviour
         }
         else if (!checkSpikeyPosition())
         {
-            if (currentSpeedV == maxSpeed) { currentSpeedV = baseSpeed; }
-            else if (currentSpeedV == -maxSpeed) { currentSpeedV = -baseSpeed; }
+            currentSpeedV = -baseSpeed; 
         }
     }
    
