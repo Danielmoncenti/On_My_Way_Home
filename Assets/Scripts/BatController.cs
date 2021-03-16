@@ -9,6 +9,7 @@ public class BatController : MonoBehaviour
     public float currentSpeedV = 0.0f;
     private float maxPositionY = 16.0f;
     private int batRadius = 300;
+    private bool actNormal = true;
 
     private Rigidbody2D rigidBody;
     private BoxCollider2D boxCollider2D;
@@ -22,7 +23,7 @@ public class BatController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         float rand = Random.Range(0.0f, 0.8f);
-        if (rand <= 0.4)
+        if (rand < 0.8)
         {
             currentSpeedV = baseSpeed;
         }
@@ -35,14 +36,15 @@ public class BatController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (checkSpikeyPosition())
-        {
-            StartRayCast();
-        }
-        else if (!checkSpikeyPosition())
-        {
-            currentSpeedV = -baseSpeed; 
-        }
+       if (checkSpikeyPosition())
+       {
+           StartRayCast();
+       }
+       else if (!checkSpikeyPosition() && !actNormal)
+       {
+           currentSpeedV = -baseSpeed;
+            actNormal = true;
+       }
     }
    
     private void FixedUpdate()
@@ -92,7 +94,7 @@ public class BatController : MonoBehaviour
         hits = Physics2D.RaycastAll(leftPosition, -Vector2.up, 150);
         if (checkRaycastWithScenario(hits)) { leftCollision = true; }
       
-        if (rightCollision || leftCollision) { currentSpeedV = -maxSpeed; }
+        if (rightCollision || leftCollision) { currentSpeedV = -maxSpeed; actNormal = false; }
 
     }
     private bool checkSpikeyPosition()
