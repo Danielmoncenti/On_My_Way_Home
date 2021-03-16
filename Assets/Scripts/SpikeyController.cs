@@ -235,6 +235,18 @@ public class SpikeyController : MonoBehaviour
         }
         return false;
     }
+    private bool checkRaycastWithScenarioClimb(RaycastHit2D[] hits)
+    {
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.collider != null)
+            {
+                if (hit.collider.gameObject.tag == "Wall" ){ return true; }
+            }
+        }
+        return false;
+    }
+
 
     private void jump()
     {
@@ -365,6 +377,28 @@ public class SpikeyController : MonoBehaviour
 
             }
         }
+        if (collision.gameObject.tag == "Wall")
+        {
+            if (canClimb == false)
+            {
+                bool col = false;
+
+                float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
+                Vector2 positionright =new Vector2 (bc2d.bounds.max.x, centery);
+                Vector2 positionleft = new Vector2(bc2d.bounds.min.x, centery);
+                if (Dashdirection == Direction.LEFT)
+                {
+                    RaycastHit2D[] hits = Physics2D.RaycastAll(positionleft, -Vector2.right, 2);
+                    if (checkRaycastWithScenarioClimb(hits)) { col = true; }
+                }
+                else if (Dashdirection == Direction.RIGHT)
+                {
+                    RaycastHit2D[] hits = Physics2D.RaycastAll(positionright, Vector2.right, 2);
+                    if (checkRaycastWithScenarioClimb(hits)) { col = true; }
+                }
+                if (col) { canClimb = true; }
+            }
+        }
 
 
     }
@@ -376,10 +410,10 @@ public class SpikeyController : MonoBehaviour
         {
             cancelDash();
         }
-        if (collision.gameObject.tag == "Wall")
-        {
-            canClimb = true;
-        }
+        //if (collision.gameObject.tag == "Wall")
+        //{
+        //    canClimb = true;
+        //}
         if (collision.gameObject.tag == "Rat")
         {
             Destroy(gameObject);
