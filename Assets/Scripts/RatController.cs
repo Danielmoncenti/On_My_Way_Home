@@ -18,9 +18,10 @@ public class RatController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    { 
         rigidBody = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
+        
         ratScale = transform.localScale;
         float rand = Random.Range(0.0f, 1.0f);
         if (rand < 0.5)
