@@ -359,7 +359,9 @@ public class SpikeyController : MonoBehaviour
     {
         if (shadowExists == true)
         {
+
             rigidBody.transform.position = shadowOndash.transform.position;
+            rigidBody.velocity = new Vector2(0, 0);
             Destroy(shadowOndash);
             shadowExists = false;
         }
