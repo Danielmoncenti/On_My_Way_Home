@@ -4,71 +4,65 @@ using UnityEngine;
 
 public class MoloController : MonoBehaviour
 {
-    public GameObject Rock;
-    public GameObject Spikey;
-
-    private Rigidbody2D rbMole;
-
-    private float shootTime = 0;
-    //private bool shooted = false;
+  
+    private float life = 3;
+    private Animator animations;
+    private Rigidbody2D rb2d;
+    private int left;
+    private int right;
+    private int center;
+    public GameObject erizo;
+    public GameObject rock;
+    public float turretRadius;
+    private float timer;
+    public float bulletSpeed;
 
     // Start is called before the first frame update
-    void Start() {
-        rbMole = GetComponent<Rigidbody2D>();
+    void Start()
+    {
+
+        timer = 0;
+        rb2d = GetComponent<Rigidbody2D>();
+   
+
+
     }
 
     // Update is called once per frame
-    void Update() {
-        //StartCoroutine(SimulateProjectile());
-        float delta = Time.deltaTime * 1000;
-        shootTime += delta;
-        if (shootTime > 5000) {
-            shootTime = 0;
-            GameObject dani = Instantiate(Rock, transform.position, transform.rotation);
-        }
-    }
-    void FixedUpdate()
+    void Update()
     {
         
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Puas")
+        if (checkShipPosition() == true)
         {
-            Destroy(gameObject);
+
+            timer += Time.deltaTime;
+            if (timer >= 2)
+            {
+                timer = 0;
+                shootToPosition(erizo.transform.position);
+            }
+
         }
     }
-    //IEnumerator SimulateProjectile() {
+    private bool checkShipPosition()
+    {
 
-    //    // Delay de cada tiro.
-    //    yield return new WaitForSeconds(10);
+        return Vector2.Distance(this.transform.position, erizo.transform.position) <= this.turretRadius;
 
-    //    // Mover la Piedra al Topo.
-    //    RockPosition.position = MolePosition.position;
 
-    //    // Guardar distancia hasta Erizo.
-    //    float target_Distance = Vector3.Distance(RockPosition.position, TargetPosition.position);
+    }
+    private void shootToPosition(Vector2 target)
+    {
+        Vector2 v = target - (Vector2)this.transform.position;
 
-    //    // Calculo de velocidad segun el angulo lanzado.
-    //    float projectile_Velocity = target_Distance / (Mathf.Sin(2 * firingAngle * Mathf.Deg2Rad) / gravity);
+        GameObject inst = Instantiate(rock, this.transform.position + transform.up * -5, rock.transform.rotation);
+        RockController bc = inst.GetComponent<RockController>();
+        bc.setVelocity(v.normalized * this.bulletSpeed);
+    }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, turretRadius);
+    }
 
-    //    // Coger la Vx - Vy de la Velocidad total.
-    //    float Vx = Mathf.Sqrt(projectile_Velocity) * Mathf.Cos(firingAngle * Mathf.Deg2Rad);
-    //    float Vy = Mathf.Sqrt(projectile_Velocity) * Mathf.Sin(firingAngle * Mathf.Deg2Rad);
-
-    //    // Calcular el tiempo de vuelo
-    //    float flightDuration = target_Distance / Vx;
-
-    //    float elapse_time = 0;
-
-    //    while (elapse_time < flightDuration)
-    //    {
-    //        RockPosition.Translate(Vx * Time.deltaTime, (Vy - (gravity * elapse_time)) * Time.deltaTime, 0);
-
-    //        elapse_time += Time.deltaTime;
-
-    //        yield return null;
-    //    }
-    //}
 }

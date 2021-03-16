@@ -298,9 +298,9 @@ public class SpikeyController : MonoBehaviour
             if (Dashdirection == Direction.RIGHT)
             {
                 float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
-                Vector2 positioncenter = new Vector2(bc2d.bounds.max.x, centery);
-                Vector2 positionup = new Vector2(bc2d.bounds.max.x, bc2d.bounds.max.y);
-                Vector2 positiondown = new Vector2(bc2d.bounds.max.x, bc2d.bounds.min.y);
+                Vector2 positioncenter = new Vector2(bc2d.bounds.max.x-5, centery);
+                Vector2 positionup = new Vector2(bc2d.bounds.max.x-5, bc2d.bounds.max.y);
+                Vector2 positiondown = new Vector2(bc2d.bounds.max.x-5, bc2d.bounds.min.y);
 
                 RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right, 200, LayerDashLimit);
                 RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right, 200, LayerDashLimit);
@@ -324,9 +324,9 @@ public class SpikeyController : MonoBehaviour
             else if (Dashdirection == Direction.LEFT)
             {
                 float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
-                Vector2 positioncenter = new Vector2(bc2d.bounds.min.x, centery);
-                Vector2 positionup = new Vector2(bc2d.bounds.min.x, bc2d.bounds.max.y);
-                Vector2 positiondown = new Vector2(bc2d.bounds.min.x, bc2d.bounds.min.y);
+                Vector2 positioncenter = new Vector2(bc2d.bounds.min.x +5, centery);
+                Vector2 positionup = new Vector2(bc2d.bounds.min.x +5, bc2d.bounds.max.y);
+                Vector2 positiondown = new Vector2(bc2d.bounds.min.x +5, bc2d.bounds.min.y);
 
                 RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right * -1, 200, LayerDashLimit);
                 RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right * -1, 200, LayerDashLimit);
@@ -359,7 +359,9 @@ public class SpikeyController : MonoBehaviour
     {
         if (shadowExists == true)
         {
+
             rigidBody.transform.position = shadowOndash.transform.position;
+            rigidBody.velocity = new Vector2(0, 0);
             Destroy(shadowOndash);
             shadowExists = false;
         }
