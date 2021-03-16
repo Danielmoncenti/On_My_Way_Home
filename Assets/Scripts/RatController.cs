@@ -84,8 +84,8 @@ public class RatController : MonoBehaviour
     {
         bool rightCollision = false;
         bool leftCollision = false;
-        Vector2 rightPosition = new Vector2(boxCollider2D.bounds.min.x, boxCollider2D.bounds.center.y);
-        Vector2 leftPosition = new Vector2(boxCollider2D.bounds.max.x, boxCollider2D.bounds.center.y);
+        Vector2 rightPosition = new Vector2(boxCollider2D.bounds.max.x, boxCollider2D.bounds.max.y);
+        Vector2 leftPosition = new Vector2(boxCollider2D.bounds.min.x, boxCollider2D.bounds.max.y);
 
         if (currentSpeedH == baseSpeed)
         {
