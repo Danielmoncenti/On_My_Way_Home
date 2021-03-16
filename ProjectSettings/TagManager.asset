@@ -16,6 +16,8 @@ TagManager:
   - Enemies
   - JawTrap
   - Crocodile
+  - DirtyWater
+  - Water
   layers:
   - Default
   - TransparentFX

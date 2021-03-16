@@ -230,7 +230,8 @@ public class SpikeyController : MonoBehaviour
     {
         foreach (RaycastHit2D hit in hits)
         {
-            if (hit.collider != null) {
+            if (hit.collider != null)
+            {
                 if (hit.collider.gameObject.tag == "Tilemap" || hit.collider.gameObject.tag == "Wall") { return true; }
             }
         }
@@ -288,10 +289,10 @@ public class SpikeyController : MonoBehaviour
     {
         if (isdashing == false)
         {
-           
+
             isdashing = true;
-            gameObject.layer =12;
-             shadowOndash= Instantiate(shadow, transform.position, transform.rotation);
+            gameObject.layer = 12;
+            shadowOndash = Instantiate(shadow, transform.position, transform.rotation);
             shadowcontroller = shadowOndash.GetComponent<ShadowController>();
             shadowcontroller.erizo = this.gameObject;
             if (Dashdirection == Direction.RIGHT)
@@ -301,12 +302,12 @@ public class SpikeyController : MonoBehaviour
                 Vector2 positionup = new Vector2(bc2d.bounds.max.x, bc2d.bounds.max.y);
                 Vector2 positiondown = new Vector2(bc2d.bounds.max.x, bc2d.bounds.min.y);
 
-                RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right , 200, LayerDashLimit);
-                RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right , 200, LayerDashLimit);
+                RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right, 200, LayerDashLimit);
+                RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right, 200, LayerDashLimit);
                 RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right, 200, LayerDashLimit);
                 RaycastHit2D[] array = new RaycastHit2D[] { hitscenter, hitsup, hitsdown };
 
-                Vector2 LimitDashPosition = transform.position + transform.right * 200 ;
+                Vector2 LimitDashPosition = transform.position + transform.right * 200;
                 for (int i = 0; i < 2; i++)
                 {
                     if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
@@ -334,7 +335,7 @@ public class SpikeyController : MonoBehaviour
                 Vector2 LimitDashPosition = transform.position + transform.right * 200 * -1;
                 for (int i = 0; i < 2; i++)
                 {
-                    if (array[i].collider != null && Vector2.Distance(array[i].point , this.transform.position)< Vector2.Distance(LimitDashPosition, this.transform.position))
+                    if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
                     {
                         LimitDashPosition = array[i].point;
                     }
@@ -344,16 +345,16 @@ public class SpikeyController : MonoBehaviour
 
 
                 limitdash = Instantiate(dashtrigger, LimitDashPosition, transform.rotation);
-                rigidBody.velocity = new Vector2(dashspeed*-1, 0);
+                rigidBody.velocity = new Vector2(dashspeed * -1, 0);
                 shadowExists = true;
                 rigidBody.gravityScale = 0;
             }
         }
 
 
-        
+
     }
-    
+
     private void goToshadow()
     {
         if (shadowExists == true)
@@ -364,38 +365,43 @@ public class SpikeyController : MonoBehaviour
         }
     }
 
+    private void DamageTaken()
+    {
+
+    }
+
     private void FixedUpdate()
     {
         float delta = Time.fixedDeltaTime * 1000;
 
-     
-        
-        
-            switch (SpikeyDirection)
-            {
-                default: break;
-                case Direction.UP:
-                    rigidBody.velocity=new Vector2(0,90);
-                    break;
-                case Direction.DOWN:
+
+
+
+        switch (SpikeyDirection)
+        {
+            default: break;
+            case Direction.UP:
+                rigidBody.velocity = new Vector2(0, 90);
+                break;
+            case Direction.DOWN:
                 rigidBody.velocity = new Vector2(0, -90);
                 break;
-                case Direction.RIGHT:
-                    rigidBody.AddForce(transform.right * baseSpeed * delta);
-                    Spikeyscale.x = 1;
-                    break;
-                case Direction.LEFT:
-                    rigidBody.AddForce((transform.right * baseSpeed * delta) * -1);
-                    Spikeyscale.x = -1;
-                    break;
+            case Direction.RIGHT:
+                rigidBody.AddForce(transform.right * baseSpeed * delta);
+                Spikeyscale.x = 1;
+                break;
+            case Direction.LEFT:
+                rigidBody.AddForce((transform.right * baseSpeed * delta) * -1);
+                Spikeyscale.x = -1;
+                break;
             case Direction.NONE:
                 if (climbing == true)
                 {
                     rigidBody.velocity = new Vector2(0, 0);
                 }
                 break;
-            }
-        
+        }
+
     }
 
 
@@ -431,7 +437,7 @@ public class SpikeyController : MonoBehaviour
                 bool col = false;
 
                 float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
-                Vector2 positionright =new Vector2 (bc2d.bounds.max.x, centery);
+                Vector2 positionright = new Vector2(bc2d.bounds.max.x, centery);
                 Vector2 positionleft = new Vector2(bc2d.bounds.min.x, centery);
                 if (Dashdirection == Direction.LEFT)
                 {
@@ -451,8 +457,8 @@ public class SpikeyController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-    
+
+
         if (collision.gameObject.tag == "Wall" && isdashing == true)
         {
             cancelDash();
@@ -481,7 +487,7 @@ public class SpikeyController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Dash" )
+        if (collision.gameObject.tag == "Dash")
         {
             cancelDash();
         }
@@ -491,7 +497,7 @@ public class SpikeyController : MonoBehaviour
             cancelDash();
             rigidBody.velocity = Vector2.zero;
             stucked = true;
-            
+
         }
         if (collision.gameObject.tag == "Enemies")
         {
@@ -504,13 +510,13 @@ public class SpikeyController : MonoBehaviour
         {
             Jumping = true;
         }
-        if (collision.gameObject.tag == "Wall" )
+        if (collision.gameObject.tag == "Wall")
         {
             Jumping = true;
             canClimb = false;
             if (climbing == true)
             {
-                
+
                 climbing = false;
                 rigidBody.gravityScale = 100;
 
