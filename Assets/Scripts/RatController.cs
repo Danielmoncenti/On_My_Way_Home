@@ -70,15 +70,12 @@ public class RatController : MonoBehaviour
         }
     }
 
-    private bool checkRaycastWithScenario(RaycastHit2D[] hits)
+    private bool checkRaycastWithScenario(RaycastHit2D hits)
     {
-        foreach (RaycastHit2D hit in hits)
-        {
-            if (hit.collider != null)
-            {
-                if(hit.collider.gameObject.tag == "Spikey") { return true; }
-            }
-        }
+       if (hits.collider != null)
+       {
+           if(hits.collider.gameObject.tag == "Spikey") { return true; }
+       }  
         return false;
     }
 
@@ -91,12 +88,12 @@ public class RatController : MonoBehaviour
 
         if (currentSpeedH == baseSpeed)
         {
-            RaycastHit2D[] hits = Physics2D.RaycastAll(rightPosition, Vector2.right, 150);
+            RaycastHit2D hits = Physics2D.Raycast(rightPosition, Vector2.right, 150);
             if (checkRaycastWithScenario(hits)) { rightCollision = true; }
         }
         else if (currentSpeedH == -baseSpeed)
         {
-            RaycastHit2D[] hits = Physics2D.RaycastAll(leftPosition, -Vector2.right, 150);
+            RaycastHit2D hits = Physics2D.Raycast(leftPosition, -Vector2.right, 150);
             if (checkRaycastWithScenario(hits)) { leftCollision = true; }
         }
         
