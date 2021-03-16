@@ -18,12 +18,14 @@ public class SpikeyController : MonoBehaviour
     private float currentSpeedV = 0.0f;
     private float currentSpeedH = 0.0f;
     public float thrust = 25.0f;
-
+    public int life = 5;
     private bool canWalk = true;
     public bool Jumping = true;
     public bool canClimb = false;
     public bool climbing = false;
-
+    public bool takingdamage = false;
+    public float damagetimer = 0.0f;
+    private Vector2 lastCheckpoint;
     KeyCode upButton = KeyCode.W;
     KeyCode downButton = KeyCode.S;
     KeyCode rightButton = KeyCode.D;
@@ -52,8 +54,10 @@ public class SpikeyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         rigidBody = GetComponent<Rigidbody2D>();
         bc2d = GetComponent<BoxCollider2D>();
+        lastCheckpoint = rigidBody.transform.position;
         //audio = GetComponent<AudioSource>();        
         shadowExists = false;
         isdashing = false;
@@ -64,8 +68,20 @@ public class SpikeyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
+        //damagetimer += Time.deltaTime;
+        //if (takingdamage)
+        //{
+        //    if (damagetimer >= 3)
+        //    {
+        //        takingdamage = false;
+        //        gameObject.layer = 8;
+        //        damagetimer = 0;
+        //    }
+        //}
+        //else
+        //{
+        //    SpikeyDirection = Direction.NONE;
+        //}
         SpikeyDirection = Direction.NONE;
         if (stucked == false)
         {
@@ -128,10 +144,10 @@ public class SpikeyController : MonoBehaviour
                 {
                     jump();
                 }
-                if (Input.GetKeyDown(spaceButton) && Jumping == true && climbing==true)
-                {
-                    climbjump();
-                }
+                //if (Input.GetKeyDown(spaceButton) && Jumping == true && climbing==true)
+                //{
+                //    climbjump();
+                //}
 
 
                 if (Input.GetKeyDown(attackButton))
@@ -162,7 +178,7 @@ public class SpikeyController : MonoBehaviour
 
                 }
             }
-            if (Input.GetKeyDown(climbButton))
+            if (Input.GetKey(climbButton))
             {
                 
                 if (canClimb == true && climbing==false)
@@ -230,7 +246,7 @@ public class SpikeyController : MonoBehaviour
         {
             if (hit.collider != null)
             {
-                if (hit.collider.gameObject.tag == "Tilemap" || hit.collider.gameObject.tag == "Wall") { return true; }
+                if (hit.collider.gameObject.tag == "Tilemap" || hit.collider.gameObject.tag == "Wall" || hit.collider.gameObject.tag == "Crocodile"|| hit.collider.gameObject.tag == "Water") { return true; }
             }
         }
         return false;
@@ -262,17 +278,17 @@ public class SpikeyController : MonoBehaviour
             Jumping = true;
         
     }
-    private void climbjump()
-    {
-        //rigidBody.transform.position.y = new Vector3(transform.position.x, transform.position.y + 5, 0);
+    //private void climbjump()
+    //{
+    //    //rigidBody.transform.position.y = new Vector3(transform.position.x, transform.position.y + 5, 0);
 
-        climbing = false;
-        float delta = Time.fixedDeltaTime * 1000;
-        rigidBody.AddForce(new Vector2(400,400), ForceMode2D.Impulse);
-        Jumping = true;
-        rigidBody.gravityScale = 100;
+    //    climbing = false;
+    //    float delta = Time.fixedDeltaTime * 1000;
+    //    rigidBody.AddForce(new Vector2(400,400), ForceMode2D.Impulse);
+    //    Jumping = true;
+    //    rigidBody.gravityScale = 100;
 
-    }
+    //}
     private void attack()
     {
         GameObject Pua1 = Instantiate(pua, transform.position + transform.up * 2, Quaternion.Euler(0, 0, 0));
@@ -380,6 +396,27 @@ public class SpikeyController : MonoBehaviour
 
     private void DamageTaken()
     {
+        if (takingdamage == false)
+        {
+            takingdamage = true;
+            life--;
+            
+            //if (Dashdirection == Direction.RIGHT)
+            //{
+            //    rigidBody.velocity = new Vector2(0, 0);
+            //    rigidBody.AddForce(new Vector2(-300, -300),ForceMode2D.Impulse);
+            //}
+            //if (Dashdirection == Direction.LEFT)
+            //{
+            //    rigidBody.velocity = new Vector2(0, 0);
+            //    rigidBody.AddForce(new Vector2(300, 300),ForceMode2D.Impulse);
+            //}
+        }
+        if (life <= 0)
+        {
+            rigidBody.transform.position = lastCheckpoint;
+            life = 5;
+        }
 
     }
 
@@ -420,7 +457,11 @@ public class SpikeyController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Tilemap" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Crocodile")
+        if (collision.gameObject.tag == "Water")
+        {
+            maxSpeed = 80;
+        }
+        if (collision.gameObject.tag == "Tilemap" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Crocodile"|| collision.gameObject.tag == "Water")
         {
             if (Jumping == true)
             {
@@ -472,23 +513,16 @@ public class SpikeyController : MonoBehaviour
     {
 
 
-       
-        if (collision.gameObject.tag == "Rat")
+        if (collision.gameObject.tag == "Water")
         {
-            Destroy(gameObject);
+            maxSpeed = 80;
         }
-        if (collision.gameObject.tag == "Mole")
+        if (collision.gameObject.tag == "Enemies")
         {
-            Destroy(gameObject);
+            rigidBody.transform.position = lastCheckpoint;
+            rigidBody.velocity = Vector2.zero;
         }
-        if (collision.gameObject.tag == "Thorns")
-        {
-            Destroy(gameObject);
-        }
-        if (collision.gameObject.tag == "Bat")
-        {
-            Destroy(gameObject);
-        }
+      
 
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -507,12 +541,25 @@ public class SpikeyController : MonoBehaviour
         }
         if (collision.gameObject.tag == "Enemies")
         {
-            Destroy(gameObject);
+            rigidBody.transform.position=lastCheckpoint;
+        }
+        if (collision.gameObject.tag == "CheckPoint")
+        {
+            lastCheckpoint = collision.transform.position;
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Tilemap")
+        {
+            Jumping = true;
+        }
+        if(collision.gameObject.tag == "Water")
+        {
+            Jumping = true;
+            maxSpeed = 130;
+        }
+        if (collision.gameObject.tag == "Crocodile")
         {
             Jumping = true;
         }

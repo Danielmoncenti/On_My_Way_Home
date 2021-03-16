@@ -69,6 +69,14 @@ public class BatController : MonoBehaviour
         }
 
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Shadow")
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private bool checkRaycastWithScenario(RaycastHit2D[] hits)
     {
         foreach (RaycastHit2D hit in hits)
@@ -101,4 +109,5 @@ public class BatController : MonoBehaviour
     {
         return Vector2.Distance(this.transform.position, Spikey.transform.position) <= this.batRadius;
     }
+    
 }

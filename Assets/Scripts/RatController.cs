@@ -106,4 +106,11 @@ public class RatController : MonoBehaviour
     {
         return Vector2.Distance(this.transform.position, Spikey.transform.position) <= this.ratRadius;
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Shadow")
+        {
+            Destroy(gameObject);
+        }
+    }
 }

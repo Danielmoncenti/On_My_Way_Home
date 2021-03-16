@@ -18,6 +18,7 @@ TagManager:
   - Crocodile
   - DirtyWater
   - Water
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
@@ -32,9 +33,9 @@ TagManager:
   - Enemies
   - Scenario
   - Dash
-  - 
-  - 
-  - 
+  - Passable Wall
+  - TakingDamage
+  - CheckPoint
   - 
   - 
   - 

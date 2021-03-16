@@ -13,7 +13,7 @@ public class MoloController : MonoBehaviour
     private int center;
     public GameObject erizo;
     public GameObject rock;
-    private float turretRadius;
+    public float turretRadius;
     private float timer;
     private float bulletSpeed;
 
@@ -62,6 +62,13 @@ public class MoloController : MonoBehaviour
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, turretRadius);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Shadow")
+        {
+            Destroy(gameObject);
+        }
     }
 
 }
