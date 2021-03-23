@@ -24,6 +24,8 @@ public class SpikeyController : MonoBehaviour
     public bool canClimb = false;
     public bool climbing = false;
     public bool takingdamage = false;
+    public bool invulnerability = false;
+    public float invulnerabilitytimer = 0.0f;
     public float damagetimer = 0.0f;
     private Vector2 lastCheckpoint;
     KeyCode upButton = KeyCode.W;
@@ -69,19 +71,25 @@ public class SpikeyController : MonoBehaviour
     void Update()
     {
         damagetimer += Time.deltaTime;
+        invulnerabilitytimer += Time.deltaTime;
         if (takingdamage)
         {
             if (damagetimer >= 1)
             {
                 takingdamage = false;
-                gameObject.layer = 8;
+                
                 damagetimer = 0;
             }
         }
-        else
+        if (invulnerability)
         {
-            SpikeyDirection = Direction.NONE;
+            if (invulnerabilitytimer >= 3)
+            {
+                gameObject.layer = 8;
+                invulnerability = false;
+            }
         }
+     
         SpikeyDirection = Direction.NONE;
         if (takingdamage == false)
         {
@@ -407,11 +415,13 @@ public class SpikeyController : MonoBehaviour
 
     private void DamageTaken(Vector2 damageDirection)
     {
-        if (takingdamage == false)
+        if (takingdamage == false && invulnerability== false)
         {
             gameObject.layer = 14;
             damagetimer = 0.0f;
+            invulnerabilitytimer = 0.0f;
             takingdamage = true;
+            invulnerability = true;
             life--;
             
             if (damageDirection.x > 0)
@@ -553,10 +563,11 @@ public class SpikeyController : MonoBehaviour
             stucked = true;
 
         }
-        //if (collision.gameObject.tag == "Enemies")
-        //{
-        //    DamageTaken();
-        //}
+        if (collision.gameObject.tag == "Enemies")
+        {
+            Vector2 damagedirection = this.transform.position - collision.transform.position;
+            DamageTaken(damagedirection);
+        }
         if (collision.gameObject.tag == "CheckPoint")
         {
             lastCheckpoint = collision.transform.position;
