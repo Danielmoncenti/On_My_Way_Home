@@ -242,6 +242,14 @@ public class SpikeyController : MonoBehaviour
         rigidBody.velocity = Vector2.zero;
         rigidBody.gravityScale = 100;
     }
+    private void Respawn()
+    {
+        gameObject.layer = 8;
+        rigidBody.transform.position = lastCheckpoint;
+        rigidBody.velocity = new Vector2(0, 0);
+
+        life = 5;
+    }
 
 
     private bool Walk()
@@ -437,9 +445,7 @@ public class SpikeyController : MonoBehaviour
         }
         if (life <= 0)
         {
-            gameObject.layer = 8;
-            rigidBody.transform.position = lastCheckpoint;
-            life = 5;
+            Respawn();
         }
 
     }
