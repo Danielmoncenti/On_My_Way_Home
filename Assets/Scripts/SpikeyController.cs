@@ -24,6 +24,8 @@ public class SpikeyController : MonoBehaviour
     public bool canClimb = false;
     public bool climbing = false;
     public bool takingdamage = false;
+    public bool invulnerability = false;
+    public float invulnerabilitytimer = 0.0f;
     public float damagetimer = 0.0f;
     private Vector2 lastCheckpoint;
     KeyCode upButton = KeyCode.W;
@@ -68,142 +70,159 @@ public class SpikeyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //damagetimer += Time.deltaTime;
-        //if (takingdamage)
-        //{
-        //    if (damagetimer >= 3)
-        //    {
-        //        takingdamage = false;
-        //        gameObject.layer = 8;
-        //        damagetimer = 0;
-        //    }
-        //}
-        //else
-        //{
-        //    SpikeyDirection = Direction.NONE;
-        //}
-        SpikeyDirection = Direction.NONE;
-        if (stucked == false)
+        damagetimer += Time.deltaTime;
+        invulnerabilitytimer += Time.deltaTime;
+        if (takingdamage)
         {
-
-            if (isdashing == false)
+            if (damagetimer >= 1)
             {
-                if (Input.GetKey(upButton) && climbing == true)
-                {
-                    SpikeyDirection = Direction.UP;
-
-                }
-                else if (Input.GetKey(downButton) && climbing == true)
-                {
-
-                    SpikeyDirection = Direction.DOWN;
-
-                }
-
-                if (Input.GetKey(rightButton) && climbing == false)
-                {
-                    //transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-                    currentSpeedH = rigidBody.velocity.x;
-                    if (currentSpeedH > maxSpeed)
-                    {
-                        canWalk = false;
-                    }
-                    else
-                    {
-                        canWalk = true;
-                    }
-
-                    if (canWalk)
-                    {
-                        SpikeyDirection = Direction.RIGHT;
-                        Dashdirection = Direction.RIGHT;
-                    }
-                }
-                else if (Input.GetKey(leftButton) && climbing == false)
-                {
-                    //transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-                    currentSpeedH = rigidBody.velocity.x;
-                    if (currentSpeedH < maxSpeed * -1)
-                    {
-                        canWalk = false;
-                    }
-                    else
-                    {
-                        canWalk = true;
-                    }
-
-                    if (canWalk)
-                    {
-                        SpikeyDirection = Direction.LEFT;
-                        Dashdirection = Direction.LEFT;
-
-                    }
-                }
-
-                if (Input.GetKeyDown(spaceButton) && Jumping == false)
-                {
-                    jump();
-                }
-                //if (Input.GetKeyDown(spaceButton) && Jumping == true && climbing==true)
-                //{
-                //    climbjump();
-                //}
-
-
-                if (Input.GetKeyDown(attackButton))
-                {
-                    attack();
-                }
-
-                if (Input.GetKeyDown(shadowButton))
-                {
-                    if (shadowExists == true && isdashing == false)
-                    {
-                        shadowcontroller.startReturn = true;
-
-                    }
-                }
-            }
-
-            if (Input.GetKeyDown(dashButton))
-            {
-                if (shadowExists == false)
-                {
-                    dash();
-
-                }
-                else if (shadowExists == true && isdashing == false)
-                {
-                    goToshadow();
-
-                }
-            }
-            if (Input.GetKey(climbButton))
-            {
+                takingdamage = false;
                 
-                if (canClimb == true && climbing==false)
+                damagetimer = 0;
+            }
+        }
+        if (invulnerability)
+        {
+            if (invulnerabilitytimer >= 3)
+            {
+                gameObject.layer = 8;
+                invulnerability = false;
+            }
+        }
+     
+        SpikeyDirection = Direction.NONE;
+        if (takingdamage == false)
+        {
+            if (stucked == false)
+            {
+
+
+                if (isdashing == false)
                 {
+                    if (Input.GetKey(upButton) && climbing == true)
+                    {
+                        SpikeyDirection = Direction.UP;
 
-                    climbing = true;
+                    }
+                    else if (Input.GetKey(downButton) && climbing == true)
+                    {
 
-                    rigidBody.gravityScale = 0;
+                        SpikeyDirection = Direction.DOWN;
+
+                    }
+
+                    if (Input.GetKey(rightButton) && climbing == false)
+                    {
+                        //transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+                        currentSpeedH = rigidBody.velocity.x;
+                        if (currentSpeedH > maxSpeed)
+                        {
+                            canWalk = false;
+                        }
+                        else
+                        {
+                            canWalk = true;
+                        }
+
+                        if (canWalk)
+                        {
+                            SpikeyDirection = Direction.RIGHT;
+                            Dashdirection = Direction.RIGHT;
+                        }
+                    }
+                    else if (Input.GetKey(leftButton) && climbing == false)
+                    {
+                        //transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+                        currentSpeedH = rigidBody.velocity.x;
+                        if (currentSpeedH < maxSpeed * -1)
+                        {
+                            canWalk = false;
+                        }
+                        else
+                        {
+                            canWalk = true;
+                        }
+
+                        if (canWalk)
+                        {
+                            SpikeyDirection = Direction.LEFT;
+                            Dashdirection = Direction.LEFT;
+
+                        }
+                    }
+
+                    if (Input.GetKeyDown(spaceButton) && Jumping == false)
+                    {
+                        jump();
+                    }
+                    //if (Input.GetKeyDown(spaceButton) && Jumping == true && climbing==true)
+                    //{
+                    //    climbjump();
+                    //}
+
+
+                    if (Input.GetKeyDown(attackButton))
+                    {
+                        attack();
+                    }
+
+                    if (Input.GetKeyDown(shadowButton))
+                    {
+                        if (shadowExists == true && isdashing == false)
+                        {
+                            shadowcontroller.startReturn = true;
+
+                        }
+                    }
                 }
 
+                if (Input.GetKeyDown(dashButton))
+                {
+                    if (shadowExists == false)
+                    {
+                        dash();
+
+                    }
+                    else if (shadowExists == true && isdashing == false)
+                    {
+                        goToshadow();
+
+                    }
+                }
+                if (Input.GetKey(climbButton))
+                {
+
+                    if (canClimb == true && climbing == false)
+                    {
+
+                        climbing = true;
+
+                        rigidBody.gravityScale = 0;
+                    }
+
+                }
+                if (Input.GetKeyUp(climbButton))
+                {
+
+                    climbing = false;
+                    rigidBody.gravityScale = 100;
+                }
+
+
+
             }
-          
-
-
-        }
-
-        else
-        {
-            stuckedtimer += Time.deltaTime * 1000;
-            if (stuckedtimer >= 2000)
+            else
             {
-                stucked = false;
-                stuckedtimer = 0;
+                stuckedtimer += Time.deltaTime * 1000;
+                if (stuckedtimer >= 2000)
+                {
+                    stucked = false;
+                    stuckedtimer = 0;
+                }
             }
         }
+
+     
         if (Input.GetKey(sprintButton))
         {
             maxSpeed = 300.0f;
@@ -222,6 +241,14 @@ public class SpikeyController : MonoBehaviour
         Destroy(limitdash);
         rigidBody.velocity = Vector2.zero;
         rigidBody.gravityScale = 100;
+    }
+    private void Respawn()
+    {
+        gameObject.layer = 8;
+        rigidBody.transform.position = lastCheckpoint;
+        rigidBody.velocity = new Vector2(0, 0);
+
+        life = 5;
     }
 
 
@@ -332,10 +359,10 @@ public class SpikeyController : MonoBehaviour
                 RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right, 200, LayerDashLimit);
                 RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right, 200, LayerDashLimit);
                 RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right, 200, LayerDashLimit);
-                RaycastHit2D[] array = new RaycastHit2D[] { hitscenter, hitsup, hitsdown };
+                RaycastHit2D[] array = new RaycastHit2D[] {  hitsup, hitscenter, hitsdown };
 
                 Vector2 LimitDashPosition = transform.position + transform.right * 200;
-                for (int i = 0; i < 2; i++)
+                for (int i = 0; i < 3; i++)
                 {
                     if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
                     {
@@ -353,14 +380,14 @@ public class SpikeyController : MonoBehaviour
                 float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
                 Vector2 positioncenter = new Vector2(bc2d.bounds.min.x, centery);
                 Vector2 positionup = new Vector2(bc2d.bounds.min.x, bc2d.bounds.max.y);
-                Vector2 positiondown = new Vector2(bc2d.bounds.min.x, bc2d.bounds.min.y);
+                Vector2 positiondown = new Vector2(bc2d.bounds.min.x, bc2d.bounds.min.y );
 
                 RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right * -1, 200, LayerDashLimit);
                 RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right * -1, 200, LayerDashLimit);
                 RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right * -1, 200, LayerDashLimit);
-                RaycastHit2D[] array = new RaycastHit2D[] { hitscenter, hitsup, hitsdown };
+                RaycastHit2D[] array = new RaycastHit2D[] {  hitsup, hitscenter, hitsdown };
                 Vector2 LimitDashPosition = transform.position + transform.right * 200 * -1;
-                for (int i = 0; i < 2; i++)
+                for (int i = 0; i < 3; i++)
                 {
                     if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
                     {
@@ -368,7 +395,7 @@ public class SpikeyController : MonoBehaviour
                     }
                 }
 
-                RaycastHit2D hits = Physics2D.Raycast(positionup, Vector2.right * -1, 200, LayerDashLimit);
+                
 
 
                 limitdash = Instantiate(dashtrigger, LimitDashPosition, transform.rotation);
@@ -394,28 +421,31 @@ public class SpikeyController : MonoBehaviour
         }
     }
 
-    private void DamageTaken()
+    private void DamageTaken(Vector2 damageDirection)
     {
-        if (takingdamage == false)
+        if (takingdamage == false && invulnerability== false)
         {
+            gameObject.layer = 14;
+            damagetimer = 0.0f;
+            invulnerabilitytimer = 0.0f;
             takingdamage = true;
+            invulnerability = true;
             life--;
             
-            //if (Dashdirection == Direction.RIGHT)
-            //{
-            //    rigidBody.velocity = new Vector2(0, 0);
-            //    rigidBody.AddForce(new Vector2(-300, -300),ForceMode2D.Impulse);
-            //}
-            //if (Dashdirection == Direction.LEFT)
-            //{
-            //    rigidBody.velocity = new Vector2(0, 0);
-            //    rigidBody.AddForce(new Vector2(300, 300),ForceMode2D.Impulse);
-            //}
+            if (damageDirection.x > 0)
+            {
+                rigidBody.velocity = new Vector2(0, 0);
+                rigidBody.AddForce(new Vector2(300, 300),ForceMode2D.Impulse);
+            }
+            else
+            {
+                rigidBody.velocity = new Vector2(0, 0);
+                rigidBody.AddForce(new Vector2(-300, 300),ForceMode2D.Impulse);
+            }
         }
         if (life <= 0)
         {
-            rigidBody.transform.position = lastCheckpoint;
-            life = 5;
+            Respawn();
         }
 
     }
@@ -519,8 +549,8 @@ public class SpikeyController : MonoBehaviour
         }
         if (collision.gameObject.tag == "Enemies")
         {
-            rigidBody.transform.position = lastCheckpoint;
-            rigidBody.velocity = Vector2.zero;
+            Vector2 damagedirection = this.transform.position-collision.transform.position;
+            DamageTaken(damagedirection);
         }
       
 
@@ -541,7 +571,8 @@ public class SpikeyController : MonoBehaviour
         }
         if (collision.gameObject.tag == "Enemies")
         {
-            rigidBody.transform.position=lastCheckpoint;
+            Vector2 damagedirection = this.transform.position - collision.transform.position;
+            DamageTaken(damagedirection);
         }
         if (collision.gameObject.tag == "CheckPoint")
         {
