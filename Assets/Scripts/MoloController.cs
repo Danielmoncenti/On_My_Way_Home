@@ -69,6 +69,10 @@ public class MoloController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        else if (collision.gameObject.tag == "Puas")
+        {
+            Destroy(gameObject);
+        }
     }
 
 }
