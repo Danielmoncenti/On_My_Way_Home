@@ -38,6 +38,7 @@ public class SpikeyController : MonoBehaviour
     KeyCode shadowButton = KeyCode.Q;
     KeyCode sprintButton = KeyCode.J;
     KeyCode climbButton = KeyCode.H;
+    KeyCode respawnButton = KeyCode.Z;
 
     private BoxCollider2D bc2d;
     private Rigidbody2D rigidBody;
@@ -70,6 +71,10 @@ public class SpikeyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(respawnButton))
+        {
+            this.transform.position = lastCheckpoint;
+        }
         damagetimer += Time.deltaTime;
         invulnerabilitytimer += Time.deltaTime;
         if (takingdamage)

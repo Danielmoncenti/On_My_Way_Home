@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -7101366518591517462}
   - component: {fileID: 4512199868017588351}
   - component: {fileID: -4600639667092246208}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SpikeShadow
   m_TagString: Shadow
   m_Icon: {fileID: 0}
