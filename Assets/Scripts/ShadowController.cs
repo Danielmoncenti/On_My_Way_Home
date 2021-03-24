@@ -10,6 +10,7 @@ public class ShadowController : MonoBehaviour
     private float timer;
     public float TotalTime;
     public bool startReturn;
+   
     SpikeyController erizocontroller;
 
     // Start is called before the first frame update
@@ -26,6 +27,7 @@ public class ShadowController : MonoBehaviour
     {
         if (startReturn == true)
         {
+            gameObject.layer = 0;
             float t = timer / TotalTime;
             rb2d.transform.position = (Vector2.Lerp(startPosition, erizo.transform.position, t));
             timer += Time.deltaTime;
