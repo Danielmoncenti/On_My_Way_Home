@@ -3,7 +3,12 @@ guid: fdaf572ab9c42654db693bd90eaeec01
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - pua: {fileID: 3648354282655943309, guid: f839185e5834e3f49b49d480c2d8de0f, type: 3}
+  - dashtrigger: {fileID: 7484787556981821367, guid: 8b59052f7d6d8694f840a7685a7cfa63,
+      type: 3}
+  - shadow: {fileID: 5444404892509207760, guid: 866204b60b54029498ade4b96ec4eb77,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
