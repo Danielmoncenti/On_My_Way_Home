@@ -6,7 +6,7 @@ public class SpikeyController : MonoBehaviour
 {
     public enum Direction { NONE, UP, DOWN, RIGHT, LEFT };
     public Direction SpikeyDirection = Direction.NONE;
-    public Direction Dashdirection = Direction.RIGHT;
+    public Direction FacingDirection = Direction.RIGHT;
     private float baseSpeed = 90.0f;
     public float maxSpeed = 130.0f;
     public float dashspeed;
@@ -132,7 +132,7 @@ public class SpikeyController : MonoBehaviour
                         if (canWalk)
                         {
                             SpikeyDirection = Direction.RIGHT;
-                            Dashdirection = Direction.RIGHT;
+                            FacingDirection = Direction.RIGHT;
                         }
                     }
                     else if (Input.GetKey(leftButton) && climbing == false)
@@ -151,7 +151,7 @@ public class SpikeyController : MonoBehaviour
                         if (canWalk)
                         {
                             SpikeyDirection = Direction.LEFT;
-                            Dashdirection = Direction.LEFT;
+                            FacingDirection = Direction.LEFT;
 
                         }
                     }
@@ -194,24 +194,7 @@ public class SpikeyController : MonoBehaviour
 
                     }
                 }
-                if (Input.GetKey(climbButton))
-                {
 
-                    if (canClimb == true && climbing == false)
-                    {
-
-                        climbing = true;
-
-                        rigidBody.gravityScale = 0;
-                    }
-
-                }
-                if (Input.GetKeyUp(climbButton))
-                {
-
-                    climbing = false;
-                    rigidBody.gravityScale = 100;
-                }
 
 
 
@@ -302,13 +285,35 @@ public class SpikeyController : MonoBehaviour
 
     private void jump()
     {
-         //rigidBody.transform.position.y = new Vector3(transform.position.x, transform.position.y + 5, 0);
-       
-        
+        //rigidBody.transform.position.y = new Vector3(transform.position.x, transform.position.y + 5, 0);
+
+        if (climbing==false)
+        {
             float delta = Time.fixedDeltaTime * 1000;
             rigidBody.AddForce(transform.up * thrust * delta, ForceMode2D.Impulse);
             Jumping = true;
-        
+        }
+        else if (climbing==true)
+        {
+             float delta = Time.fixedDeltaTime * 1000;
+            climbing = false;
+            if (FacingDirection == Direction.LEFT)
+            {
+                FacingDirection = Direction.RIGHT;
+                rigidBody.AddForce((new Vector2(20 * delta, 10 * delta)), ForceMode2D.Impulse);
+
+                Jumping = true;
+               
+            }
+            else if (FacingDirection == Direction.RIGHT)
+            {
+                FacingDirection = Direction.LEFT;
+                rigidBody.AddForce((new Vector2(20 * delta *-1, 10 * delta)), ForceMode2D.Impulse);
+
+                Jumping = true;
+                
+            }
+        }
     }
     //private void climbjump()
     //{
@@ -354,7 +359,7 @@ public class SpikeyController : MonoBehaviour
             shadowOndash = Instantiate(shadow, transform.position, transform.rotation);
             shadowcontroller = shadowOndash.GetComponent<ShadowController>();
             shadowcontroller.erizo = this.gameObject;
-            if (Dashdirection == Direction.RIGHT)
+            if (FacingDirection == Direction.RIGHT)
             {
                 float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
                 Vector2 positioncenter = new Vector2(bc2d.bounds.max.x, centery);
@@ -380,7 +385,7 @@ public class SpikeyController : MonoBehaviour
                 shadowExists = true;
                 rigidBody.gravityScale = 0;
             }
-            else if (Dashdirection == Direction.LEFT)
+            else if (FacingDirection == Direction.LEFT)
             {
                 float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
                 Vector2 positioncenter = new Vector2(bc2d.bounds.min.x, centery);
@@ -466,10 +471,10 @@ public class SpikeyController : MonoBehaviour
         {
             default: break;
             case Direction.UP:
-                rigidBody.velocity = new Vector2(0, 90);
+                rigidBody.velocity = new Vector2(0, 90 );
                 break;
             case Direction.DOWN:
-                rigidBody.velocity = new Vector2(0, -90);
+                rigidBody.velocity = new Vector2(0, -90 );
                 break;
             case Direction.RIGHT:
                 rigidBody.AddForce(transform.right * baseSpeed * delta);
@@ -521,25 +526,25 @@ public class SpikeyController : MonoBehaviour
         }
         if (collision.gameObject.tag == "Wall")
         {
-            if (canClimb == false)
-            {
+           
+            
                 bool col = false;
 
                 float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
                 Vector2 positionright = new Vector2(bc2d.bounds.max.x, centery);
                 Vector2 positionleft = new Vector2(bc2d.bounds.min.x, centery);
-                if (Dashdirection == Direction.LEFT)
+                if (FacingDirection == Direction.LEFT)
                 {
                     RaycastHit2D[] hits = Physics2D.RaycastAll(positionleft, -Vector2.right, 2);
                     if (checkRaycastWithScenarioClimb(hits)) { col = true; }
                 }
-                else if (Dashdirection == Direction.RIGHT)
+                else if (FacingDirection == Direction.RIGHT)
                 {
                     RaycastHit2D[] hits = Physics2D.RaycastAll(positionright, Vector2.right, 2);
                     if (checkRaycastWithScenarioClimb(hits)) { col = true; }
                 }
-                if (col) { canClimb = true; }
-            }
+                if (col) { climbing = true; }
+            Jumping = false;
         }
 
 
