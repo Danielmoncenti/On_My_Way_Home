@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5502308671452103371, guid: acce94c67b8107c4fb12af74b2a1c982,
+  m_Sprite: {fileID: 7114653933595064485, guid: d30d67c8fb0a6194db8876274454d797,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -156,9 +156,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   thrust: 25
+  life: 5
   Jumping: 1
   canClimb: 0
   climbing: 0
+  takingdamage: 0
+  invulnerability: 0
+  invulnerabilitytimer: 0
+  damagetimer: 0
   pua: {fileID: 3648354282655943309, guid: f839185e5834e3f49b49d480c2d8de0f, type: 3}
   dashtrigger: {fileID: 7484787556981821367, guid: 8b59052f7d6d8694f840a7685a7cfa63,
     type: 3}
