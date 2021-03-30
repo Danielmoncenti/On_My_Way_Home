@@ -141,7 +141,11 @@ public class BatController : MonoBehaviour
         hits = Physics2D.RaycastAll(leftPosition, -Vector2.up, 150);
         if (checkRaycastWithScenario(hits)) { leftCollision = true; }
       
-        if (rightCollision || leftCollision) { currentSpeedV = -maxSpeed; actNormal = false; isMad = true; }
+        if (rightCollision || leftCollision) { 
+            currentSpeedV = -maxSpeed; actNormal = false;
+            isMad = true; 
+            SoundManager.Play(SoundManager.Sound.BAT);
+        }
 
     }
     private bool checkSpikeyPosition()

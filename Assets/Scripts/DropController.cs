@@ -23,9 +23,9 @@ public class DropController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Tilemap")
         {
+            SoundManager.Play(SoundManager.Sound.DROP);
             Destroy(gameObject);
-           //animacion
-           //sonido
+            //animacion
         }
 
 
