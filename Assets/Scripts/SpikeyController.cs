@@ -314,6 +314,7 @@ public class SpikeyController : MonoBehaviour
                 
             }
         }
+        SoundManager.Play(SoundManager.Sound.PLAYERJUMP);
     }
     //private void climbjump()
     //{
