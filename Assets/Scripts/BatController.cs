@@ -67,7 +67,7 @@ public class BatController : MonoBehaviour
 
        if (isFalling || isDead)
        {
-
+            //cambiar la layer para que no haya contacto
        }
 
         animator.SetBool(mad_animation, isMad);

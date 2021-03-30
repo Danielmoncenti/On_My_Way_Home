@@ -14,6 +14,15 @@ public class RatController : MonoBehaviour
 
     private Rigidbody2D rigidBody;
     private BoxCollider2D boxCollider2D;
+    private Animator animator;
+
+    private int mad_animation;
+    private int bite_animation;
+    private int falling_animation;
+
+    private bool isMad = false;
+    private bool isBitting = false;
+    private bool isFalling = false;
     Vector3 ratScale;
 
     // Start is called before the first frame update
@@ -21,7 +30,11 @@ public class RatController : MonoBehaviour
     { 
         rigidBody = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-        
+        animator = GetComponent<Animator>();
+        mad_animation = Animator.StringToHash("isMad");
+        bite_animation = Animator.StringToHash("isBitting");
+        falling_animation = Animator.StringToHash("isFalling");
+
         ratScale = transform.localScale;
         float rand = Random.Range(0.0f, 1.0f);
         if (rand < 0.5)
@@ -49,7 +62,18 @@ public class RatController : MonoBehaviour
         {
             if (currentSpeedH == maxSpeed) { currentSpeedH = baseSpeed; }
             else if (currentSpeedH == -maxSpeed){ currentSpeedH = -baseSpeed; }
+            isMad = false;
         }
+
+        if (isFalling)
+        {
+            currentSpeedH = 0.0f;
+            //cambiar la layer para que no haya contacto
+        }
+
+        animator.SetBool(mad_animation, isMad);
+        animator.SetBool(bite_animation, isBitting);
+        animator.SetBool(falling_animation, isFalling);
     }
 
     private void FixedUpdate()
@@ -67,7 +91,29 @@ public class RatController : MonoBehaviour
         }
         if (collision.gameObject.tag == "Puas")
         {
-            Destroy(gameObject);
+            isFalling = true;
+        }
+        if (collision.gameObject.tag == "Spikey")
+        {
+            isBitting = true;
+        }
+    }
+
+    private void SetBitAnimation()
+    {
+        isBitting = false;
+    }
+
+    private void RatisDead ()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Shadow")
+        {
+            isFalling = true;
         }
     }
 
@@ -98,19 +144,13 @@ public class RatController : MonoBehaviour
             if (checkRaycastWithScenario(hits)) { leftCollision = true; }
         }
         
-        if (rightCollision) { currentSpeedH = maxSpeed; }
-        else if (leftCollision) { currentSpeedH = -maxSpeed; }
+        if (rightCollision) { currentSpeedH = maxSpeed; isMad = true; }
+        else if (leftCollision) { currentSpeedH = -maxSpeed; isMad = true; }
 
     }
     private bool checkSpikeyPosition()
     {
         return Vector2.Distance(this.transform.position, Spikey.transform.position) <= this.ratRadius;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Shadow")
-        {
-            Destroy(gameObject);
-        }
-    }
+   
 }
