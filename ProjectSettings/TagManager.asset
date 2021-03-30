@@ -19,6 +19,7 @@ TagManager:
   - DirtyWater
   - Water
   - CheckPoint
+  - Sound
   layers:
   - Default
   - TransparentFX

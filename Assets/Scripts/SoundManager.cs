@@ -6,14 +6,6 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour {
     public enum Sound { PLAYERJUMP, PLAYERDASH, PLAYERRUN, PLAYERDASHRETURN, PLAYERSPIKE, RAT, BAT, DROP, TRAP}
 
-    public static SoundAudioClip[] SoundAudioClipArray;
-
-    [System.Serializable]
-    public class SoundAudioClip {
-        public SoundManager.Sound sound;
-        public AudioClip audioClip;
-    }
-
 
     // Start is called before the first frame update
     void Start()
@@ -34,10 +26,9 @@ public class SoundManager : MonoBehaviour {
     }
 
     private static AudioClip GetAudioClip(Sound _sound) {
-        int size = SoundAudioClipArray.Length;
-        for (int i=0; i < size;i++) {
-            if (SoundAudioClipArray[i].sound == _sound) {
-                return SoundAudioClipArray[i].audioClip;
+        foreach (GameManagerController.SoundAudioClip soundAudioClip in GameManagerController.Instance.SoundAudioClipArray) {
+            if (soundAudioClip.sound == _sound) {
+                return soundAudioClip.audioClip;
             }
         }
         return null;

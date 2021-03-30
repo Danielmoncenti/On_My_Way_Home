@@ -144,8 +144,16 @@ public class RatController : MonoBehaviour
             if (checkRaycastWithScenario(hits)) { leftCollision = true; }
         }
         
-        if (rightCollision) { currentSpeedH = maxSpeed; isMad = true; }
-        else if (leftCollision) { currentSpeedH = -maxSpeed; isMad = true; }
+        if (rightCollision) { 
+            currentSpeedH = maxSpeed;
+            isMad = true;
+            SoundManager.Play(SoundManager.Sound.RAT);
+        }
+        else if (leftCollision) { 
+            currentSpeedH = -maxSpeed; 
+            isMad = true;
+            SoundManager.Play(SoundManager.Sound.RAT);
+        }
 
     }
     private bool checkSpikeyPosition()
