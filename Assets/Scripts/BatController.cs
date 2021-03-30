@@ -13,6 +13,15 @@ public class BatController : MonoBehaviour
 
     private Rigidbody2D rigidBody;
     private BoxCollider2D boxCollider2D;
+    private Animator animator;
+
+    private int mad_animation;
+    private int falling_animation;
+    private int dead_animation;
+
+    private bool isMad = false;
+    private bool isFalling = false;
+    private bool isDead = false;
 
     [SerializeField] GameObject Spikey;
 
@@ -22,6 +31,11 @@ public class BatController : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
+        mad_animation = Animator.StringToHash("isMad");
+        falling_animation = Animator.StringToHash("isFalling");
+        dead_animation = Animator.StringToHash("isDead");
+
         float rand = Random.Range(0.0f, 0.8f);
         if (rand < 0.8)
         {
@@ -36,15 +50,29 @@ public class BatController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //isMad = false;
+        //isFalling = false;
+        //isDead = false;
+
        if (checkSpikeyPosition())
        {
            StartRayCast();
        }
        else if (!checkSpikeyPosition() && !actNormal)
        {
-           currentSpeedV = -baseSpeed;
+            currentSpeedV = -baseSpeed;
             actNormal = true;
+            isMad = false;
        }
+
+       if (isFalling || isDead)
+       {
+            //cambiar la layer para que no haya contacto
+       }
+
+        animator.SetBool(mad_animation, isMad);
+        animator.SetBool(falling_animation, isFalling);
+        animator.SetBool(dead_animation, isDead);
     }
    
     private void FixedUpdate()
@@ -61,11 +89,19 @@ public class BatController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Tilemap")
         {
+            if (isFalling)
+            {
+                isDead = true;
+                currentSpeedV = 0.0f;
+                Destroy(gameObject, 2);
+            }
             currentSpeedV *= -1;
         }
         if (collision.gameObject.tag == "Puas")
         {
-            Destroy(gameObject);
+            isFalling = true;
+            currentSpeedV = -maxSpeed;
+            //Destroy(gameObject);
         }
 
     }
@@ -73,7 +109,9 @@ public class BatController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Shadow")
         {
-            Destroy(gameObject);
+            isFalling = true;
+            currentSpeedV = -baseSpeed;
+            //Destroy(gameObject);
         }
     }
 
@@ -93,6 +131,7 @@ public class BatController : MonoBehaviour
     {
         bool rightCollision = false;
         bool leftCollision = false;
+        //molaba hacerlo en diagonal
         Vector2 rightPosition = new Vector2(boxCollider2D.bounds.max.x, boxCollider2D.bounds.min.y);
         Vector2 leftPosition = new Vector2(boxCollider2D.bounds.min.x, boxCollider2D.bounds.min.y);
 
@@ -102,7 +141,7 @@ public class BatController : MonoBehaviour
         hits = Physics2D.RaycastAll(leftPosition, -Vector2.up, 150);
         if (checkRaycastWithScenario(hits)) { leftCollision = true; }
       
-        if (rightCollision || leftCollision) { currentSpeedV = -maxSpeed; actNormal = false; }
+        if (rightCollision || leftCollision) { currentSpeedV = -maxSpeed; actNormal = false; isMad = true; }
 
     }
     private bool checkSpikeyPosition()

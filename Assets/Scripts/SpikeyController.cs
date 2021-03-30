@@ -11,11 +11,10 @@ public class SpikeyController : MonoBehaviour
     public float maxSpeed = 130.0f;
     public float dashspeed;
     public bool shadowExists;
-    public bool isdashing;
+    public bool dashing;
     public bool stucked;
     public float stuckedtimer = 0;
     public LayerMask LayerDashLimit;
-    private float currentSpeedV = 0.0f;
     private float currentSpeedH = 0.0f;
     public float thrust = 25.0f;
     public int life = 5;
@@ -44,6 +43,23 @@ public class SpikeyController : MonoBehaviour
     private Rigidbody2D rigidBody;
     private GameObject shadowOndash;
     private GameObject limitdash;
+    private Animator animator;
+    private int walking_animation;
+    private int running_animation;
+    private int jumping_animation;
+    private int climbing_animation;
+    private int gethurt_animation;
+    private int dashing_animation;
+    private int attacking_animation;
+    bool isWalking = false;
+    bool isRunning = false;
+    bool isJumping = false;
+    bool isClimbing = false;
+    bool isHurt = false;
+    bool isDashing = false;
+    bool isAttacking = false;
+
+
     //private AudioSource audio;
 
     public GameObject pua;
@@ -60,10 +76,18 @@ public class SpikeyController : MonoBehaviour
 
         rigidBody = GetComponent<Rigidbody2D>();
         bc2d = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
+        walking_animation = Animator.StringToHash("isWalking");
+        running_animation = Animator.StringToHash("isRunning");
+        jumping_animation = Animator.StringToHash("isJumping");
+        climbing_animation = Animator.StringToHash("isClimbing");
+        gethurt_animation = Animator.StringToHash("isHurt");
+        dashing_animation = Animator.StringToHash("isDashing");
+        attacking_animation = Animator.StringToHash("isAttacking");
         lastCheckpoint = rigidBody.transform.position;
         //audio = GetComponent<AudioSource>();        
         shadowExists = false;
-        isdashing = false;
+        dashing = false;
         stucked = false;
         Spikeyscale = transform.localScale;
     }
@@ -71,6 +95,14 @@ public class SpikeyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isWalking = false;
+        isRunning = false;
+        isJumping = false;
+        isClimbing = false;
+        isHurt = false;
+        isDashing = false;
+        isAttacking = false;
+
         if (Input.GetKeyDown(respawnButton))
         {
             this.transform.position = lastCheckpoint;
@@ -79,6 +111,14 @@ public class SpikeyController : MonoBehaviour
         invulnerabilitytimer += Time.deltaTime;
         if (takingdamage)
         {
+            //no se cumple la animacion porq se siguen aceptando los inputs
+            isWalking = false;
+            isRunning = false;
+            isJumping = false;
+            isClimbing = false;
+            isHurt = true;
+            isDashing = false;
+            isAttacking = false;
             if (damagetimer >= 1)
             {
                 takingdamage = false;
@@ -88,6 +128,7 @@ public class SpikeyController : MonoBehaviour
         }
         if (invulnerability)
         {
+            
             if (invulnerabilitytimer >= 3)
             {
                 gameObject.layer = 8;
@@ -102,19 +143,24 @@ public class SpikeyController : MonoBehaviour
             {
 
 
-                if (isdashing == false)
+                if (dashing == false)
                 {
-                    if (Input.GetKey(upButton) && climbing == true)
+                    if (climbing)
                     {
-                        SpikeyDirection = Direction.UP;
+                        isClimbing = true;
+                        if (Input.GetKey(upButton))
+                        {
+                            
+                            SpikeyDirection = Direction.UP;
 
+                        }
+                        else if (Input.GetKey(downButton))
+                        {
+                            SpikeyDirection = Direction.DOWN;
+
+                        }
                     }
-                    else if (Input.GetKey(downButton) && climbing == true)
-                    {
-
-                        SpikeyDirection = Direction.DOWN;
-
-                    }
+                    
 
                     if (Input.GetKey(rightButton) && climbing == false)
                     {
@@ -134,6 +180,7 @@ public class SpikeyController : MonoBehaviour
                             SpikeyDirection = Direction.RIGHT;
                             FacingDirection = Direction.RIGHT;
                         }
+                        isWalking = true;
                     }
                     else if (Input.GetKey(leftButton) && climbing == false)
                     {
@@ -152,8 +199,8 @@ public class SpikeyController : MonoBehaviour
                         {
                             SpikeyDirection = Direction.LEFT;
                             FacingDirection = Direction.LEFT;
-
                         }
+                        isWalking = true;
                     }
 
                     if (Input.GetKeyDown(spaceButton) && Jumping == false)
@@ -164,43 +211,52 @@ public class SpikeyController : MonoBehaviour
                     //{
                     //    climbjump();
                     //}
-
-
-                    if (Input.GetKeyDown(attackButton))
+                    if (Jumping)
                     {
-                        attack();
+                        isWalking = false;
+                        isRunning = false;
+                        isJumping = true;
+                    }
+
+
+                    if (Input.GetKey/*Down*/(attackButton))
+                    {
+                        isAttacking = true;
+                        //attack();
                     }
 
                     if (Input.GetKeyDown(shadowButton))
                     {
-                        if (shadowExists == true && isdashing == false)
+                        if (shadowExists == true && dashing == false)
                         {
                             shadowcontroller.startReturn = true;
-
                         }
                     }
+                }
+                else
+                {
+                    isDashing = true;
                 }
 
                 if (Input.GetKeyDown(dashButton))
                 {
+
                     if (shadowExists == false)
                     {
+                        isDashing = true;
                         dash();
 
                     }
-                    else if (shadowExists == true && isdashing == false)
+                    else if (shadowExists == true && dashing == false)
                     {
                         goToshadow();
-
                     }
                 }
-
-
-
 
             }
             else
             {
+                isHurt = true;
                 stuckedtimer += Time.deltaTime * 1000;
                 if (stuckedtimer >= 2000)
                 {
@@ -213,7 +269,25 @@ public class SpikeyController : MonoBehaviour
      
         if (Input.GetKey(sprintButton))
         {
-            maxSpeed = 300.0f;
+            if (rigidBody.velocity == new Vector2(0, 0))
+            {
+                isRunning = false;
+            }
+            else if (isDashing)
+            {
+                isRunning = false;
+            }
+            else if (Jumping)
+            {
+                isRunning = false;
+            }
+            else
+            {
+                isWalking = false;
+                isRunning = true;
+                maxSpeed = 300.0f;
+            }
+            
         }
         if (Input.GetKeyUp(sprintButton))
         {
@@ -221,10 +295,18 @@ public class SpikeyController : MonoBehaviour
         }
 
         transform.localScale = Spikeyscale;
+        animator.SetBool(walking_animation, isWalking);
+        animator.SetBool(running_animation, isRunning);
+        animator.SetBool(jumping_animation, isJumping);
+        animator.SetBool(dashing_animation, isDashing);
+        animator.SetBool(gethurt_animation, isHurt);
+        animator.SetBool(climbing_animation, isClimbing);
+        animator.SetBool(attacking_animation, isAttacking);
+
     }
     private void cancelDash()
     {
-        isdashing = false;
+        dashing = false;
         gameObject.layer = 8;
         Destroy(limitdash);
         rigidBody.velocity = Vector2.zero;
@@ -352,10 +434,10 @@ public class SpikeyController : MonoBehaviour
 
     private void dash()
     {
-        if (isdashing == false)
+        if (dashing == false)
         {
 
-            isdashing = true;
+            dashing = true;
             gameObject.layer = 12;
             shadowOndash = Instantiate(shadow, transform.position, transform.rotation);
             shadowcontroller = shadowOndash.GetComponent<ShadowController>();
@@ -465,8 +547,19 @@ public class SpikeyController : MonoBehaviour
     {
         float delta = Time.fixedDeltaTime * 1000;
 
+        switch (FacingDirection)
+        {
+            default:
+                Spikeyscale.x = 1;
+                break;
+            case Direction.RIGHT:
+                Spikeyscale.x = 1;
+                break;
+            case Direction.LEFT:
+                Spikeyscale.x = -1;
+                break;
 
-
+        }
 
         switch (SpikeyDirection)
         {
@@ -479,11 +572,9 @@ public class SpikeyController : MonoBehaviour
                 break;
             case Direction.RIGHT:
                 rigidBody.AddForce(transform.right * baseSpeed * delta);
-                Spikeyscale.x = 1;
                 break;
             case Direction.LEFT:
                 rigidBody.AddForce((transform.right * baseSpeed * delta) * -1);
-                Spikeyscale.x = -1;
                 break;
             case Direction.NONE:
                 if (climbing == true)
@@ -522,6 +613,7 @@ public class SpikeyController : MonoBehaviour
                 if (checkRaycastWithScenarioJump(hits)) { col3 = true; }
 
                 if (col1 || col2 || col3) { Jumping = false; }
+                else { isJumping = true; }
 
             }
         }
@@ -545,7 +637,7 @@ public class SpikeyController : MonoBehaviour
                     if (checkRaycastWithScenarioClimb(hits)) { col = true; }
                 }
                 if (col) { climbing = true; }
-            Jumping = false;
+                Jumping = false;
         }
 
 
