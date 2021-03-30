@@ -11,7 +11,7 @@ public class SpikeyController : MonoBehaviour
     public float maxSpeed = 130.0f;
     public float dashspeed;
     public bool shadowExists;
-    public bool isdashing;
+    public bool dashing;
     public bool stucked;
     public float stuckedtimer = 0;
     public LayerMask LayerDashLimit;
@@ -87,7 +87,7 @@ public class SpikeyController : MonoBehaviour
         lastCheckpoint = rigidBody.transform.position;
         //audio = GetComponent<AudioSource>();        
         shadowExists = false;
-        isdashing = false;
+        dashing = false;
         stucked = false;
         Spikeyscale = transform.localScale;
     }
@@ -143,20 +143,24 @@ public class SpikeyController : MonoBehaviour
             {
 
 
-                if (isdashing == false)
+                if (dashing == false)
                 {
-                    if (Input.GetKey(upButton) && climbing == true)
+                    if (climbing)
                     {
                         isClimbing = true;
-                        SpikeyDirection = Direction.UP;
+                        if (Input.GetKey(upButton))
+                        {
+                            
+                            SpikeyDirection = Direction.UP;
 
-                    }
-                    else if (Input.GetKey(downButton) && climbing == true)
-                    {
-                        isClimbing = true;
-                        SpikeyDirection = Direction.DOWN;
+                        }
+                        else if (Input.GetKey(downButton))
+                        {
+                            SpikeyDirection = Direction.DOWN;
 
+                        }
                     }
+                    
 
                     if (Input.GetKey(rightButton) && climbing == false)
                     {
@@ -223,29 +227,31 @@ public class SpikeyController : MonoBehaviour
 
                     if (Input.GetKeyDown(shadowButton))
                     {
-                        if (shadowExists == true && isdashing == false)
+                        if (shadowExists == true && dashing == false)
                         {
                             shadowcontroller.startReturn = true;
                         }
                     }
                 }
+                else
+                {
+                    isDashing = true;
+                }
 
                 if (Input.GetKeyDown(dashButton))
                 {
+
                     if (shadowExists == false)
                     {
                         isDashing = true;
                         dash();
 
                     }
-                    else if (shadowExists == true && isdashing == false)
+                    else if (shadowExists == true && dashing == false)
                     {
                         goToshadow();
                     }
                 }
-
-
-
 
             }
             else
@@ -263,9 +269,25 @@ public class SpikeyController : MonoBehaviour
      
         if (Input.GetKey(sprintButton))
         {
-            isWalking = false;
-            isRunning = true;
-            maxSpeed = 300.0f;
+            if (rigidBody.velocity == new Vector2(0, 0))
+            {
+                isRunning = false;
+            }
+            else if (isDashing)
+            {
+                isRunning = false;
+            }
+            else if (Jumping)
+            {
+                isRunning = false;
+            }
+            else
+            {
+                isWalking = false;
+                isRunning = true;
+                maxSpeed = 300.0f;
+            }
+            
         }
         if (Input.GetKeyUp(sprintButton))
         {
@@ -284,7 +306,7 @@ public class SpikeyController : MonoBehaviour
     }
     private void cancelDash()
     {
-        isdashing = false;
+        dashing = false;
         gameObject.layer = 8;
         Destroy(limitdash);
         rigidBody.velocity = Vector2.zero;
@@ -411,10 +433,10 @@ public class SpikeyController : MonoBehaviour
 
     private void dash()
     {
-        if (isdashing == false)
+        if (dashing == false)
         {
 
-            isdashing = true;
+            dashing = true;
             gameObject.layer = 12;
             shadowOndash = Instantiate(shadow, transform.position, transform.rotation);
             shadowcontroller = shadowOndash.GetComponent<ShadowController>();
