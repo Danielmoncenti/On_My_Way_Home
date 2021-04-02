@@ -20,6 +20,10 @@ TagManager:
   - Water
   - CheckPoint
   - Sound
+  - Arrow
+  - Bush
+  - Ballista
+  - Mushroom
   layers:
   - Default
   - TransparentFX
@@ -38,8 +42,8 @@ TagManager:
   - TakingDamage
   - CheckPoint
   - Shadow
-  - 
-  - 
+  - Decoration
+  - Shots
   - 
   - 
   - 

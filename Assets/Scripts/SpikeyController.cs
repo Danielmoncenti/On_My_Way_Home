@@ -396,7 +396,7 @@ public class SpikeyController : MonoBehaviour
                 
             }
         }
-        SoundManager.Play(SoundManager.Sound.PLAYERJUMP);
+        //SoundManager.Play(SoundManager.Sound.PLAYERJUMP);
     }
     //private void climbjump()
     //{
@@ -655,11 +655,22 @@ public class SpikeyController : MonoBehaviour
             Vector2 damagedirection = this.transform.position-collision.transform.position;
             DamageTaken(damagedirection);
         }
-      
+   
+
 
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "BoundTrap")
+        {
+            rigidBody.velocity = Vector2.zero;
+            rigidBody.AddForce(new Vector2(-700, 500), ForceMode2D.Impulse);
+        }
+        if (collision.gameObject.tag == "BoundTrapReverse")
+        {
+            rigidBody.velocity = Vector2.zero;
+            rigidBody.AddForce(new Vector2(700, 500), ForceMode2D.Impulse);
+        }
         if (collision.gameObject.tag == "Dash")
         {
             cancelDash();
