@@ -50,25 +50,21 @@ public class BatController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //isMad = false;
-        //isFalling = false;
-        //isDead = false;
+        if (checkSpikeyPosition())
+        {
+            StartRayCast();
+        }
+        else if (!checkSpikeyPosition() && !actNormal)
+        {
+             currentSpeedV = -baseSpeed;
+             actNormal = true;
+             isMad = false;
+        }
 
-       if (checkSpikeyPosition())
-       {
-           StartRayCast();
-       }
-       else if (!checkSpikeyPosition() && !actNormal)
-       {
-            currentSpeedV = -baseSpeed;
-            actNormal = true;
-            isMad = false;
-       }
-
-       if (isFalling || isDead)
-       {
-            //cambiar la layer para que no haya contacto
-       }
+        if (isFalling || isDead)
+        {
+             gameObject.layer = 17;
+        }
 
         animator.SetBool(mad_animation, isMad);
         animator.SetBool(falling_animation, isFalling);
@@ -101,7 +97,6 @@ public class BatController : MonoBehaviour
         {
             isFalling = true;
             currentSpeedV = -maxSpeed;
-            //Destroy(gameObject);
         }
 
     }
@@ -111,7 +106,6 @@ public class BatController : MonoBehaviour
         {
             isFalling = true;
             currentSpeedV = -baseSpeed;
-            //Destroy(gameObject);
         }
     }
 

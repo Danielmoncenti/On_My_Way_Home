@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MushroomController : MonoBehaviour
 {
-    private Rigidbody2D rigidBody;
     private Animator animator;
     private int bounce_animation;
     private bool isBouncing = false;
@@ -12,7 +11,6 @@ public class MushroomController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         bounce_animation = Animator.StringToHash("isBouncing");
     }

@@ -68,7 +68,7 @@ public class RatController : MonoBehaviour
         if (isFalling)
         {
             currentSpeedH = 0.0f;
-            //cambiar la layer para que no haya contacto
+            gameObject.layer = 17;
         }
 
         animator.SetBool(mad_animation, isMad);

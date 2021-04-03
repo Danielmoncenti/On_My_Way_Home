@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ThormsController : MonoBehaviour
 {
-    private Rigidbody2D rigidBody;
     private Animator animator;
     private int mad_animation;
     private bool isMad = false;
@@ -12,7 +11,6 @@ public class ThormsController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         mad_animation = Animator.StringToHash("isMad");
     }
