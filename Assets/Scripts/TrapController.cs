@@ -10,7 +10,6 @@ public class TrapController : MonoBehaviour
     private int isWaiting_animation;
     private bool isTrapped = false;
     private bool isWaiting = false;
-    private float stuckedtimer = 0.0f;
 
     // Start is called before the first frame update
     void Start()

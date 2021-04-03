@@ -36,7 +36,6 @@ public class SpikeyController : MonoBehaviour
     KeyCode dashButton = KeyCode.K;
     KeyCode shadowButton = KeyCode.Q;
     KeyCode sprintButton = KeyCode.J;
-    KeyCode climbButton = KeyCode.H;
     KeyCode respawnButton = KeyCode.Z;
 
     private BoxCollider2D bc2d;
