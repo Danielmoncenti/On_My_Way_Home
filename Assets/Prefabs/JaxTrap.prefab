@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5562114620298237566}
   - component: {fileID: 7396717497454188353}
   - component: {fileID: 1340686557463750297}
+  - component: {fileID: 6127286190965307017}
+  - component: {fileID: 301751892652835098}
   m_Layer: 10
   m_Name: JaxTrap
   m_TagString: JawTrap
@@ -72,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4100559863563513154, guid: 9848c331f8eff4e418c3f395c05c5ddd,
+  m_Sprite: {fileID: 6890116190134736083, guid: 0443d1773c0c947449d976ee913e293a,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -118,7 +120,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.06707001, y: -10.463257}
+  m_Offset: {x: -0.05888319, y: -10.599396}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -129,5 +131,37 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 29.987831, y: 9.061279}
+  m_Size: {x: 9.835465, y: 10.663116}
   m_EdgeRadius: 0
+--- !u!114 &6127286190965307017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4059123003676018456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 811aeb54be27eaf4e92c8b71774b6976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spikey: {fileID: 3751320106580556463, guid: ae037e2e96dec9e409553190f936d51b, type: 3}
+--- !u!95 &301751892652835098
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4059123003676018456}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 43d372b6a5631c94b81dc5ab4cdfd462, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

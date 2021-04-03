@@ -5,7 +5,6 @@ using UnityEngine;
 public class TrapController : MonoBehaviour
 {
     [SerializeField] GameObject Spikey;
-    private Rigidbody2D rigidBody;
     private Animator animator;
     private int itsAtrap_animation;
     private int isWaiting_animation;
@@ -16,7 +15,6 @@ public class TrapController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         itsAtrap_animation = Animator.StringToHash("isTrapped");
         isWaiting_animation = Animator.StringToHash("isWaiting");
@@ -39,16 +37,7 @@ public class TrapController : MonoBehaviour
 
     private void FreezeAnimation() { isWaiting = true; }
 
-    private void ResetAnimation() 
-    {
-        isWaiting = false;
-        isTrapped = false;
-        /*stuckedtimer += Time.deltaTime * 1000;
-        if (stuckedtimer >= 2000)
-        {
-            isWaiting = false;
-            isTrapped = false;
-            stuckedtimer = 0;
-        }*/
-    }
+    private void ResetAnimation() { isTrapped = false; }
+
+    private void GoIddle() { isWaiting = false; }
 }
