@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 502109296738468680}
   - component: {fileID: 502109296738468683}
   - component: {fileID: 502109296738468682}
+  - component: {fileID: 887016594}
   m_Layer: 10
   m_Name: Gout
   m_TagString: Enemies
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2956855853329849070, guid: 9848c331f8eff4e418c3f395c05c5ddd,
+  m_Sprite: {fileID: -8589825691757194948, guid: 0854fe74b40c3e64da1e235603e53055,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -119,18 +120,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.6742363, y: 0}
+  m_Offset: {x: 0.9276705, y: -3.041214}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 32, y: 32}
+    oldSize: {x: 64, y: 64}
     newSize: {x: 32, y: 32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20.462845, y: 26.15651}
+  m_Size: {x: 31.782896, y: 20.074081}
   m_EdgeRadius: 0
 --- !u!114 &502109296738468682
 MonoBehaviour:
@@ -144,3 +145,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5299fe8addac6642a8f385e248103b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &887016594
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502109296738468685}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9c07d6789c0273147b249fe65b69a255, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
