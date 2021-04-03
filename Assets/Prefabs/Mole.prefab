@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1939441969166841342}
   - component: {fileID: 1939441969166841337}
   - component: {fileID: 1939441969166841336}
+  - component: {fileID: 1634062939}
   m_Layer: 10
   m_Name: Mole
   m_TagString: Enemies
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2266103055812333723, guid: 9848c331f8eff4e418c3f395c05c5ddd,
+  m_Sprite: {fileID: -1015094862578392770, guid: 0443d1773c0c947449d976ee913e293a,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -144,5 +145,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bbf43319437294285ec15399729c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  erizo: {fileID: 3751320106580556463, guid: ae037e2e96dec9e409553190f936d51b, type: 3}
+  erizo: {fileID: 0}
   rock: {fileID: 4301033416577344875, guid: c8b5bdcb2c7cd3b4c8aacb09de7f91aa, type: 3}
+--- !u!95 &1634062939
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939441969166841317}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c07c4b08a0443d94a88b077c8a3194c5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
