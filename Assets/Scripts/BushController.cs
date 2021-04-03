@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bushcontroller : MonoBehaviour
+public class BushController : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
