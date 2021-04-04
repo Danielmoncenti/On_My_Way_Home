@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
-    public GameObject arrows;
-    public float menuoptions;
+    [SerializeField] GameObject arrows;
+    private float menuoptions;
     KeyCode upButton = KeyCode.W;
     KeyCode downButton = KeyCode.S;
     KeyCode select = KeyCode.Space;
+
     // Start is called before the first frame update
     void Start()
     {
