@@ -48,7 +48,7 @@ public class DropController : MonoBehaviour
         {
             stop = true;
             splash = true;
-            SoundManager.Play(SoundManager.Sound.DROP);
+            SoundManager.PlaySound("Drop");
         }
     }
 

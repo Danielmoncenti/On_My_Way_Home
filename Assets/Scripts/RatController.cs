@@ -138,12 +138,12 @@ public class RatController : MonoBehaviour
         if (rightCollision) { 
             currentSpeedH = maxSpeed;
             isMad = true;
-            SoundManager.Play(SoundManager.Sound.RAT);
+            SoundManager.PlaySound("Rat");
         }
         else if (leftCollision) { 
             currentSpeedH = -maxSpeed; 
             isMad = true;
-            SoundManager.Play(SoundManager.Sound.RAT);
+            SoundManager.PlaySound("Rat");
         }
 
     }

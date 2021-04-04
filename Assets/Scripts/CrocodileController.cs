@@ -38,6 +38,7 @@ public class CrocodileController : MonoBehaviour
             {
                 isBiting = true;
                 timer = 0.0f;
+                SoundManager.PlaySound("Roar");
             }
         }
         

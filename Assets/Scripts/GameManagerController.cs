@@ -15,13 +15,13 @@ public class GameManagerController : MonoBehaviour
     private float SpikeyY;
 
 
-    public SoundAudioClip[] SoundAudioClipArray;
-    [System.Serializable]
-    public class SoundAudioClip
-    {
-        public SoundManager.Sound sound;
-        public AudioClip audioClip;
-    }
+    //public SoundAudioClip[] SoundAudioClipArray;
+    //[System.Serializable]
+    //public class SoundAudioClip
+    //{
+    //    public SoundManager.Sound sound;
+    //    public AudioClip audioClip;
+    //}
 
     void Awake()
     {

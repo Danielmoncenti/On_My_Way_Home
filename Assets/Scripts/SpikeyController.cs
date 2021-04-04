@@ -256,6 +256,7 @@ public class SpikeyController : MonoBehaviour
                         {
                             shadowcontroller.startReturn = true;
                             dashCD = 10000;
+                            SoundManager.PlaySound("DashRevert");
                         }
                     }
                 }
@@ -440,7 +441,7 @@ public class SpikeyController : MonoBehaviour
 
             }
         }
-        //SoundManager.Play(SoundManager.Sound.PLAYERJUMP);
+        SoundManager.PlaySound("Jump");
     }
     //private void climbjump()
     //{
@@ -542,9 +543,7 @@ public class SpikeyController : MonoBehaviour
                 
             }
         }
-
-
-
+        SoundManager.PlaySound("DashRevert");
     }
 
 
@@ -558,6 +557,7 @@ public class SpikeyController : MonoBehaviour
             Destroy(shadowOndash);
             shadowExists = false;
         }
+        SoundManager.PlaySound("DashRevert");
     }
 
 
@@ -624,7 +624,7 @@ public class SpikeyController : MonoBehaviour
                 rigidBody.gravityScale = 0;
             }
         }
-
+        SoundManager.PlaySound("Dash");
     }
 
     private void doubleDash()
@@ -691,7 +691,7 @@ public class SpikeyController : MonoBehaviour
                 rigidBody.gravityScale = 0;
             }
         }
-
+        SoundManager.PlaySound("Dash");
     }
 
     private void DamageTaken(Vector2 damageDirection)
@@ -720,7 +720,7 @@ public class SpikeyController : MonoBehaviour
         {
             Respawn();
         }
-
+        SoundManager.PlaySound("Daño");
     }
 
     private void FixedUpdate()
@@ -880,6 +880,7 @@ public class SpikeyController : MonoBehaviour
         if (collision.gameObject.tag == "CheckPoint")
         {
             lastCheckpoint = collision.transform.position;
+            SoundManager.PlaySound("Checkpoint");
         }
     }
     private void OnCollisionExit2D(Collision2D collision)

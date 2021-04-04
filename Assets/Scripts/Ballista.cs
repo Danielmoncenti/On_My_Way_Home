@@ -62,6 +62,7 @@ public class Ballista : MonoBehaviour
                 GameObject inst = Instantiate(arrow, rb2d.transform.position + transform.right * -5+transform.up *5, arrow.transform.rotation);
                 ArrowController bc = inst.GetComponent<ArrowController>();
                 bc.setVelocity(arrowSpeed*-1);
+                SoundManager.PlaySound("BoundTrap");
 
                 canShoot = false;
             }
