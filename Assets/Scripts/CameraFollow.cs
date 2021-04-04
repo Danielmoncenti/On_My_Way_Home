@@ -18,7 +18,7 @@ public class CameraFollow : MonoBehaviour
 
     //enable and set the maxium Y value
     private bool YMaxEnabled = true;
-    private float YMaxValue = 150;
+    private float YMaxValue = 100;
 
     //enable and set the min Y value
     private bool YMinEnabled = true;

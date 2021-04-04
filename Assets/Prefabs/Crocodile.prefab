@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Spikey: {fileID: 0}
+  isBiting: 0
 --- !u!95 &1720152924
 Animator:
   serializedVersion: 3

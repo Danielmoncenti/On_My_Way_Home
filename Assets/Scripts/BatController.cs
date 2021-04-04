@@ -6,8 +6,8 @@ public class BatController : MonoBehaviour
 {
     private float baseSpeed = 3.0f;
     private float maxSpeed = 8.0f;
-    public float currentSpeedV = 0.0f;
-    private float maxPositionY = 16.0f;
+    private float currentSpeedV = 0.0f;
+    private float maxPositionY;
     private int batRadius = 300;
     private bool actNormal = true;
 
@@ -23,7 +23,7 @@ public class BatController : MonoBehaviour
     private bool isFalling = false;
     private bool isDead = false;
 
-    [SerializeField] GameObject Spikey;
+    private Transform Spikey;
 
     
     // Start is called before the first frame update
@@ -35,6 +35,9 @@ public class BatController : MonoBehaviour
         mad_animation = Animator.StringToHash("isMad");
         falling_animation = Animator.StringToHash("isFalling");
         dead_animation = Animator.StringToHash("isDead");
+        Spikey = GameObject.Find("Spikey").GetComponent<Transform>();
+
+        maxPositionY = this.transform.position.y + 10;
 
         float rand = Random.Range(0.0f, 0.8f);
         if (rand < 0.8)

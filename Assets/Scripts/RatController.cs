@@ -7,10 +7,10 @@ public class RatController : MonoBehaviour
     private float baseSpeed = 3.0f;
     private float maxSpeed = 8.0f;
 
-    public float currentSpeedH = 0.0f;
+    private float currentSpeedH = 0.0f;
 
     private int ratRadius = 300;
-    [SerializeField] GameObject Spikey;
+    private Transform Spikey;
 
     private Rigidbody2D rigidBody;
     private BoxCollider2D boxCollider2D;
@@ -34,6 +34,7 @@ public class RatController : MonoBehaviour
         mad_animation = Animator.StringToHash("isMad");
         bite_animation = Animator.StringToHash("isBitting");
         falling_animation = Animator.StringToHash("isFalling");
+        Spikey = GameObject.Find("Spikey").GetComponent<Transform>();
 
         ratScale = transform.localScale;
         float rand = Random.Range(0.0f, 1.0f);

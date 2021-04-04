@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpeedH: 0
-  Spikey: {fileID: 3751320106580556463, guid: ae037e2e96dec9e409553190f936d51b, type: 3}
+  Spikey: {fileID: 0}
 --- !u!95 &446460140
 Animator:
   serializedVersion: 3

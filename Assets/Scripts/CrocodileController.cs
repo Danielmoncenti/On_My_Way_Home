@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CrocodileController : MonoBehaviour
 {
-    [SerializeField] GameObject Spikey;
     private Animator animator;
     private Rigidbody2D rigidBody;
     private int bite_animation;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoloController : MonoBehaviour
 {
     private Animator animator;
-    [SerializeField] GameObject Spikey;
+    private Transform Spikey;
     [SerializeField] GameObject Rock;
     private float turretRadius = 350.0f;
     private float timer = 0.0f;
@@ -28,6 +28,7 @@ public class MoloController : MonoBehaviour
         attack_animation  = Animator.StringToHash("isAttacking");
         out_animation = Animator.StringToHash("getHitted");
         wait_animation = Animator.StringToHash("isWaiting");
+        Spikey = GameObject.Find("Spikey").GetComponent<Transform>();
     }
 
     // Update is called once per frame
