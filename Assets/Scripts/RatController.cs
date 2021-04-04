@@ -35,19 +35,9 @@ public class RatController : MonoBehaviour
         bite_animation = Animator.StringToHash("isBitting");
         falling_animation = Animator.StringToHash("isFalling");
         Spikey = GameObject.Find("Spikey").GetComponent<Transform>();
-
         ratScale = transform.localScale;
-        float rand = Random.Range(0.0f, 1.0f);
-        if (rand < 0.5)
-        {
-            currentSpeedH = -baseSpeed;
-            ratScale.x = -1.5f;
-        }
-        else
-        {
-            currentSpeedH = baseSpeed;
-            ratScale.x = 1.5f;
-        }
+        currentSpeedH = -baseSpeed;
+        ratScale.x = -1.5f;
     }
 
     // Update is called once per frame

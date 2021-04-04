@@ -24,18 +24,8 @@ public class CrocodileController : MonoBehaviour
         animator = GetComponent<Animator>();
         bite_animation = Animator.StringToHash("isBiting");
         crocodileScale = transform.localScale;
-        float rand = Random.Range(0.0f, 1.0f);
-        if (rand < 0.5)
-        {
-            currentSpeedH = -baseSpeed;
-            crocodileScale.x = 1.5f;
-        }
-        else
-        {
-            currentSpeedH = baseSpeed;
-            crocodileScale.x = -1.5f;
-        }
-        
+        currentSpeedH = -baseSpeed;
+        crocodileScale.x = 1.5f;
     }
 
     // Update is called once per frame

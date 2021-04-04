@@ -12,6 +12,7 @@ public class DropController : MonoBehaviour
     private bool splash = false;
     private bool stop = false;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,11 +20,17 @@ public class DropController : MonoBehaviour
         animator = GetComponent<Animator>();
         hold_animation = Animator.StringToHash("isHolding");
         splash_animation = Animator.StringToHash("Splash");
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (rigidBody.velocity.y > 100)
+        {
+            rigidBody.drag = 0;
+            rigidBody.velocity = new Vector2(0.0f, 100.0f);
+        }
 
         if (stop)
         {

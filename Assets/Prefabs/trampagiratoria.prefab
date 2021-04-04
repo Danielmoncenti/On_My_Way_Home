@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7189720948302786633}
   - component: {fileID: 7189720948302786678}
-  - component: {fileID: 7189720948302786679}
   - component: {fileID: 7189720948302786676}
   - component: {fileID: 7189720948302786677}
+  - component: {fileID: 7189720948302786679}
   m_Layer: 0
   m_Name: trampagiratoria
   m_TagString: Untagged
@@ -84,18 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7189720948302786679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7189720948302786674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03decee87701c144fa1ef654412a0fc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &7189720948302786676
 Rigidbody2D:
   serializedVersion: 4
@@ -116,7 +104,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &7189720948302786677
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -143,3 +131,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 13.387451, y: 186}
   m_EdgeRadius: 0
+--- !u!114 &7189720948302786679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7189720948302786674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03decee87701c144fa1ef654412a0fc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
