@@ -23,7 +23,7 @@ public class Spawner : MonoBehaviour
         timer += delta;
         if (timer > 2000)
         {
-            GameObject Gota = Instantiate(Gouts, transform.position - (transform.up * 4), transform.rotation);
+            GameObject Gota = Instantiate(Gouts, transform.position - (transform.up * 30), transform.rotation);
             timer = 0;
             
         }

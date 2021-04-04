@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bushcontroller : MonoBehaviour
+public class RotateTrapController : MonoBehaviour
 {
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+      
     }
 
     // Update is called once per frame
@@ -15,12 +16,10 @@ public class bushcontroller : MonoBehaviour
     {
         
     }
+    private void FixedUpdate()
+    {
+        float delta = Time.fixedDeltaTime * 1000;
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Arrow")
-    //    {
-    //        Destro
-    //    }
-    //}
+        this.transform.Rotate(0, 0, 2);
+    }
 }

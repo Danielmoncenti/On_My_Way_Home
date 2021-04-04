@@ -24,6 +24,9 @@ TagManager:
   - Bush
   - Ballista
   - Mushroom
+  - BoundTrap
+  - BoundTrapReverse
+  - Camera
   layers:
   - Default
   - TransparentFX
@@ -44,9 +47,9 @@ TagManager:
   - Shadow
   - Decoration
   - Shots
-  - 
-  - 
-  - 
+  - HUD
+  - Camera
+  - DeadEnemies
   - 
   - 
   - 

@@ -4,80 +4,66 @@ using UnityEngine;
 
 public class CrocodileController : MonoBehaviour
 {
-    private float baseSpeed = 3.0f;
-    public float currentSpeedH = 0.0f;
-    public float currentSpeedV = 0.0f;
-    public bool canAttack = false;
-
-    //private int crocodileRadius = 250;
-    [SerializeField] GameObject Spikey;
-
+    private Animator animator;
     private Rigidbody2D rigidBody;
+    private int bite_animation;
+    public bool isBiting = false;
+
+    private float timer = 0.0f;
+    private float baseSpeed = 3.0f;
+    private float currentSpeedH = 0.0f;
+    private float currentSpeedV = 0.0f;
+    private bool canAttack = true;
+    
     Vector3 crocodileScale;
+
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        bite_animation = Animator.StringToHash("isBiting");
         crocodileScale = transform.localScale;
         float rand = Random.Range(0.0f, 1.0f);
         if (rand < 0.5)
         {
             currentSpeedH = -baseSpeed;
-            crocodileScale.x = 2f;
+            crocodileScale.x = 1.5f;
         }
         else
         {
             currentSpeedH = baseSpeed;
-            crocodileScale.x = -2f;
+            crocodileScale.x = -1.5f;
         }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (canAttack)
+        {
+            timer += Time.deltaTime;
+            if (timer > 3)
+            {
+                isBiting = true;
+                timer = 0.0f;
+            }
+        }
+        
+        animator.SetBool(bite_animation, isBiting);
+        
         transform.localScale = crocodileScale;
-
-        //if (checkSpikeyPosition())
-        //{
-        //    currentSpeedH = 0.0f;
-        //    float delta = Time.deltaTime * 1000;
-        //    if (delta > 2000)
-        //    {
-        //        currentSpeedH = -baseSpeed;
-        //    }
-        //    canAttack = true;
-        //}
-        //else if (!checkSpikeyPosition() && canAttack)
-        //{
-        //    currentSpeedH = -baseSpeed;
-        //    canAttack = false;
-        //}
     }
 
     private void FixedUpdate()
     {
         float delta = Time.fixedDeltaTime * 1000;
-
-       //if (canAttack)
-       //{
-       //    currentSpeedV += 50;
-       //   //if (delta >= 1000)
-       //   //{
-       //   //    currentSpeedV += 5;
-       //   //    if (delta >= 2000)
-       //   //    {
-       //   //        currentSpeedV -= 5;
-       //   //        delta = 0;
-       //   //    }
-       //   //}
-       //   //else if (!canAttack)
-       //   //{
-       //   //    currentSpeedV = 0;
-       //   //}
-       //}
-
         rigidBody.velocity = new Vector2(currentSpeedH, currentSpeedV) * delta;
     }
+
+    private void SetToIddle() { isBiting = false; }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -86,13 +72,19 @@ public class CrocodileController : MonoBehaviour
             currentSpeedH *= -1;
             crocodileScale.x *= -1;
         }
-        if (collision.gameObject.tag == "Puas")
+        else if (collision.gameObject.tag == "Spikey")
         {
-            Destroy(gameObject);
+            canAttack = false;
         }
     }
-    /*private bool checkSpikeyPosition()
+
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        return Vector2.Distance(this.transform.position, Spikey.transform.position) <= this.crocodileRadius;
-    }*/
+        if (collision.gameObject.tag == "Spikey")
+        {
+            canAttack = true;
+        }
+    }
+
+   
 }

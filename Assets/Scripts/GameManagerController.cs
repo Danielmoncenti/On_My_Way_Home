@@ -6,12 +6,11 @@ public class GameManagerController : MonoBehaviour
 {
     public static GameManagerController Instance { get; private set; }
 
-
-    [SerializeField] GameObject GameCamera;
+    private Camera GameCamera;
     [SerializeField] GameObject Spikey;
 
     private SpikeyController spikeyController;
-    Camera camera;
+    //Camera camera;
     private Vector3 cameraPos;
     private float SpikeyY;
 
@@ -42,7 +41,7 @@ public class GameManagerController : MonoBehaviour
     void Start()
     {
         spikeyController = Spikey.GetComponent<SpikeyController>();
-        camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        GameCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         SpikeyY = Spikey.transform.position.y;
     }
 
@@ -54,6 +53,6 @@ public class GameManagerController : MonoBehaviour
 
         }
         cameraPos = new Vector3(Spikey.transform.position.x, Spikey.transform.position.y + 60, -10.0f);
-        camera.transform.position = cameraPos;
+        GameCamera.transform.position = cameraPos;
     }
 }

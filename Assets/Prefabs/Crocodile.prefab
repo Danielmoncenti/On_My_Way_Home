@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 1744193400792705763}
   - component: {fileID: 5571918639835733620}
   - component: {fileID: 8121195860672227100}
+  - component: {fileID: 1720152924}
   m_Layer: 10
   m_Name: Crocodile
-  m_TagString: Crocodile
+  m_TagString: Tilemap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1111345454626826704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -23.9, y: -153.2, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,13 +74,13 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7977071857788356772, guid: 9848c331f8eff4e418c3f395c05c5ddd,
+  m_Sprite: {fileID: 3344921677555671030, guid: 0854fe74b40c3e64da1e235603e53055,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 32, y: 32}
+  m_Size: {x: 64, y: 64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -119,18 +120,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.9625759, y: 2.0532494}
+  m_Offset: {x: 1.4359131, y: -9.760242}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 32, y: 32}
-    newSize: {x: 32, y: 32}
+    oldSize: {x: 64, y: 64}
+    newSize: {x: 64, y: 64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 30.074848, y: 17.376213}
+  m_Size: {x: 60.686768, y: 20.575706}
   m_EdgeRadius: 0
 --- !u!114 &8121195860672227100
 MonoBehaviour:
@@ -144,6 +145,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d97a91494b362e4ca3fac4512e75744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpeedH: 0
-  canAttack: 0
-  Spikey: {fileID: 3751320106580556463, guid: ae037e2e96dec9e409553190f936d51b, type: 3}
+  Spikey: {fileID: 0}
+  isBiting: 0
+--- !u!95 &1720152924
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111345454626826704}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 691e391381eeb074fb70d7ecc2f83264, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

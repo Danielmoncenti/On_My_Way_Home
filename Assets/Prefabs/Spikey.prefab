@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3751320106580556458}
   - component: {fileID: 3751320106580556459}
   - component: {fileID: 3751320106580556460}
+  - component: {fileID: 1026869074}
   m_Layer: 8
   m_Name: Spikey
   m_TagString: Spikey
@@ -145,17 +146,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpikeyDirection: 0
-  Dashdirection: 3
+  FacingDirection: 3
+  dashCD: 0
   maxSpeed: 130
   dashspeed: 400
   shadowExists: 0
-  isdashing: 0
+  dashing: 0
   stucked: 0
   stuckedtimer: 0
   LayerDashLimit:
     serializedVersion: 2
     m_Bits: 2048
-  thrust: 25
+  thrust: 2
   life: 5
   Jumping: 1
   canClimb: 0
@@ -168,3 +170,22 @@ MonoBehaviour:
   dashtrigger: {fileID: 7484787556981821367, guid: 8b59052f7d6d8694f840a7685a7cfa63,
     type: 3}
   shadow: {fileID: 5444404892509207760, guid: 866204b60b54029498ade4b96ec4eb77, type: 3}
+--- !u!95 &1026869074
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3751320106580556463}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2518983bdbda2cb4192388a193980091, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

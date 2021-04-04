@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 360083955244070545}
   - component: {fileID: 387032157126825654}
   - component: {fileID: 4359638771203432994}
+  - component: {fileID: 8758543259991767818}
   m_Layer: 4
   m_Name: Water
   m_TagString: Water
@@ -131,3 +132,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 32, y: 20.41092}
   m_EdgeRadius: 0
+--- !u!95 &8758543259991767818
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277592212919929108}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 400ddbb9152c39644908ef1263f5a683, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
