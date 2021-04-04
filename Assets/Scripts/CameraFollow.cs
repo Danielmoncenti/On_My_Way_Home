@@ -4,39 +4,43 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
+    //Camera
+    private Camera _camera;
+
     //What we are following
-    [SerializeField] Transform Spikey;
+    private Transform Spikey;
  
     //Zeros out the velocity
     private Vector3 velocity = Vector3.zero;
 
     //Time to follow target
-    public float smoothTime = .15f;
+    private float smoothTime = .15f;
 
     //enable and set the maxium Y value
-    public bool YMaxEnabled = false;
-    public float YMaxValue = 0;
+    private bool YMaxEnabled = true;
+    private float YMaxValue = 150;
 
     //enable and set the min Y value
-    public bool YMinEnabled = false;
-    public float YMinValue = 0;
+    private bool YMinEnabled = true;
+    private float YMinValue = -10;
 
     //enable and set the maxium X value
-    public bool XMaxEnabled = false;
-    public float XMaxValue = 0;
+    private bool XMaxEnabled = false;
+    private float XMaxValue = 0;
 
     //enable and set the min X value
-    public bool XMinEnabled = false;
-    public float XMinValue = 0;
+    private bool XMinEnabled = true;
+    private float XMinValue = 0;
 
     //pixels
-    public float pixelToUnits = 40.0f;
+    private float pixelToUnits = 40.0f;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        Spikey = GameObject.Find("Spikey").GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -62,48 +66,48 @@ public class CameraFollow : MonoBehaviour
         //Vertical
         if (YMinEnabled && YMaxEnabled)
         {
-            targetPos.y = Mathf.Clamp(Spikey.position.y, YMinValue, YMaxValue);
+            targetPos.y = Mathf.Clamp((int)Spikey.position.y, (int)YMinValue, (int)YMaxValue);
         }
         else if (YMinEnabled)
         {
-            targetPos.y = Mathf.Clamp(Spikey.position.y, YMinValue, Spikey.position.y);
+            targetPos.y = Mathf.Clamp((int)Spikey.position.y, (int)YMinValue, (int)Spikey.position.y);
 
         }
         else if (YMaxEnabled)
         {
-            targetPos.y = Mathf.Clamp(Spikey.position.y, Spikey.position.y, YMaxValue);
+            targetPos.y = Mathf.Clamp((int)Spikey.position.y, (int)Spikey.position.y, (int)YMaxValue);
         }
 
         //Horizontal
         if (XMinEnabled && XMaxEnabled)
         {
-            targetPos.x = Mathf.Clamp(Spikey.position.x, XMinValue, XMaxValue);
+            targetPos.x = Mathf.Clamp((int)Spikey.position.x, (int)XMinValue, (int)XMaxValue);
         }
         else if (XMinEnabled)
         {
-            targetPos.x = Mathf.Clamp(Spikey.position.x, XMinValue, Spikey.position.x);
+            targetPos.x = Mathf.Clamp((int)Spikey.position.x, (int)XMinValue, (int)Spikey.position.x);
 
         }
         else if (XMaxEnabled)
         {
-            targetPos.x = Mathf.Clamp(Spikey.position.x, Spikey.position.x, XMaxValue);
+            targetPos.x = Mathf.Clamp((int)Spikey.position.x, (int)Spikey.position.x, (int)XMaxValue);
         }
 
 
 
         //align the camera and the targets z position
-        targetPos.z = transform.position.z;
+        targetPos.z = _camera.transform.position.z;
 
         //using smooth daap we will gradually change the camera transform position to the target position based on the cameras transform velocity and our smooth time
-        transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velocity, smoothTime);
+        _camera.transform.position = Vector3.SmoothDamp(_camera.transform.position, targetPos, ref velocity, smoothTime);
 
     }
 
-    public float RoundToNearestPixel(float unityUnits)
+    /*public float RoundToNearestPixel(float unityUnits)
     {
         float valueInPixels = unityUnits * pixelToUnits;
         valueInPixels = Mathf.Round(valueInPixels);
         float roundedUnityUnits = valueInPixels * (1 / pixelToUnits);
         return roundedUnityUnits;
-    }
+    }*/
 }
