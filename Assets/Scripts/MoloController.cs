@@ -84,7 +84,7 @@ public class MoloController : MonoBehaviour
         if (collision.gameObject.tag == "Puas")
         {
             isOut = true;
-            gameObject.layer = 17;
+            gameObject.layer = 21;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -92,7 +92,7 @@ public class MoloController : MonoBehaviour
         if (collision.gameObject.tag == "Shadow")
         {
             isOut = true;
-            gameObject.layer = 17;
+            gameObject.layer = 21;
         }
     }
 

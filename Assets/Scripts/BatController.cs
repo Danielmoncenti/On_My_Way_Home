@@ -63,7 +63,7 @@ public class BatController : MonoBehaviour
 
         if (isFalling || isDead)
         {
-             gameObject.layer = 17;
+             gameObject.layer = 21;
         }
 
         animator.SetBool(mad_animation, isMad);

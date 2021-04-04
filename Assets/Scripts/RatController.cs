@@ -68,7 +68,7 @@ public class RatController : MonoBehaviour
         if (isFalling)
         {
             currentSpeedH = 0.0f;
-            gameObject.layer = 17;
+            gameObject.layer = 21;
         }
 
         animator.SetBool(mad_animation, isMad);
