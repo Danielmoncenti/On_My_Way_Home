@@ -27,6 +27,9 @@ TagManager:
   - BoundTrap
   - BoundTrapReverse
   - Camera
+  - BigCoin
+  - Coin
+  - LifeUp
   layers:
   - Default
   - TransparentFX
