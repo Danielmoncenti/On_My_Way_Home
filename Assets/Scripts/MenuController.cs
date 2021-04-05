@@ -47,14 +47,13 @@ public class MenuController : MonoBehaviour
             switch (menuoptions)
             {
                 case 0:
-                    //SceneManager.LoadScene("Level1");
                     SceneManager.LoadScene("SampleScene");
                     break;
                 case 1:
                     arrows.transform.position = new Vector2(0, -20);
                     break;
                 case 2:
-                    arrows.transform.position = new Vector2(0, -60);
+                    Application.Quit();
                     break;
             }
         

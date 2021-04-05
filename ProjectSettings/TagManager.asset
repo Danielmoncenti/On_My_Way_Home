@@ -32,6 +32,7 @@ TagManager:
   - LifeUp
   - Points
   - Lifes
+  - Active
   layers:
   - Default
   - TransparentFX

@@ -145,8 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bbf43319437294285ec15399729c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  erizo: {fileID: 0}
-  rock: {fileID: 4301033416577344875, guid: c8b5bdcb2c7cd3b4c8aacb09de7f91aa, type: 3}
+  Rock: {fileID: 4301033416577344875, guid: c8b5bdcb2c7cd3b4c8aacb09de7f91aa, type: 3}
 --- !u!95 &1634062939
 Animator:
   serializedVersion: 3

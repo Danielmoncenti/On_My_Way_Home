@@ -59,11 +59,6 @@ public class GameManagerController : MonoBehaviour
     void Update()
     {
 
-        /*if (points % 100 == points)
-        {
-            lifeUp = true;
-        }*/
-
         if (coin)
         {
             points++;

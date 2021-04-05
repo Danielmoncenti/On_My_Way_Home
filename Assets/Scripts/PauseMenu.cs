@@ -24,15 +24,17 @@ public class PauseMenu : MonoBehaviour
             }
         }
 
-         void pause() { pauseMenu.SetActive(true);
+         void pause() 
+         { 
+            pauseMenu.SetActive(true);
             Time.timeScale = 0;
             gameispaused = true;
-        }
+         }
   
     }
     public void Quit()
     {
-        SceneManager.LoadScene("MainMenu");
+        Application.Quit();
     }
     public void resume()
     {

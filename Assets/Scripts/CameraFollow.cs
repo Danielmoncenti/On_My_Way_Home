@@ -17,20 +17,20 @@ public class CameraFollow : MonoBehaviour
     private float smoothTime = .15f;
 
     //enable and set the maxium Y value
-    private bool YMaxEnabled = true;
-    private float YMaxValue = 100;
+    public bool YMaxEnabled = true;
+    public float YMaxValue = 100;
 
     //enable and set the min Y value
-    private bool YMinEnabled = true;
-    private float YMinValue = -10;
+    public bool YMinEnabled = true;
+    public float YMinValue = -10;
 
     //enable and set the maxium X value
-    private bool XMaxEnabled = false;
-    private float XMaxValue = 0;
+    public bool XMaxEnabled = false;
+    public float XMaxValue = 0;
 
     //enable and set the min X value
-    private bool XMinEnabled = true;
-    private float XMinValue = 0;
+    public bool XMinEnabled = true;
+    public float XMinValue = 0;
 
     //pixels
     //private float pixelToUnits = 40.0f;
