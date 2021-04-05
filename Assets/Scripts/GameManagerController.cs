@@ -1,27 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEditor;
+using System.IO;
 
 public class GameManagerController : MonoBehaviour
 {
     public static GameManagerController Instance { get; private set; }
 
-    private Camera GameCamera;
-    [SerializeField] GameObject Spikey;
+    private enum POINTS { COIN, BIGCOIN, LIFEUP };
 
-    private SpikeyController spikeyController;
-    //Camera camera;
-    private Vector3 cameraPos;
-    private float SpikeyY;
+    private GameObject Spikey;
+    private Rigidbody2D Spikey_rigidBody;
 
+    private GameObject BigCoin;
+    private Rigidbody2D BigCoin_rigidBody;
 
-    //public SoundAudioClip[] SoundAudioClipArray;
-    //[System.Serializable]
-    //public class SoundAudioClip
-    //{
-    //    public SoundManager.Sound sound;
-    //    public AudioClip audioClip;
-    //}
+    private GameObject Coin;
+    private Rigidbody2D Coin_rigidBody;
+
+    private GameObject LifeUp;
+    private Rigidbody2D LifeUp_rigidBody;
+
+    //Puntos y vida de Spikey
+    public int life = 3;
+    public int points = 0;
+
+    //Booleanos para los puntos
+    public bool bigCoin = false;
+    public bool coin = false;
+    public bool lifeUp = false;
 
     void Awake()
     {
@@ -40,19 +50,44 @@ public class GameManagerController : MonoBehaviour
     //Start is called before the first frame update
     void Start()
     {
-        spikeyController = Spikey.GetComponent<SpikeyController>();
-        GameCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-        SpikeyY = Spikey.transform.position.y;
+        Spikey = GameObject.Find("Spikey");
+        Spikey_rigidBody = Spikey.GetComponent<Rigidbody2D>();
+
+        BigCoin = GameObject.Find("BigCoin");
+        BigCoin_rigidBody = BigCoin.GetComponent<Rigidbody2D>();
+
+        Coin = GameObject.Find("Coin");
+        Coin_rigidBody = Coin.GetComponent<Rigidbody2D>();
+
+        LifeUp = GameObject.Find("LifeUp");
+        LifeUp_rigidBody = LifeUp.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (SpikeyY == SpikeyY + 50)
-        {
-
-        }
-        cameraPos = new Vector3(Spikey.transform.position.x, Spikey.transform.position.y + 60, -10.0f);
-        GameCamera.transform.position = cameraPos;
+       if (coin)
+       {
+            points++;
+            coin = false;
+       }
+       else if (bigCoin)
+       {
+            points += 20;
+            bigCoin = false;
+       }
+       else if (lifeUp)
+       {
+            if (life == 6)
+            {
+                points += 20;
+                lifeUp = false;
+            }
+            else if (life < 6)
+            {
+                life++;
+                lifeUp = false;
+            }
+       }
     }
 }

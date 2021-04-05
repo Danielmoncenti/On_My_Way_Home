@@ -33,6 +33,8 @@ public class SpikeyController : MonoBehaviour
     public float invulnerabilitytimer = 0.0f;
     public float damagetimer = 0.0f;
     private Vector2 lastCheckpoint;
+
+    //Inputs del teclado
     KeyCode upButton = KeyCode.W;
     KeyCode downButton = KeyCode.S;
     KeyCode rightButton = KeyCode.D;
@@ -44,10 +46,19 @@ public class SpikeyController : MonoBehaviour
     KeyCode sprintButton = KeyCode.J;
     KeyCode respawnButton = KeyCode.Z;
 
+    //Get Components
     private BoxCollider2D bc2d;
     private Rigidbody2D rigidBody;
     private GameObject shadowOndash;
     private GameObject limitdash;
+
+    //Get Components de fuera del script
+    public GameObject pua;
+    public GameObject dashtrigger;
+    public GameObject shadow;
+    private ShadowController shadowcontroller;
+
+    //Animaciones
     private Animator animator;
     private int walking_animation;
     private int running_animation;
@@ -64,16 +75,7 @@ public class SpikeyController : MonoBehaviour
     bool isDashing = false;
     bool isAttacking = false;
 
-
-    //private AudioSource audio;
-
-    public GameObject pua;
-    public GameObject dashtrigger;
-    public GameObject shadow;
-    private ShadowController shadowcontroller;
-
     Vector3 Spikeyscale;
-
 
     // Start is called before the first frame update
     void Start()
@@ -716,7 +718,7 @@ public class SpikeyController : MonoBehaviour
                 rigidBody.AddForce(new Vector2(-300, 300),ForceMode2D.Impulse);
             }
         }
-        if (life <= 0)
+        else if(life <= 0)
         {
             Respawn();
         }
@@ -773,7 +775,7 @@ public class SpikeyController : MonoBehaviour
         {
             maxSpeed = 80;
         }
-        if (collision.gameObject.tag == "Tilemap" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Crocodile"|| collision.gameObject.tag == "Water")
+        else if(collision.gameObject.tag == "Tilemap" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Crocodile"|| collision.gameObject.tag == "Water")
         {
             if (Jumping == true)
             {
@@ -797,7 +799,7 @@ public class SpikeyController : MonoBehaviour
 
             }
         }
-        if (collision.gameObject.tag == "Wall")
+        else if(collision.gameObject.tag == "Wall")
         {
            
             
@@ -824,18 +826,28 @@ public class SpikeyController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-
-        if (collision.gameObject.tag == "Water")
+        if (collision.gameObject.tag == "Coin")
+        {
+            GameManagerController.Instance.coin = true;
+        }
+        else if (collision.gameObject.tag == "BigCoin")
+        {
+            GameManagerController.Instance.bigCoin = true;
+        }
+        else if (collision.gameObject.tag == "LifeUp")
+        {
+            GameManagerController.Instance.lifeUp = true;
+        }
+        else if(collision.gameObject.tag == "Water")
         {
             maxSpeed = 80;
         }
-        if (collision.gameObject.tag == "Enemies" && dashing==false)
+        else if(collision.gameObject.tag == "Enemies" && dashing==false)
         {
             Vector2 damagedirection = this.transform.position-collision.transform.position;
             DamageTaken(damagedirection);
         }
-        if (collision.gameObject.tag == "Enemies" && dashing==true)
+        else if(collision.gameObject.tag == "Enemies" && dashing==true)
         {
             Destroy(collision.gameObject);
             cancelDash();
@@ -855,29 +867,29 @@ public class SpikeyController : MonoBehaviour
             rigidBody.velocity = Vector2.zero;
             rigidBody.AddForce(new Vector2(-700, 500), ForceMode2D.Impulse);
         }
-        if (collision.gameObject.tag == "BoundTrapReverse")
+        else if(collision.gameObject.tag == "BoundTrapReverse")
         {
             rigidBody.velocity = Vector2.zero;
             rigidBody.AddForce(new Vector2(700, 500), ForceMode2D.Impulse);
         }
-        if (collision.gameObject.tag == "Dash")
+        else if(collision.gameObject.tag == "Dash")
         {
             cancelDash();
         }
 
-        if (collision.gameObject.tag == "JawTrap")
+        else if(collision.gameObject.tag == "JawTrap")
         {
             cancelDash();
             rigidBody.velocity = Vector2.zero;
             stucked = true;
 
         }
-        if (collision.gameObject.tag == "Enemies")
+        else if(collision.gameObject.tag == "Enemies")
         {
             Vector2 damagedirection = this.transform.position - collision.transform.position;
             DamageTaken(damagedirection);
         }
-        if (collision.gameObject.tag == "CheckPoint")
+        else if (collision.gameObject.tag == "CheckPoint")
         {
             lastCheckpoint = collision.transform.position;
             SoundManager.PlaySound("Checkpoint");
@@ -889,16 +901,16 @@ public class SpikeyController : MonoBehaviour
         {
             Jumping = true;
         }
-        if(collision.gameObject.tag == "Water")
+        else if(collision.gameObject.tag == "Water")
         {
             Jumping = true;
             maxSpeed = 130;
         }
-        if (collision.gameObject.tag == "Crocodile")
+        else if(collision.gameObject.tag == "Crocodile")
         {
             Jumping = true;
         }
-        if (collision.gameObject.tag == "Wall")
+        else if(collision.gameObject.tag == "Wall")
         {
             Jumping = true;
            

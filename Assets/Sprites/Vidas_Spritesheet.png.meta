@@ -29,6 +29,33 @@ TextureImporter:
   - first:
       213: -6934087619857467263
     second: Vidas_Spritesheet_8
+  - first:
+      213: 8571118937183038510
+    second: Vidas_Spritesheet_9
+  - first:
+      213: 8983211729978930727
+    second: Vidas_Spritesheet_10
+  - first:
+      213: 5802628723998880067
+    second: Vidas_Spritesheet_11
+  - first:
+      213: 6645290693615430114
+    second: Vidas_Spritesheet_12
+  - first:
+      213: -4886683461061388548
+    second: Vidas_Spritesheet_13
+  - first:
+      213: 5604446063638124147
+    second: Vidas_Spritesheet_14
+  - first:
+      213: 8033803714547501979
+    second: Vidas_Spritesheet_15
+  - first:
+      213: -5062677465624140363
+    second: Vidas_Spritesheet_16
+  - first:
+      213: 8452994533828387914
+    second: Vidas_Spritesheet_17
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -118,9 +145,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
-        width: 64
-        height: 32
+        y: 270
+        width: 130
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,10 +165,10 @@ TextureImporter:
       name: Vidas_Spritesheet_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 128
-        width: 64
-        height: 32
+        x: 0
+        y: 255
+        width: 130
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,9 +187,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
-        width: 64
-        height: 32
+        y: 240
+        width: 130
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -180,10 +207,10 @@ TextureImporter:
       name: Vidas_Spritesheet_3
       rect:
         serializedVersion: 2
-        x: 64
-        y: 96
-        width: 64
-        height: 32
+        x: 0
+        y: 225
+        width: 130
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,9 +229,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
-        width: 64
-        height: 32
+        y: 210
+        width: 130
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -222,10 +249,10 @@ TextureImporter:
       name: Vidas_Spritesheet_5
       rect:
         serializedVersion: 2
-        x: 64
-        y: 64
-        width: 64
-        height: 32
+        x: 0
+        y: 195
+        width: 130
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,9 +271,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
-        width: 64
-        height: 32
+        y: 180
+        width: 130
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -264,10 +291,10 @@ TextureImporter:
       name: Vidas_Spritesheet_7
       rect:
         serializedVersion: 2
-        x: 64
-        y: 32
-        width: 64
-        height: 32
+        x: 0
+        y: 165
+        width: 130
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -286,9 +313,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 64
-        height: 32
+        y: 150
+        width: 130
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -298,6 +325,195 @@ TextureImporter:
       bones: []
       spriteID: 18836f05c0c25cf90800000000000000
       internalID: -6934087619857467263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vidas_Spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 135
+        width: 130
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2c2b6af24bb2f670800000000000000
+      internalID: 8571118937183038510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vidas_Spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 120
+        width: 130
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 726348b2977caac70800000000000000
+      internalID: 8983211729978930727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vidas_Spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 105
+        width: 130
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3417e61b414178050800000000000000
+      internalID: 5802628723998880067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vidas_Spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 90
+        width: 130
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e928267da0d83c50800000000000000
+      internalID: 6645290693615430114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vidas_Spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 75
+        width: 130
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf6d8ad68430f2cb0800000000000000
+      internalID: -4886683461061388548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vidas_Spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 60
+        width: 130
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3769cf1500ef6cd40800000000000000
+      internalID: 5604446063638124147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vidas_Spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 45
+        width: 130
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9b41d8d9edcd7f60800000000000000
+      internalID: 8033803714547501979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vidas_Spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 30
+        width: 130
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b529111ba1cdb9b0800000000000000
+      internalID: -5062677465624140363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vidas_Spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 15
+        width: 130
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a44e82d1eb11f4570800000000000000
+      internalID: 8452994533828387914
       vertices: []
       indices: 
       edges: []
