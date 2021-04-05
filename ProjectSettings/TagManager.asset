@@ -30,6 +30,8 @@ TagManager:
   - BigCoin
   - Coin
   - LifeUp
+  - Points
+  - Lifes
   layers:
   - Default
   - TransparentFX

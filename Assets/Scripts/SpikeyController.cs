@@ -826,19 +826,7 @@ public class SpikeyController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Coin")
-        {
-            GameManagerController.Instance.coin = true;
-        }
-        else if (collision.gameObject.tag == "BigCoin")
-        {
-            GameManagerController.Instance.bigCoin = true;
-        }
-        else if (collision.gameObject.tag == "LifeUp")
-        {
-            GameManagerController.Instance.lifeUp = true;
-        }
-        else if(collision.gameObject.tag == "Water")
+        if(collision.gameObject.tag == "Water")
         {
             maxSpeed = 80;
         }
@@ -846,6 +834,7 @@ public class SpikeyController : MonoBehaviour
         {
             Vector2 damagedirection = this.transform.position-collision.transform.position;
             DamageTaken(damagedirection);
+            GameManagerController.Instance.lifeDown = true;
         }
         else if(collision.gameObject.tag == "Enemies" && dashing==true)
         {
@@ -876,7 +865,6 @@ public class SpikeyController : MonoBehaviour
         {
             cancelDash();
         }
-
         else if(collision.gameObject.tag == "JawTrap")
         {
             cancelDash();
@@ -888,11 +876,29 @@ public class SpikeyController : MonoBehaviour
         {
             Vector2 damagedirection = this.transform.position - collision.transform.position;
             DamageTaken(damagedirection);
+            GameManagerController.Instance.lifeDown = true;
+
         }
         else if (collision.gameObject.tag == "CheckPoint")
         {
             lastCheckpoint = collision.transform.position;
             SoundManager.PlaySound("Checkpoint");
+        }
+        else if (collision.gameObject.tag == "Coin")
+        {
+            Destroy(collision.gameObject);
+            GameManagerController.Instance.coin = true;
+
+        }
+        else if (collision.gameObject.tag == "BigCoin")
+        {
+            GameManagerController.Instance.bigCoin = true;
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.tag == "LifeUp")
+        {
+            GameManagerController.Instance.lifeUp = true;
+            Destroy(collision.gameObject);
         }
     }
     private void OnCollisionExit2D(Collision2D collision)

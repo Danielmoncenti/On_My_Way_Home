@@ -33,7 +33,7 @@ public class CameraFollow : MonoBehaviour
     private float XMinValue = 0;
 
     //pixels
-    private float pixelToUnits = 40.0f;
+    //private float pixelToUnits = 40.0f;
 
 
     // Start is called before the first frame update
