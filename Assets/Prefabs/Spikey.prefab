@@ -105,7 +105,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &3751320106580556459
 BoxCollider2D:
@@ -147,6 +147,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpikeyDirection: 0
   FacingDirection: 3
+  VerticalDashDirection: 0
+  basicDashActivated: 1
+  shadowDashActivated: 0
+  doubleDashActivated: 0
   dashCD: 0
   maxSpeed: 130
   dashspeed: 400
@@ -157,10 +161,10 @@ MonoBehaviour:
   LayerDashLimit:
     serializedVersion: 2
     m_Bits: 2048
-  thrust: 2
+  thrust: 28
   life: 5
   Jumping: 1
-  canClimb: 0
+  canClimb: 1
   climbing: 0
   takingdamage: 0
   invulnerability: 0
