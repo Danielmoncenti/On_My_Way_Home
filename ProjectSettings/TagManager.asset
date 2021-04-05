@@ -32,6 +32,9 @@ TagManager:
   - LifeUp
   - Points
   - Lifes
+  - Unlocker
+  - ClimbableWall
+  - FallingPlataform
   layers:
   - Default
   - TransparentFX
@@ -55,7 +58,7 @@ TagManager:
   - HUD
   - Camera
   - DeadEnemies
-  - 
+  - Background
   - 
   - 
   - 
@@ -68,6 +71,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1178164991
     locked: 0
   - name: Spikey
     uniqueID: 1549782627
