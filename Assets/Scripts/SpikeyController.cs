@@ -1022,6 +1022,13 @@ public class SpikeyController : MonoBehaviour
             GameManagerController.Instance.lifeDown = true;
 
         }
+        else if (collision.gameObject.tag == "Arrow")
+        {
+            Vector2 damagedirection = this.transform.position - collision.transform.position;
+            DamageTaken(damagedirection);
+            GameManagerController.Instance.lifeDown = true;
+
+        }
         else if (collision.gameObject.tag == "CheckPoint")
         {
             lastCheckpoint = collision.transform.position;

@@ -96,6 +96,16 @@ public class BatController : MonoBehaviour
             }
             currentSpeedV *= -1;
         }
+        if (collision.gameObject.tag == "Water")
+        {
+            if (isFalling)
+            {
+                isDead = true;
+                currentSpeedV = 0.0f;
+                Destroy(gameObject, 2);
+            }
+            currentSpeedV *= -1;
+        }
         if (collision.gameObject.tag == "Puas")
         {
             isFalling = true;
