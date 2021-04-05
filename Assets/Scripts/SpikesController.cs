@@ -12,7 +12,6 @@ public class SpikesController : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.velocity = transform.up * thurst;
-
     }
 
     // Update is called once per frame

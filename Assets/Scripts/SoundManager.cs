@@ -5,11 +5,65 @@ using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour {
 
+    public static SoundManager Instance { get; private set; }
+
     public static AudioClip Song, SongGame, PlayerJump, PlayerDash, PlayerRevert, PlayerRun, PlayerDamage, PlayerSpike, Rat, Bat, Drop, Trap, Crocodile, ClickMenu, Checkpoint, Button, Cristal, CrossBow, BoundTrap, Water;
     static AudioSource audiosrc;
 
     Scene currentScene;
     string sceneName;
+
+    //Comprobar para activar sonidos
+    /*private int radius = 500;
+    Ballista _Ballista;
+    private bool b_ballista = false;
+    BatController _Bat;
+    private bool b_bat = false;
+    BoundTrapController _BoundTrap;
+    private bool b_boundtrap = false;
+    BushController _Bush;
+    private bool b_bush = false;
+    ButtonController _Button;
+    private bool b_button = false;
+    CrocodileController _Crocodile;
+    private bool b_crocodile = false;
+    DropController _Drop;
+    private bool b_drop = false;
+    FallingPlataform _FallingPlataform;
+    private bool b_fallinplataform = false;
+    //GameObject Pajaro;
+    MoloController _Mole;
+    private bool b_mole = false;
+    MushroomController _Mushroom;
+    private bool b_mushroom = false;
+    RatController _Rat;
+    private bool b_rat = false;
+    RockController _Rock;
+    private bool b_rock = false;
+    RotateTrapController _RotateTrap;
+    private bool b_rotatetrap = false;
+    Spawner _Spawner;
+    private bool b_spawner = false;
+    ThormsController _Thorms;
+    private bool b_thorms = false;
+    TrapController _Trap; 
+    private bool b_trap = false;
+
+    Vector2 distance;*/
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Debug.Log("Warning: multiple " + this + " in scene!!");
+        }
+
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +91,24 @@ public class SoundManager : MonoBehaviour {
 
         audiosrc = GetComponent<AudioSource>();
 
+        /*_Ballista = GetComponent<Ballista>();
+        _Bat = GetComponent<BatController>();
+        _BoundTrap = GetComponent<BoundTrapController>();
+        _Bush = GetComponent<BushController>();
+        _Button = GetComponent<ButtonController>();
+        _Crocodile = GetComponent<CrocodileController>();
+        _Drop = GetComponent<DropController>();
+        _FallingPlataform = GetComponent<FallingPlataform>();
+        //Pajaro = GameObject.FindGameObjectsWithTag("").GetComponent<ButtonController>();
+        _Mole = GetComponent<MoloController>();
+        _Mushroom = GetComponent<MushroomController>();
+        _Rat = GetComponent<RatController>();
+        _Rock = GetComponent<RockController>();
+        _RotateTrap = GetComponent<RotateTrapController>();
+        _Spawner = GetComponent<Spawner>();
+        _Thorms = GetComponent<ThormsController>();
+        _Trap = GetComponent<TrapController>();*/
+
         currentScene = SceneManager.GetActiveScene();
         sceneName = currentScene.name;
 
@@ -49,8 +121,13 @@ public class SoundManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        
+        //CheckCollisions();
     }
+
+    /*private void CheckCollisions()
+    {
+       
+    }*/
 
     public static void PlaySound (string clip)
     {
@@ -86,15 +163,15 @@ public class SoundManager : MonoBehaviour {
             case "Bat":
                 audiosrc.PlayOneShot(Bat);
                 break;
-            case "Drop":
-                audiosrc.PlayOneShot(Drop);
-                break;
+            //case "Drop":
+                //audiosrc.PlayOneShot(Drop);
+               // break;
             case "Trap":
                 audiosrc.PlayOneShot(Trap);
                 break;
-            case "Roar":
-                audiosrc.PlayOneShot(Crocodile);
-                break;
+            //case "Roar":
+                //audiosrc.PlayOneShot(Crocodile);
+                //break;
             case "ClickMenu":
                 audiosrc.PlayOneShot(ClickMenu);
                 break;
