@@ -11,13 +11,13 @@ public class Ballista : MonoBehaviour
     public GameObject arrow;
     public float turretRadius;
     private Vector2 arrowSpeed;
-    private bool canShoot;
+    public bool canShoot=true;
 
     // Start is called before the first frame update
     void Start()
     {
     
-        canShoot = true;
+        
         arrowSpeed = new Vector2(500,0);
         turretRadius = 250;
         rb2d = GetComponent<Rigidbody2D>();
@@ -62,9 +62,10 @@ public class Ballista : MonoBehaviour
                 GameObject inst = Instantiate(arrow, rb2d.transform.position + transform.right * -5+transform.up *5, arrow.transform.rotation);
                 ArrowController bc = inst.GetComponent<ArrowController>();
                 bc.setVelocity(arrowSpeed*-1);
+                canShoot = false;
                 SoundManager.PlaySound("BoundTrap");
 
-                canShoot = false;
+                
             }
         }
   

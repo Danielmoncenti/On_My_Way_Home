@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5567684094673863966}
   m_Layer: 11
   m_Name: Falling_Plataform
-  m_TagString: FallingPlataform
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,5 +146,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   falling: 0
   falltimer: 0
-  startshake: 3
-  fall: 6
+  startshake: 1
+  fall: 3
