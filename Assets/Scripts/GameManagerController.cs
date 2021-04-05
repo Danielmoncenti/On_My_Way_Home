@@ -14,18 +14,19 @@ public class GameManagerController : MonoBehaviour
     private enum POINTS { COIN, BIGCOIN, LIFEUP };
 
     //Texto de los puntos y vidas
-    public Text Point_text;
-    public Text Lifes_text;
+    private Text Point_text;
+    private Text Lifes_text;
 
     //Puntos y vida de Spikey
-    public int totalLifes = 10;
+    public int totalLifes = 3;
     public int life = 3;
     public int points = 0;
 
     //Animacion de las vidas
-    public bool Iddle = false;
+    //public bool Iddle = false;
     public bool OneUp = false;
     public bool OneDown = false;
+    public bool TryAgain = false;
 
     //Booleanos para los puntos
     public bool bigCoin = false;
@@ -57,10 +58,11 @@ public class GameManagerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (points % 100 == points)
+
+        /*if (points % 100 == points)
         {
             lifeUp = true;
-        }
+        }*/
 
         if (coin)
         {
@@ -83,30 +85,43 @@ public class GameManagerController : MonoBehaviour
             {
                 life++;
                 OneUp = true;
+                //Iddle = false;
                 lifeUp = false;
             }
         }
         else if (lifeDown)
         {
-            if (life == 0)
+            if (life == 1)
             {
                 totalLifes--;
+                life = 3;
+                OneDown = true;
+                TryAgain = true;
                 lifeDown = false;
             }
-            else if (life <= 6)
+            else
             {
                 life--;
                 OneDown = true;
+                //Iddle = false;
                 lifeDown = false;
+
             }
-        }
-
-        if (totalLifes == 0)
-        {
 
         }
+        CheckTotalLifes();
 
         Point_text.text = points.ToString();
-        Lifes_text.text = points.ToString();
+        Lifes_text.text = totalLifes.ToString();
+    }
+
+
+    private void CheckTotalLifes()
+    {
+        if (totalLifes < 0)
+        {
+            SceneManager.LoadScene("GameOver");
+            Destroy(this);
+        }
     }
 }

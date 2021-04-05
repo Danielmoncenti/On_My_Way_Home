@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4885091205026297949}
-  - component: {fileID: 4885091205026297948}
+  - component: {fileID: -7327497375496718674}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4885091205026297948
+--- !u!114 &-7327497375496718674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,6 +40,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4885091205026297951}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fec39e3b2d0e404bb37450e5d83dc32, type: 3}
+  m_Script: {fileID: 11500000, guid: a4f6e76c3b2ec764aa59e5cf90634020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalLifes: 3
+  life: 3
+  points: 0
+  OneUp: 0
+  OneDown: 0
+  TryAgain: 0
+  bigCoin: 0
+  coin: 0
+  lifeUp: 0
+  lifeDown: 0

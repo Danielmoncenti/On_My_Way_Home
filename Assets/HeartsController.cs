@@ -23,13 +23,15 @@ public class HeartsController : MonoBehaviour
     private int Five_to_Six_animation;
     private int Six_to_Five_animation;
     private int Six_Iddle_animation;
-    bool Iddle = false;
-    bool OneUp = false;
-    bool OneDown = false;
+    public bool Iddle = true;
+    public bool OneUp = false;
+    public bool OneDown = false;
+    public bool TryAgain = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         One_to_N_animation = Animator.StringToHash("OneDown");
         One_Iddle_animation = Animator.StringToHash("Iddle");
         One_to_Two_animation = Animator.StringToHash("OneUp");
@@ -38,6 +40,7 @@ public class HeartsController : MonoBehaviour
         Two_to_Three_animation = Animator.StringToHash("OneUp");
         Three_to_Two_animation = Animator.StringToHash("OneDown");
         Three_Iddle_animation = Animator.StringToHash("Iddle");
+        Three_Iddle_animation = Animator.StringToHash("TryAgain");
         Three_to_Four_animation = Animator.StringToHash("OneUp");
         Four_to_Three_animation = Animator.StringToHash("OneDown");
         Four_Iddle_animation = Animator.StringToHash("Iddle");
@@ -52,10 +55,9 @@ public class HeartsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         OneUp = GameManagerController.Instance.OneUp;
         OneDown = GameManagerController.Instance.OneDown;
-
+        TryAgain = GameManagerController.Instance.TryAgain;
 
         animator.SetBool(One_to_N_animation, OneDown);
         animator.SetBool(One_Iddle_animation, Iddle);
@@ -64,6 +66,7 @@ public class HeartsController : MonoBehaviour
         animator.SetBool(Two_Iddle_animation, Iddle);
         animator.SetBool(Two_to_Three_animation, OneUp);
         animator.SetBool(Three_to_Two_animation, OneDown);
+        animator.SetBool(Three_Iddle_animation, TryAgain);
         animator.SetBool(Three_Iddle_animation, Iddle);
         animator.SetBool(Three_to_Four_animation, OneUp);
         animator.SetBool(Four_to_Three_animation, OneDown);
@@ -76,10 +79,14 @@ public class HeartsController : MonoBehaviour
         animator.SetBool(Six_Iddle_animation, Iddle);
     }
 
-    private void SetToIddle() { OneDown = false; OneUp = false; Iddle = true; }
-
-    private void CheckLifes()
+    public void SetToIddle() 
     {
-
+        GameManagerController.Instance.OneDown = false;
+        GameManagerController.Instance.OneUp = false; 
+        Iddle = true; 
     }
+
+    private void SetTryAgain() { GameManagerController.Instance.TryAgain = false; }
+
+    private void LifeDown() { GameManagerController.Instance.OneDown = false; }
 }
