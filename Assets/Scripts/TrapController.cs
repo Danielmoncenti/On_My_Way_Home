@@ -31,6 +31,7 @@ public class TrapController : MonoBehaviour
         if (collision.gameObject.tag == "Spikey")
         {
             isTrapped = true;
+            SoundManager.PlaySound("Trap");
         }
     }
 

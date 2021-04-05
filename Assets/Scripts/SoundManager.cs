@@ -1,22 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour {
-    //public enum Sound { PLAYERJUMP, PLAYERDASH, PLAYERRUN, PLAYERDASHRETURN, PLAYERSPIKE, RAT, BAT, DROP, TRAP}
 
-    public static AudioClip Song, PlayerJump, PlayerDash, PlayerRevert, PlayerRun, PlayerDamage, PlayerSpike, Rat, Bat, Drop, Trap, Crocodile, ClickMenu, Checkpoint, Button, Cristal, CrossBow, BoundTrap;
+    public static AudioClip Song, SongGame, PlayerJump, PlayerDash, PlayerRevert, PlayerRun, PlayerDamage, PlayerSpike, Rat, Bat, Drop, Trap, Crocodile, ClickMenu, Checkpoint, Button, Cristal, CrossBow, BoundTrap, Water;
     static AudioSource audiosrc;
+
+    Scene currentScene;
+    string sceneName;
 
     // Start is called before the first frame update
     void Start()
     {
         Song = Resources.Load<AudioClip> ("Song");
+        SongGame = Resources.Load<AudioClip> ("SongGame");
         PlayerJump = Resources.Load<AudioClip> ("Jump");
         PlayerDash = Resources.Load<AudioClip>("Dash");
         PlayerRevert = Resources.Load<AudioClip>("DashRevert");
-        //PlayerRun = Resources.Load<AudioClip> ("Run");
+        PlayerRun = Resources.Load<AudioClip> ("Step");
         PlayerDamage = Resources.Load<AudioClip>("Daño");
         //PlayerSpike = Resources.Load<AudioClip>("Spikes");
         Rat = Resources.Load<AudioClip>("Rat");
@@ -30,8 +33,18 @@ public class SoundManager : MonoBehaviour {
         Cristal = Resources.Load<AudioClip>("Cristal");
         CrossBow = Resources.Load<AudioClip>("Crossbow");
         BoundTrap = Resources.Load<AudioClip>("BoundTrap");
+        Water = Resources.Load<AudioClip>("Water");
 
         audiosrc = GetComponent<AudioSource>();
+
+        currentScene = SceneManager.GetActiveScene();
+        sceneName = currentScene.name;
+
+        if (sceneName == "MainMenu" || sceneName == "GameOver") {
+            PlaySound("Song");
+        } else {
+            PlaySound("SongGame");
+        }
     }
     // Update is called once per frame
     void Update()
@@ -45,6 +58,9 @@ public class SoundManager : MonoBehaviour {
         {
             case "Song":
                 audiosrc.PlayOneShot(Song);
+                break;
+            case "SongGame":
+                audiosrc.PlayOneShot(SongGame);
                 break;
             case "Jump":
                 audiosrc.PlayOneShot(PlayerJump);
@@ -97,21 +113,9 @@ public class SoundManager : MonoBehaviour {
             case "BoundTrap":
                 audiosrc.PlayOneShot(BoundTrap);
                 break;
+            case "Water":
+                audiosrc.PlayOneShot(Water);
+                break;
         }
     }
-
-    //public static void Play(Sound _sound) {
-    //    GameObject soundGameObject = new GameObject("Sound");
-    //    AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
-    //    audioSource.PlayOneShot(GetAudioClip(_sound));
-    //}
-
-    //private static AudioClip GetAudioClip(Sound _sound) {
-    //    foreach (GameManagerController.SoundAudioClip soundAudioClip in GameManagerController.Instance.SoundAudioClipArray) {
-    //        if (soundAudioClip.sound == _sound) {
-    //            return soundAudioClip.audioClip;
-    //        }
-    //    }
-    //    return null;
-    //}
 }
