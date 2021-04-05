@@ -147,6 +147,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpikeyDirection: 0
   FacingDirection: 3
+  VerticalDashDirection: 0
+  basicDashActivated: 1
+  shadowDashActivated: 0
+  doubleDashActivated: 0
   dashCD: 0
   maxSpeed: 130
   dashspeed: 400
@@ -160,7 +164,7 @@ MonoBehaviour:
   thrust: 28
   life: 5
   Jumping: 1
-  canClimb: 0
+  canClimb: 1
   climbing: 0
   takingdamage: 0
   invulnerability: 0

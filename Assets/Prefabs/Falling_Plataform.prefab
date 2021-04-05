@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5567684094673863966}
   m_Layer: 11
   m_Name: Falling_Plataform
-  m_TagString: Wall
+  m_TagString: FallingPlataform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -3907030084420521239, guid: 9848c331f8eff4e418c3f395c05c5ddd,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

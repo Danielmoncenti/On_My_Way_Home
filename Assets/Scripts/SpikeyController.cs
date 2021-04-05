@@ -7,10 +7,11 @@ public class SpikeyController : MonoBehaviour
     public enum Direction { NONE, UP, DOWN, RIGHT, LEFT };
     public Direction SpikeyDirection = Direction.NONE;
     public Direction FacingDirection = Direction.RIGHT;
-   
-    private bool basicDashActivated;
-    private bool shadowDashActivated;
-    private bool doubleDashActivated;
+    public Direction VerticalDashDirection = Direction.NONE;
+
+    public bool basicDashActivated;
+    public bool shadowDashActivated;
+    public bool doubleDashActivated;
 
     public float dashCD = 0;
     private float baseSpeed = 90.0f;
@@ -27,6 +28,7 @@ public class SpikeyController : MonoBehaviour
     private bool canWalk = true;
     public bool Jumping = true;
     public bool canClimb = true;
+   
     public bool climbing = false;
     public bool takingdamage = false;
     public bool invulnerability = false;
@@ -45,6 +47,9 @@ public class SpikeyController : MonoBehaviour
     KeyCode shadowButton = KeyCode.Q;
     KeyCode sprintButton = KeyCode.J;
     KeyCode respawnButton = KeyCode.Z;
+    KeyCode ChangeBasic = KeyCode.Alpha1;
+    KeyCode ChangeShadow = KeyCode.Alpha2;
+    KeyCode ChangeDouble = KeyCode.Alpha3;
 
     //Get Components
     private BoxCollider2D bc2d;
@@ -105,7 +110,7 @@ public class SpikeyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(rigidBody.velocity.y > 600)
+        if (rigidBody.velocity.y > 600)
         {
             rigidBody.velocity = new Vector2(currentSpeedH, 600);
         }
@@ -118,8 +123,14 @@ public class SpikeyController : MonoBehaviour
         {
             dashCD -= delta;
         }
-        if (dashCD < 0)
+        if (dashCD <= 0)
         {
+            if (shadowExists)
+            {
+              
+                Destroy(shadowOndash);
+                shadowExists = false;
+            }
             dashCD = 0;
         }
         isWalking = false;
@@ -164,6 +175,7 @@ public class SpikeyController : MonoBehaviour
         }
 
         SpikeyDirection = Direction.NONE;
+        VerticalDashDirection = Direction.NONE;
         if (takingdamage == false)
         {
             if (stucked == false)
@@ -177,7 +189,7 @@ public class SpikeyController : MonoBehaviour
                         isClimbing = true;
                         if (Input.GetKey(upButton))
                         {
-
+                            VerticalDashDirection = Direction.UP;
                             SpikeyDirection = Direction.UP;
 
                         }
@@ -187,7 +199,30 @@ public class SpikeyController : MonoBehaviour
 
                         }
                     }
+                    if (Input.GetKeyDown(ChangeBasic))
+                    {
+                        basicDashActivated = true;
+                        shadowDashActivated = false;
+                        doubleDashActivated = false;
+                    }
+                    if (Input.GetKeyDown(ChangeDouble))
+                    {
+                        basicDashActivated = false;
+                        shadowDashActivated = false;
+                        doubleDashActivated = true;
+                    }
+                    if (Input.GetKeyDown(ChangeShadow))
+                    {
+                        basicDashActivated = false;
+                        shadowDashActivated = true;
+                        doubleDashActivated = false;
+                    }
+                    if (Input.GetKey(upButton))
+                    {
+                        VerticalDashDirection = Direction.UP;
 
+
+                    }
 
                     if (Input.GetKey(rightButton) && climbing == false)
                     {
@@ -483,25 +518,91 @@ public class SpikeyController : MonoBehaviour
     {
         if (dashing == false)
         {
-
-            dashing = true;
-            gameObject.layer = 12;
-            shadowOndash = Instantiate(shadow, transform.position, transform.rotation);
-            shadowcontroller = shadowOndash.GetComponent<ShadowController>();
-            shadowcontroller.erizo = this.gameObject;
-            if (FacingDirection == Direction.RIGHT)
+            if (VerticalDashDirection == Direction.NONE)
             {
-                float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
-                Vector2 positioncenter = new Vector2(bc2d.bounds.max.x, centery);
-                Vector2 positionup = new Vector2(bc2d.bounds.max.x, bc2d.bounds.max.y);
-                Vector2 positiondown = new Vector2(bc2d.bounds.max.x, bc2d.bounds.min.y);
+                dashing = true;
+                gameObject.layer = 12;
+                shadowOndash = Instantiate(shadow, transform.position, transform.rotation);
+                shadowcontroller = shadowOndash.GetComponent<ShadowController>();
+                shadowcontroller.erizo = this.gameObject;
+                if (FacingDirection == Direction.RIGHT)
+                {
+                    float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
+                    Vector2 positioncenter = new Vector2(bc2d.bounds.max.x, centery);
+                    Vector2 positionup = new Vector2(bc2d.bounds.max.x, bc2d.bounds.max.y);
+                    Vector2 positiondown = new Vector2(bc2d.bounds.max.x, bc2d.bounds.min.y);
 
-                RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right, 200, LayerDashLimit);
-                RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right, 200, LayerDashLimit);
-                RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right, 200, LayerDashLimit);
+                    RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right, 200, LayerDashLimit);
+                    RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right, 200, LayerDashLimit);
+                    RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right, 200, LayerDashLimit);
+                    RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
+
+                    Vector2 LimitDashPosition = transform.position + transform.right * 200;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
+                        {
+                            LimitDashPosition = array[i].point;
+                        }
+                    }
+                    limitdash = Instantiate(dashtrigger, LimitDashPosition, transform.rotation);
+
+                    rigidBody.velocity = new Vector2(dashspeed, 0);
+                    shadowExists = true;
+                    rigidBody.gravityScale = 0;
+                    dashCD = 10000;
+                }
+                else if (FacingDirection == Direction.LEFT)
+                {
+                    float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
+                    Vector2 positioncenter = new Vector2(bc2d.bounds.min.x, centery);
+                    Vector2 positionup = new Vector2(bc2d.bounds.min.x, bc2d.bounds.max.y);
+                    Vector2 positiondown = new Vector2(bc2d.bounds.min.x, bc2d.bounds.min.y);
+
+                    RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right * -1, 200, LayerDashLimit);
+                    RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right * -1, 200, LayerDashLimit);
+                    RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right * -1, 200, LayerDashLimit);
+                    RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
+                    Vector2 LimitDashPosition = transform.position + transform.right * 200 * -1;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
+                        {
+                            LimitDashPosition = array[i].point;
+                        }
+                    }
+
+
+
+
+
+                    limitdash = Instantiate(dashtrigger, LimitDashPosition, transform.rotation);
+                    rigidBody.velocity = new Vector2(dashspeed * -1, 0);
+                    shadowExists = true;
+                    rigidBody.gravityScale = 0;
+                    dashCD = 10000;
+
+                }
+            }
+            else if (VerticalDashDirection == Direction.UP)
+            {
+                dashing = true;
+                gameObject.layer = 12;
+                shadowOndash = Instantiate(shadow, transform.position, transform.rotation);
+                shadowcontroller = shadowOndash.GetComponent<ShadowController>();
+                shadowcontroller.erizo = this.gameObject;
+
+                float center = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
+                Vector2 right = new Vector2(bc2d.bounds.max.x, bc2d.bounds.max.y);
+                Vector2 poscenter = new Vector2(bc2d.bounds.center.x, bc2d.bounds.max.y);
+                Vector2 left = new Vector2(bc2d.bounds.min.x, bc2d.bounds.max.y);
+
+                RaycastHit2D hitscenter = Physics2D.Raycast(right, Vector2.up, 200, LayerDashLimit);
+                RaycastHit2D hitsup = Physics2D.Raycast(poscenter, Vector2.up, 200, LayerDashLimit);
+                RaycastHit2D hitsdown = Physics2D.Raycast(left, Vector2.up, 200, LayerDashLimit);
                 RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
 
-                Vector2 LimitDashPosition = transform.position + transform.right * 200;
+                Vector2 LimitDashPosition = transform.position + transform.up * 200;
                 for (int i = 0; i < 3; i++)
                 {
                     if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
@@ -511,40 +612,17 @@ public class SpikeyController : MonoBehaviour
                 }
                 limitdash = Instantiate(dashtrigger, LimitDashPosition, transform.rotation);
 
-                rigidBody.velocity = new Vector2(dashspeed, 0);
+                rigidBody.velocity = new Vector2(0, dashspeed);
                 shadowExists = true;
                 rigidBody.gravityScale = 0;
+                dashCD = 10000;
             }
-            else if (FacingDirection == Direction.LEFT)
-            {
-                float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
-                Vector2 positioncenter = new Vector2(bc2d.bounds.min.x, centery);
-                Vector2 positionup = new Vector2(bc2d.bounds.min.x, bc2d.bounds.max.y);
-                Vector2 positiondown = new Vector2(bc2d.bounds.min.x, bc2d.bounds.min.y);
 
-                RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right * -1, 200, LayerDashLimit);
-                RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right * -1, 200, LayerDashLimit);
-                RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right * -1, 200, LayerDashLimit);
-                RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
-                Vector2 LimitDashPosition = transform.position + transform.right * 200 * -1;
-                for (int i = 0; i < 3; i++)
-                {
-                    if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
-                    {
-                        LimitDashPosition = array[i].point;
-                    }
-                }
-
-
-
-
-                limitdash = Instantiate(dashtrigger, LimitDashPosition, transform.rotation);
-                rigidBody.velocity = new Vector2(dashspeed * -1, 0);
-                shadowExists = true;
-                rigidBody.gravityScale = 0;
-                
-            }
+            
         }
+
+    
+
         SoundManager.PlaySound("DashRevert");
     }
 
@@ -553,7 +631,7 @@ public class SpikeyController : MonoBehaviour
     {
         if (shadowExists == true)
         {
-            dashCD = 10000;
+            
             rigidBody.transform.position = shadowOndash.transform.position;
             rigidBody.velocity = new Vector2(0, 0);
             Destroy(shadowOndash);
@@ -570,45 +648,80 @@ public class SpikeyController : MonoBehaviour
         {
             dashCD = 5000;
             dashing = true;
-          
-            if (FacingDirection == Direction.RIGHT)
+            if (VerticalDashDirection == Direction.NONE)
             {
-                float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
-                Vector2 positioncenter = new Vector2(bc2d.bounds.max.x, centery);
-                Vector2 positionup = new Vector2(bc2d.bounds.max.x, bc2d.bounds.max.y);
-                Vector2 positiondown = new Vector2(bc2d.bounds.max.x, bc2d.bounds.min.y);
-
-                RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right, 200, LayerDashLimit);
-                RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right, 200, LayerDashLimit);
-                RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right, 200, LayerDashLimit);
-                RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
-
-                Vector2 LimitDashPosition = transform.position + transform.right * 200;
-                for (int i = 0; i < 3; i++)
+                if (FacingDirection == Direction.RIGHT)
                 {
-                    if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
-                    {
-                        LimitDashPosition = array[i].point;
-                    }
-                }
-                limitdash = Instantiate(dashtrigger, LimitDashPosition, transform.rotation);
+                    float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
+                    Vector2 positioncenter = new Vector2(bc2d.bounds.max.x, centery);
+                    Vector2 positionup = new Vector2(bc2d.bounds.max.x, bc2d.bounds.max.y);
+                    Vector2 positiondown = new Vector2(bc2d.bounds.max.x, bc2d.bounds.min.y);
 
-                rigidBody.velocity = new Vector2(dashspeed, 0);
-                
-                rigidBody.gravityScale = 0;
+                    RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right, 200, LayerDashLimit);
+                    RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right, 200, LayerDashLimit);
+                    RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right, 200, LayerDashLimit);
+                    RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
+
+                    Vector2 LimitDashPosition = transform.position + transform.right * 200;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
+                        {
+                            LimitDashPosition = array[i].point;
+                        }
+                    }
+                    limitdash = Instantiate(dashtrigger, LimitDashPosition, transform.rotation);
+
+                    rigidBody.velocity = new Vector2(dashspeed, 0);
+
+                    rigidBody.gravityScale = 0;
+                }
+                else if (FacingDirection == Direction.LEFT)
+                {
+                    float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
+                    Vector2 positioncenter = new Vector2(bc2d.bounds.min.x, centery);
+                    Vector2 positionup = new Vector2(bc2d.bounds.min.x, bc2d.bounds.max.y);
+                    Vector2 positiondown = new Vector2(bc2d.bounds.min.x, bc2d.bounds.min.y);
+
+                    RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right * -1, 200, LayerDashLimit);
+                    RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right * -1, 200, LayerDashLimit);
+                    RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right * -1, 200, LayerDashLimit);
+                    RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
+                    Vector2 LimitDashPosition = transform.position + transform.right * 200 * -1;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
+                        {
+                            LimitDashPosition = array[i].point;
+                        }
+                    }
+
+
+
+
+                    limitdash = Instantiate(dashtrigger, LimitDashPosition, transform.rotation);
+                    rigidBody.velocity = new Vector2(dashspeed * -1, 0);
+
+                    rigidBody.gravityScale = 0;
+                }
             }
-            else if (FacingDirection == Direction.LEFT)
+            else if (VerticalDashDirection == Direction.UP)
             {
-                float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
-                Vector2 positioncenter = new Vector2(bc2d.bounds.min.x, centery);
-                Vector2 positionup = new Vector2(bc2d.bounds.min.x, bc2d.bounds.max.y);
-                Vector2 positiondown = new Vector2(bc2d.bounds.min.x, bc2d.bounds.min.y);
+                dashCD = 5000;
+                dashing = true;
+               
 
-                RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right * -1, 200, LayerDashLimit);
-                RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right * -1, 200, LayerDashLimit);
-                RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right * -1, 200, LayerDashLimit);
+                float center = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
+                Vector2 right = new Vector2(bc2d.bounds.max.x, bc2d.bounds.max.y);
+                Vector2 poscenter = new Vector2(bc2d.bounds.center.x, bc2d.bounds.max.y);
+                Vector2 left = new Vector2(bc2d.bounds.min.x, bc2d.bounds.max.y);
+
+                RaycastHit2D hitscenter = Physics2D.Raycast(right, Vector2.up, 200, LayerDashLimit);
+                RaycastHit2D hitsup = Physics2D.Raycast(poscenter, Vector2.up, 200, LayerDashLimit);
+                RaycastHit2D hitsdown = Physics2D.Raycast(left, Vector2.up, 200, LayerDashLimit);
                 RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
-                Vector2 LimitDashPosition = transform.position + transform.right * 200 * -1;
+
+                Vector2 LimitDashPosition = transform.position + transform.up * 200;
                 for (int i = 0; i < 3; i++)
                 {
                     if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
@@ -616,13 +729,10 @@ public class SpikeyController : MonoBehaviour
                         LimitDashPosition = array[i].point;
                     }
                 }
-
-
-
-
                 limitdash = Instantiate(dashtrigger, LimitDashPosition, transform.rotation);
-                rigidBody.velocity = new Vector2(dashspeed * -1, 0);
-             
+
+                rigidBody.velocity = new Vector2(0, dashspeed);
+                
                 rigidBody.gravityScale = 0;
             }
         }
@@ -634,48 +744,84 @@ public class SpikeyController : MonoBehaviour
 
         if (dashing == false)
         {
-            
+
             dashCD += 5000;
             dashing = true;
-
-            if (FacingDirection == Direction.RIGHT)
+            if (VerticalDashDirection == Direction.NONE)
             {
-                float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
-                Vector2 positioncenter = new Vector2(bc2d.bounds.max.x, centery);
-                Vector2 positionup = new Vector2(bc2d.bounds.max.x, bc2d.bounds.max.y);
-                Vector2 positiondown = new Vector2(bc2d.bounds.max.x, bc2d.bounds.min.y);
-
-                RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right, 200, LayerDashLimit);
-                RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right, 200, LayerDashLimit);
-                RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right, 200, LayerDashLimit);
-                RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
-
-                Vector2 LimitDashPosition = transform.position + transform.right * 200;
-                for (int i = 0; i < 3; i++)
+                if (FacingDirection == Direction.RIGHT)
                 {
-                    if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
+
+                    float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
+                    Vector2 positioncenter = new Vector2(bc2d.bounds.max.x, centery);
+                    Vector2 positionup = new Vector2(bc2d.bounds.max.x, bc2d.bounds.max.y);
+                    Vector2 positiondown = new Vector2(bc2d.bounds.max.x, bc2d.bounds.min.y);
+
+                    RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right, 200, LayerDashLimit);
+                    RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right, 200, LayerDashLimit);
+                    RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right, 200, LayerDashLimit);
+                    RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
+
+                    Vector2 LimitDashPosition = transform.position + transform.right * 200;
+                    for (int i = 0; i < 3; i++)
                     {
-                        LimitDashPosition = array[i].point;
+                        if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
+                        {
+                            LimitDashPosition = array[i].point;
+                        }
                     }
+                    limitdash = Instantiate(dashtrigger, LimitDashPosition, transform.rotation);
+
+                    rigidBody.velocity = new Vector2(dashspeed, 0);
+
+                    rigidBody.gravityScale = 0;
                 }
-                limitdash = Instantiate(dashtrigger, LimitDashPosition, transform.rotation);
+                else if (FacingDirection == Direction.LEFT)
+                {
+                    float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
+                    Vector2 positioncenter = new Vector2(bc2d.bounds.min.x, centery);
+                    Vector2 positionup = new Vector2(bc2d.bounds.min.x, bc2d.bounds.max.y);
+                    Vector2 positiondown = new Vector2(bc2d.bounds.min.x, bc2d.bounds.min.y);
 
-                rigidBody.velocity = new Vector2(dashspeed, 0);
+                    RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right * -1, 200, LayerDashLimit);
+                    RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right * -1, 200, LayerDashLimit);
+                    RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right * -1, 200, LayerDashLimit);
+                    RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
+                    Vector2 LimitDashPosition = transform.position + transform.right * 200 * -1;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
+                        {
+                            LimitDashPosition = array[i].point;
+                        }
+                    }
 
-                rigidBody.gravityScale = 0;
+
+
+
+                    limitdash = Instantiate(dashtrigger, LimitDashPosition, transform.rotation);
+                    rigidBody.velocity = new Vector2(dashspeed * -1, 0);
+
+                    rigidBody.gravityScale = 0;
+                }
             }
-            else if (FacingDirection == Direction.LEFT)
+            else if (VerticalDashDirection == Direction.UP)
             {
-                float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
-                Vector2 positioncenter = new Vector2(bc2d.bounds.min.x, centery);
-                Vector2 positionup = new Vector2(bc2d.bounds.min.x, bc2d.bounds.max.y);
-                Vector2 positiondown = new Vector2(bc2d.bounds.min.x, bc2d.bounds.min.y);
+               
+                
 
-                RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right * -1, 200, LayerDashLimit);
-                RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right * -1, 200, LayerDashLimit);
-                RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right * -1, 200, LayerDashLimit);
+
+                float center = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
+                Vector2 right = new Vector2(bc2d.bounds.max.x, bc2d.bounds.max.y);
+                Vector2 poscenter = new Vector2(bc2d.bounds.center.x, bc2d.bounds.max.y);
+                Vector2 left = new Vector2(bc2d.bounds.min.x, bc2d.bounds.max.y);
+
+                RaycastHit2D hitscenter = Physics2D.Raycast(right, Vector2.up, 200, LayerDashLimit);
+                RaycastHit2D hitsup = Physics2D.Raycast(poscenter, Vector2.up, 200, LayerDashLimit);
+                RaycastHit2D hitsdown = Physics2D.Raycast(left, Vector2.up, 200, LayerDashLimit);
                 RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
-                Vector2 LimitDashPosition = transform.position + transform.right * 200 * -1;
+
+                Vector2 LimitDashPosition = transform.position + transform.up * 200;
                 for (int i = 0; i < 3; i++)
                 {
                     if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
@@ -683,16 +829,14 @@ public class SpikeyController : MonoBehaviour
                         LimitDashPosition = array[i].point;
                     }
                 }
-
-
-
-
                 limitdash = Instantiate(dashtrigger, LimitDashPosition, transform.rotation);
-                rigidBody.velocity = new Vector2(dashspeed * -1, 0);
+
+                rigidBody.velocity = new Vector2(0, dashspeed);
 
                 rigidBody.gravityScale = 0;
             }
         }
+    
         SoundManager.PlaySound("Dash");
     }
 
@@ -775,7 +919,7 @@ public class SpikeyController : MonoBehaviour
         {
             maxSpeed = 80;
         }
-        else if(collision.gameObject.tag == "Tilemap" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Crocodile"|| collision.gameObject.tag == "Water")
+        else if(collision.gameObject.tag == "Tilemap" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Crocodile"|| collision.gameObject.tag == "Water" || collision.gameObject.tag == "Wall" )
         {
             if (Jumping == true)
             {
@@ -790,7 +934,7 @@ public class SpikeyController : MonoBehaviour
                 RaycastHit2D[] hits = Physics2D.RaycastAll(centerPosition, -Vector2.up, 2);
                 if (checkRaycastWithScenarioJump(hits)) { col1 = true; }
                 hits = Physics2D.RaycastAll(leftPosition, -Vector2.up, 2);
-                if (checkRaycastWithScenarioJump(hits)) { col2 = true; }
+                if (checkRaycastWithScenarioJump(hits   )) { col2 = true; }
                 hits = Physics2D.RaycastAll(rightPosition, -Vector2.up, 2);
                 if (checkRaycastWithScenarioJump(hits)) { col3 = true; }
 
@@ -799,7 +943,7 @@ public class SpikeyController : MonoBehaviour
 
             }
         }
-        else if(collision.gameObject.tag == "Wall")
+         if(collision.gameObject.tag == "Wall")
         {
            
             
