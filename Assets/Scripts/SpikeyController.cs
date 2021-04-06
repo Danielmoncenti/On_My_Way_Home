@@ -621,8 +621,6 @@ public class SpikeyController : MonoBehaviour
             
         }
 
-    
-
         SoundManager.PlaySound("DashRevert");
     }
 
@@ -696,9 +694,6 @@ public class SpikeyController : MonoBehaviour
                         }
                     }
 
-
-
-
                     limitdash = Instantiate(dashtrigger, LimitDashPosition, transform.rotation);
                     rigidBody.velocity = new Vector2(dashspeed * -1, 0);
 
@@ -710,7 +705,6 @@ public class SpikeyController : MonoBehaviour
                 dashCD = 5000;
                 dashing = true;
                
-
                 float center = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
                 Vector2 right = new Vector2(bc2d.bounds.max.x, bc2d.bounds.max.y);
                 Vector2 poscenter = new Vector2(bc2d.bounds.center.x, bc2d.bounds.max.y);
@@ -751,7 +745,6 @@ public class SpikeyController : MonoBehaviour
             {
                 if (FacingDirection == Direction.RIGHT)
                 {
-
                     float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
                     Vector2 positioncenter = new Vector2(bc2d.bounds.max.x, centery);
                     Vector2 positionup = new Vector2(bc2d.bounds.max.x, bc2d.bounds.max.y);
@@ -796,9 +789,6 @@ public class SpikeyController : MonoBehaviour
                         }
                     }
 
-
-
-
                     limitdash = Instantiate(dashtrigger, LimitDashPosition, transform.rotation);
                     rigidBody.velocity = new Vector2(dashspeed * -1, 0);
 
@@ -807,10 +797,6 @@ public class SpikeyController : MonoBehaviour
             }
             else if (VerticalDashDirection == Direction.UP)
             {
-               
-                
-
-
                 float center = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
                 Vector2 right = new Vector2(bc2d.bounds.max.x, bc2d.bounds.max.y);
                 Vector2 poscenter = new Vector2(bc2d.bounds.center.x, bc2d.bounds.max.y);
@@ -943,27 +929,26 @@ public class SpikeyController : MonoBehaviour
 
             }
         }
-         if(collision.gameObject.tag == "Wall")
-        {
-           
-            
-                bool col = false;
 
-                float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
-                Vector2 positionright = new Vector2(bc2d.bounds.max.x, centery);
-                Vector2 positionleft = new Vector2(bc2d.bounds.min.x, centery);
-                if (FacingDirection == Direction.LEFT)
-                {
-                    RaycastHit2D[] hits = Physics2D.RaycastAll(positionleft, -Vector2.right, 2);
-                    if (checkRaycastWithScenarioClimb(hits)) { col = true; }
-                }
-                else if (FacingDirection == Direction.RIGHT)
-                {
-                    RaycastHit2D[] hits = Physics2D.RaycastAll(positionright, Vector2.right, 2);
-                    if (checkRaycastWithScenarioClimb(hits)) { col = true; }
-                }
-                if (col && canClimb==true) { climbing = true; }
-                Jumping = false;
+        if(collision.gameObject.tag == "Wall")
+        {
+            bool col = false;
+
+            float centery = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
+            Vector2 positionright = new Vector2(bc2d.bounds.max.x, centery);
+            Vector2 positionleft = new Vector2(bc2d.bounds.min.x, centery);
+            if (FacingDirection == Direction.LEFT)
+            {
+                RaycastHit2D[] hits = Physics2D.RaycastAll(positionleft, -Vector2.right, 2);
+                if (checkRaycastWithScenarioClimb(hits)) { col = true; }
+            }
+            else if (FacingDirection == Direction.RIGHT)
+            {
+                RaycastHit2D[] hits = Physics2D.RaycastAll(positionright, Vector2.right, 2);
+                if (checkRaycastWithScenarioClimb(hits)) { col = true; }
+            }
+            if (col && canClimb==true) { climbing = true; }
+            Jumping = false;
         }
 
 
@@ -972,7 +957,12 @@ public class SpikeyController : MonoBehaviour
     {
         if(collision.gameObject.tag == "Water")
         {
+            Jumping = false;
             maxSpeed = 80;
+        }
+        else if (collision.gameObject.tag == "ToxicWater")
+        {
+            Respawn();
         }
         else if(collision.gameObject.tag == "Enemies" && dashing==false)
         {

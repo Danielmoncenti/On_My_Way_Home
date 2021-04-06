@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8305398400281379434}
   m_Layer: 4
   m_Name: DirtyWater
-  m_TagString: Enemies
+  m_TagString: ToxicWater
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

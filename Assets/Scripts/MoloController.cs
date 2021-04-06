@@ -7,7 +7,7 @@ public class MoloController : MonoBehaviour
     private Animator animator;
     private Transform Spikey;
     [SerializeField] GameObject Rock;
-    private float turretRadius = 350.0f;
+    private float turretRadius = 200.0f;
     private float timer = 0.0f;
     private float bulletSpeed = 250.0f;
     private int mad_animaton;

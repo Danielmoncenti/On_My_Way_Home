@@ -33,6 +33,7 @@ TagManager:
   - Points
   - Lifes
   - Active
+  - ToxicWater
   layers:
   - Default
   - TransparentFX

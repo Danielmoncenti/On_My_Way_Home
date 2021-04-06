@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 2546959997715530331}
   - component: {fileID: 2546959997715530328}
   - component: {fileID: 2546959997715530329}
+  - component: {fileID: 2893071722398174385}
+  - component: {fileID: 3104711418047407331}
   m_Layer: 15
   m_Name: CheckPoint
   m_TagString: CheckPoint
@@ -131,3 +133,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 32, y: 32}
   m_EdgeRadius: 0
+--- !u!114 &2893071722398174385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2546959997715530334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 011b7594b21d1d942b8be0c968fa7c1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &3104711418047407331
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2546959997715530334}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 578e1bc163025aa419718f409b3120b2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -34,17 +34,18 @@ public class Ballista : MonoBehaviour
         {
             if (canShoot==true)
             {
-             toShoot();
+                toShoot();
             }
         }
     }
     private bool checkSpikeyPosition()
     {
 
-        return Vector2.Distance(rb2d.transform.position, erizo.transform.position) <=turretRadius;
+        return Vector2.Distance(rb2d.transform.position, erizo.transform.position) <= turretRadius;
 
 
     }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.white;

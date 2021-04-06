@@ -47,7 +47,7 @@ public class MenuController : MonoBehaviour
             switch (menuoptions)
             {
                 case 0:
-                    SceneManager.LoadScene("SampleScene");
+                    SceneManager.LoadScene("Tutorial");
                     break;
                 case 1:
                     arrows.transform.position = new Vector2(0, -20);
