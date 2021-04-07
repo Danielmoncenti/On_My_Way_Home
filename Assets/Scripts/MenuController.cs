@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
-    [SerializeField] GameObject arrows;
-    private float menuoptions;
+    //public enum MENUOPTIONS { START, CONTINUE, OPTIONS, CREDITS, QUIT };
+    private int menuoptions;
     KeyCode upButton = KeyCode.W;
     KeyCode downButton = KeyCode.S;
     KeyCode select = KeyCode.Space;
@@ -14,6 +14,7 @@ public class MenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.transform.position = new Vector2(0, 45);
         menuoptions = 0;
     }
 
@@ -22,27 +23,19 @@ public class MenuController : MonoBehaviour
     {
         if (Input.GetKeyDown(upButton))
         {
-            if (menuoptions == 0)
-            {
-                menuoptions = 2;
-            }
-            else
-            {
-                menuoptions -= 1;
-            }
+            menuoptions--;
+
+            if (menuoptions < 0) { menuoptions = 4; }
+
         }
-        if (Input.GetKeyDown(downButton))
+        else if (Input.GetKeyDown(downButton))
         {
-            if (menuoptions == 2)
-            {
-                menuoptions = 0;
-            }
-            else
-            {
-                menuoptions += 1;
-            }
+            menuoptions++;
+
+            if (menuoptions > 4) { menuoptions = 0; }
+
         }
-        if (Input.GetKeyDown(select))
+        else if (Input.GetKeyDown(select))
         {
             switch (menuoptions)
             {
@@ -50,9 +43,15 @@ public class MenuController : MonoBehaviour
                     SceneManager.LoadScene("Tutorial");
                     break;
                 case 1:
-                    arrows.transform.position = new Vector2(0, -20);
+                    // si hay partida guardada ir a ese nivel
                     break;
                 case 2:
+                    // menu de opciones
+                    break;
+                case 3:
+                    SceneManager.LoadScene("Credits");
+                    break;
+                case 4:
                     Application.Quit();
                     break;
             }
@@ -61,13 +60,19 @@ public class MenuController : MonoBehaviour
         switch (menuoptions)
         {
             case 0:
-                arrows.transform.position = new Vector2(0, 20);
+                gameObject.transform.position = new Vector2(0, 45);
                 break;
             case 1:
-                arrows.transform.position = new Vector2(0, -20);
+                gameObject.transform.position = new Vector2(0, 0);
                 break;
             case 2:
-                arrows.transform.position = new Vector2(0, -60);
+                gameObject.transform.position = new Vector2(0, -45);
+                break;
+            case 3:
+                gameObject.transform.position = new Vector2(0, -90);
+                break;
+            case 4:
+                gameObject.transform.position = new Vector2(0, -135);
                 break;
         }
     }

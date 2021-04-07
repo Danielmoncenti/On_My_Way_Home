@@ -862,13 +862,13 @@ public class SpikeyController : MonoBehaviour
         switch (FacingDirection)
         {
             default:
-                Spikeyscale.x = 1;
+                Spikeyscale.x = 1.5f;
                 break;
             case Direction.RIGHT:
-                Spikeyscale.x = 1;
+                Spikeyscale.x = 1.5f;
                 break;
             case Direction.LEFT:
-                Spikeyscale.x = -1;
+                Spikeyscale.x = -1.5f;
                 break;
 
         }
