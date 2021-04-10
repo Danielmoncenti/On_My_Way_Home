@@ -40,6 +40,8 @@ public class MenuController : MonoBehaviour
             switch (menuoptions)
             {
                 case 0:
+                    SoundManager.StopSound();
+                    SoundManager.PlaySound("SongGame");
                     SceneManager.LoadScene("Tutorial");
                     break;
                 case 1:

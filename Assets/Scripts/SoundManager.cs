@@ -13,6 +13,11 @@ public class SoundManager : MonoBehaviour {
     Scene currentScene;
     string sceneName;
 
+    private float introSongTimer;
+    private float gameSongTimer;
+    private float introSong;
+    private float gameSong;
+
     //Comprobar para activar sonidos
     /*private int radius = 500;
     Ballista _Ballista;
@@ -107,28 +112,35 @@ public class SoundManager : MonoBehaviour {
         _RotateTrap = GetComponent<RotateTrapController>();
         _Spawner = GetComponent<Spawner>();
         _Thorms = GetComponent<ThormsController>();
-        _Trap = GetComponent<TrapController>();*/
+        _Trap = GetComponent<TrapController>();*/        
 
-        currentScene = SceneManager.GetActiveScene();
-        sceneName = currentScene.name;
-
-        if (sceneName == "MainMenu" || sceneName == "GameOver") {
-            PlaySound("Song");
-        } else {
-            PlaySound("SongGame");
-        }
+        introSong = Song.length;
+        gameSong = SongGame.length;
     }
     // Update is called once per frame
     void Update()
     {
         //CheckCollisions();
+        if (!audiosrc.isPlaying) {
+            currentScene = SceneManager.GetActiveScene();
+            sceneName = currentScene.name;
+            if ((sceneName == "MainMenu" || sceneName == "GameOver" || sceneName == "Win"))
+            {
+                PlaySound("Song");
+            }
+            else
+            {
+                PlaySound("SongGame");
+            }
+        }
+
     }
 
     /*private void CheckCollisions()
     {
        
     }*/
-
+    public static void StopSound () { audiosrc.Stop(); }
     public static void PlaySound (string clip)
     {
         switch (clip)
