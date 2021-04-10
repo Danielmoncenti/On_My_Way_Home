@@ -962,6 +962,7 @@ public class SpikeyController : MonoBehaviour
         }
         else if (collision.gameObject.tag == "ToxicWater")
         {
+            SoundManager.PlaySound("Damage");
             Respawn();
         }
         else if(collision.gameObject.tag == "Enemies" && dashing==false)
@@ -969,6 +970,7 @@ public class SpikeyController : MonoBehaviour
             Vector2 damagedirection = this.transform.position-collision.transform.position;
             DamageTaken(damagedirection);
             GameManagerController.Instance.lifeDown = true;
+            SoundManager.PlaySound("Damage");
         }
         else if(collision.gameObject.tag == "Enemies" && dashing==true)
         {
@@ -978,6 +980,7 @@ public class SpikeyController : MonoBehaviour
             {
                 dashCD = 0;
             }
+            SoundManager.PlaySound("Damage");
         }
 
     }
@@ -1028,12 +1031,13 @@ public class SpikeyController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             GameManagerController.Instance.coin = true;
-
+            SoundManager.PlaySound("Coin");
         }
         else if (collision.gameObject.tag == "BigCoin")
         {
             GameManagerController.Instance.bigCoin = true;
             Destroy(collision.gameObject);
+            SoundManager.PlaySound("Coin");
         }
         else if (collision.gameObject.tag == "LifeUp")
         {

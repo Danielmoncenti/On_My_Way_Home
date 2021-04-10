@@ -23,15 +23,15 @@ public class MenuController : MonoBehaviour
     {
         if (Input.GetKeyDown(upButton))
         {
+            SoundManager.PlaySound("ClickMenu");
             menuoptions--;
-
             if (menuoptions < 0) { menuoptions = 4; }
 
         }
         else if (Input.GetKeyDown(downButton))
         {
+            SoundManager.PlaySound("ClickMenu");
             menuoptions++;
-
             if (menuoptions > 4) { menuoptions = 0; }
 
         }
