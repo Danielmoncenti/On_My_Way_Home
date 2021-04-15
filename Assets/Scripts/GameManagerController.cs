@@ -58,7 +58,6 @@ public class GameManagerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (coin)
         {
             points++;
@@ -109,7 +108,6 @@ public class GameManagerController : MonoBehaviour
         Point_text.text = points.ToString();
         Lifes_text.text = totalLifes.ToString();
     }
-
 
     private void CheckTotalLifes()
     {

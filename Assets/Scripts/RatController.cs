@@ -37,7 +37,7 @@ public class RatController : MonoBehaviour
         Spikey = GameObject.Find("Spikey").GetComponent<Transform>();
         ratScale = transform.localScale;
         currentSpeedH = -baseSpeed;
-        ratScale.x = -1.5f;
+        ratScale.x = -2.5f;
     }
 
     // Update is called once per frame
@@ -151,5 +151,4 @@ public class RatController : MonoBehaviour
     {
         return Vector2.Distance(this.transform.position, Spikey.transform.position) <= this.ratRadius;
     }
-   
 }
