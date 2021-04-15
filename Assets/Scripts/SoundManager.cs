@@ -7,11 +7,16 @@ public class SoundManager : MonoBehaviour {
 
     public static SoundManager Instance { get; private set; }
 
-    public static AudioClip Song, SongGame, PlayerJump, PlayerDash, PlayerRevert, PlayerRun, PlayerDamage, PlayerSpike, Rat, Bat, Drop, Trap, Crocodile, ClickMenu, Checkpoint, Button, Cristal, CrossBow, BoundTrap, Water;
+    public static AudioClip Song, SongGame, PlayerJump, PlayerDash, PlayerRevert, PlayerRun, PlayerDamage, PlayerSpike, Rat, Bat, Drop, Trap, Crocodile, ClickMenu, Checkpoint, Button, Cristal, CrossBow, BoundTrap, Water, Coin;
     static AudioSource audiosrc;
 
     Scene currentScene;
     string sceneName;
+
+    private float introSongTimer;
+    private float gameSongTimer;
+    private float introSong;
+    private float gameSong;
 
     //Comprobar para activar sonidos
     /*private int radius = 500;
@@ -73,20 +78,25 @@ public class SoundManager : MonoBehaviour {
         PlayerJump = Resources.Load<AudioClip> ("Jump");
         PlayerDash = Resources.Load<AudioClip>("Dash");
         PlayerRevert = Resources.Load<AudioClip>("DashRevert");
-        PlayerRun = Resources.Load<AudioClip> ("Step");
-        PlayerDamage = Resources.Load<AudioClip>("Daño");
-        //PlayerSpike = Resources.Load<AudioClip>("Spikes");
-        Rat = Resources.Load<AudioClip>("Rat");
-        Bat = Resources.Load<AudioClip>("Bat");
+        PlayerDamage = Resources.Load<AudioClip>("Damage");
+        Rat = Resources.Load<AudioClip>("RatChase");
+        Bat = Resources.Load<AudioClip>("BatChase");
         Drop = Resources.Load<AudioClip>("Drop");
         Trap = Resources.Load<AudioClip>("Trap");
-        Crocodile = Resources.Load<AudioClip>("Roar");
         ClickMenu = Resources.Load<AudioClip>("ClickMenu");
         Checkpoint = Resources.Load<AudioClip>("Checkpoint");
-        Button = Resources.Load<AudioClip>("Button");
+        Coin = Resources.Load<AudioClip>("Coin");
+
+        BoundTrap = Resources.Load<AudioClip>("BoundTrap"); // AL FINAL NO SE USARA?
+        CrossBow = Resources.Load<AudioClip>("Crossbow"); // AL FINAL NO SE USARA?
+
+        //Crocodile = Resources.Load<AudioClip>("Crocodile"); HAY QUE
+        
+        // NO USADOS / IMPLEMENTADOS
+        //PlayerSpike = Resources.Load<AudioClip>("Spikes");
         Cristal = Resources.Load<AudioClip>("Cristal");
-        CrossBow = Resources.Load<AudioClip>("Crossbow");
-        BoundTrap = Resources.Load<AudioClip>("BoundTrap");
+        Button = Resources.Load<AudioClip>("Button");
+        PlayerRun = Resources.Load<AudioClip> ("Step");
         Water = Resources.Load<AudioClip>("Water");
 
         audiosrc = GetComponent<AudioSource>();
@@ -107,28 +117,35 @@ public class SoundManager : MonoBehaviour {
         _RotateTrap = GetComponent<RotateTrapController>();
         _Spawner = GetComponent<Spawner>();
         _Thorms = GetComponent<ThormsController>();
-        _Trap = GetComponent<TrapController>();*/
+        _Trap = GetComponent<TrapController>();*/        
 
-        currentScene = SceneManager.GetActiveScene();
-        sceneName = currentScene.name;
-
-        if (sceneName == "MainMenu" || sceneName == "GameOver") {
-            PlaySound("Song");
-        } else {
-            PlaySound("SongGame");
-        }
+        introSong = Song.length;
+        gameSong = SongGame.length;
     }
     // Update is called once per frame
     void Update()
     {
         //CheckCollisions();
+        if (!audiosrc.isPlaying) {
+            currentScene = SceneManager.GetActiveScene();
+            sceneName = currentScene.name;
+            if ((sceneName == "MainMenu" || sceneName == "GameOver" || sceneName == "Win"))
+            {
+                PlaySound("Song");
+            }
+            else
+            {
+                PlaySound("SongGame");
+            }
+        }
+
     }
 
     /*private void CheckCollisions()
     {
        
     }*/
-
+    public static void StopSound () { audiosrc.Stop(); }
     public static void PlaySound (string clip)
     {
         switch (clip)
@@ -151,16 +168,16 @@ public class SoundManager : MonoBehaviour {
             case "Run":
                 audiosrc.PlayOneShot(PlayerRun);
                 break;
-            case "Daño":
+            case "Damage":
                 audiosrc.PlayOneShot(PlayerDamage);
                 break;
             case "Spikes":
                 audiosrc.PlayOneShot(PlayerSpike);
                 break;
-            case "Rat":
+            case "RatChase":
                 audiosrc.PlayOneShot(Rat);
                 break;
-            case "Bat":
+            case "BatChase":
                 audiosrc.PlayOneShot(Bat);
                 break;
             //case "Drop":
@@ -169,7 +186,7 @@ public class SoundManager : MonoBehaviour {
             case "Trap":
                 audiosrc.PlayOneShot(Trap);
                 break;
-            //case "Roar":
+            //case "Crocodile":
                 //audiosrc.PlayOneShot(Crocodile);
                 //break;
             case "ClickMenu":

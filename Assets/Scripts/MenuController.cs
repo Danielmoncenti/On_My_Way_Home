@@ -23,15 +23,15 @@ public class MenuController : MonoBehaviour
     {
         if (Input.GetKeyDown(upButton))
         {
+            SoundManager.PlaySound("ClickMenu");
             menuoptions--;
-
             if (menuoptions < 0) { menuoptions = 4; }
 
         }
         else if (Input.GetKeyDown(downButton))
         {
+            SoundManager.PlaySound("ClickMenu");
             menuoptions++;
-
             if (menuoptions > 4) { menuoptions = 0; }
 
         }
@@ -40,6 +40,8 @@ public class MenuController : MonoBehaviour
             switch (menuoptions)
             {
                 case 0:
+                    SoundManager.StopSound();
+                    SoundManager.PlaySound("SongGame");
                     SceneManager.LoadScene("Tutorial");
                     break;
                 case 1:

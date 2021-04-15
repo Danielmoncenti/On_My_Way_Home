@@ -14,21 +14,19 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (gameispaused)
-            {
+            if (gameispaused) {
                 resume();
             }
-            else
-            {
+            else {
                 pause();
             }
         }
 
-         void pause() 
-         { 
+         void pause() { 
             pauseMenu.SetActive(true);
             Time.timeScale = 0;
             gameispaused = true;
+            //SoundManager.StopSound();
          }
   
     }
@@ -41,5 +39,6 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
         gameispaused = false;
+        //SoundManager.PlaySound("GameSong");
     }
 }

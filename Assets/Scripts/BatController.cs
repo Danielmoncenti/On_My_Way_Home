@@ -151,7 +151,7 @@ public class BatController : MonoBehaviour
         if (rightCollision || leftCollision) { 
             currentSpeedV = -maxSpeed; actNormal = false;
             isMad = true;
-            SoundManager.PlaySound("Bat");
+            SoundManager.PlaySound("BatChase");
         }
 
     }
