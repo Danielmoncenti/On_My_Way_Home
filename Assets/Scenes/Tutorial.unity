@@ -614,6 +614,11 @@ PrefabInstance:
       propertyPath: YMinEnabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4680987130947465056, guid: fd7715397254c6544803df5f972491d7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4680987130947465057, guid: fd7715397254c6544803df5f972491d7,
         type: 3}
       propertyPath: m_RootOrder
@@ -6083,21 +6088,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3751320106580556460, guid: ae037e2e96dec9e409553190f936d51b,
-        type: 3}
-      propertyPath: thrust
-      value: 63
-      objectReference: {fileID: 0}
-    - target: {fileID: 3751320106580556460, guid: ae037e2e96dec9e409553190f936d51b,
-        type: 3}
-      propertyPath: maxSpeed
-      value: 260
-      objectReference: {fileID: 0}
-    - target: {fileID: 3751320106580556460, guid: ae037e2e96dec9e409553190f936d51b,
-        type: 3}
-      propertyPath: dashspeed
-      value: 800
-      objectReference: {fileID: 0}
     - target: {fileID: 3751320106580556461, guid: ae037e2e96dec9e409553190f936d51b,
         type: 3}
       propertyPath: m_RootOrder
@@ -6106,12 +6096,12 @@ PrefabInstance:
     - target: {fileID: 3751320106580556461, guid: ae037e2e96dec9e409553190f936d51b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10288
+      value: -618.3
       objectReference: {fileID: 0}
     - target: {fileID: 3751320106580556461, guid: ae037e2e96dec9e409553190f936d51b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -161
+      value: -235.2
       objectReference: {fileID: 0}
     - target: {fileID: 3751320106580556461, guid: ae037e2e96dec9e409553190f936d51b,
         type: 3}

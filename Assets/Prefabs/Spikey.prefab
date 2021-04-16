@@ -120,7 +120,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.0467606, y: 1.1057205}
+  m_Offset: {x: 1.0467606, y: 1.3078613}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -131,7 +131,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 29.448837, y: 24.939468}
+  m_Size: {x: 29.448837, y: 24.535187}
   m_EdgeRadius: 0
 --- !u!114 &3751320106580556460
 MonoBehaviour:
@@ -152,8 +152,8 @@ MonoBehaviour:
   shadowDashActivated: 0
   doubleDashActivated: 0
   dashCD: 0
-  maxSpeed: 130
-  dashspeed: 400
+  maxSpeed: 260
+  dashspeed: 800
   shadowExists: 0
   dashing: 0
   stucked: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
   LayerDashLimit:
     serializedVersion: 2
     m_Bits: 2048
-  thrust: 28
+  thrust: 63
   life: 5
   Jumping: 1
   canClimb: 1
