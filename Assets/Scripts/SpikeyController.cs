@@ -14,8 +14,8 @@ public class SpikeyController : MonoBehaviour
     public bool doubleDashActivated;
 
     public float dashCD = 0;
-    private float baseSpeed = 90.0f;
-    public float maxSpeed = 130.0f;
+    private float baseSpeed = 135.0f;
+    public float maxSpeed = 195.0f;
     public float dashspeed;
     public bool shadowExists;
     public bool dashing;
@@ -23,7 +23,7 @@ public class SpikeyController : MonoBehaviour
     public float stuckedtimer = 0;
     public LayerMask LayerDashLimit;
     private float currentSpeedH = 0.0f;
-    public float thrust = 25.0f;
+    public float thrust = 37f;
     public int life = 5;
     private bool canWalk = true;
     public bool Jumping = true;
@@ -110,6 +110,7 @@ public class SpikeyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        currentSpeedH = rigidBody.velocity.x;
         if (rigidBody.velocity.y > 600)
         {
             rigidBody.velocity = new Vector2(currentSpeedH, 600);
@@ -367,13 +368,13 @@ public class SpikeyController : MonoBehaviour
             {
                 isWalking = false;
                 isRunning = true;
-                maxSpeed = 300.0f;
+                maxSpeed = 450f;
             }
 
         }
         if (Input.GetKeyUp(sprintButton))
         {
-            maxSpeed = 130.0f;
+            maxSpeed = 195.0f;
         }
 
         transform.localScale = Spikeyscale;
@@ -464,7 +465,7 @@ public class SpikeyController : MonoBehaviour
             if (FacingDirection == Direction.LEFT)
             {
                 FacingDirection = Direction.RIGHT;
-                rigidBody.AddForce((new Vector2(20 * delta, 10 * delta)), ForceMode2D.Impulse);
+                rigidBody.AddForce((new Vector2(15 * delta, 8 * delta)), ForceMode2D.Impulse);
 
                 Jumping = true;
 
@@ -472,7 +473,7 @@ public class SpikeyController : MonoBehaviour
             else if (FacingDirection == Direction.RIGHT)
             {
                 FacingDirection = Direction.LEFT;
-                rigidBody.AddForce((new Vector2(20 * delta * -1, 10 * delta)), ForceMode2D.Impulse);
+                rigidBody.AddForce((new Vector2(15 * delta * -1, 8 * delta)), ForceMode2D.Impulse);
 
                 Jumping = true;
 
@@ -532,12 +533,12 @@ public class SpikeyController : MonoBehaviour
                     Vector2 positionup = new Vector2(bc2d.bounds.max.x, bc2d.bounds.max.y);
                     Vector2 positiondown = new Vector2(bc2d.bounds.max.x, bc2d.bounds.min.y);
 
-                    RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right, 200, LayerDashLimit);
-                    RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right, 200, LayerDashLimit);
-                    RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right, 200, LayerDashLimit);
+                    RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right, 300, LayerDashLimit);
+                    RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right, 300, LayerDashLimit);
+                    RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right, 300, LayerDashLimit);
                     RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
 
-                    Vector2 LimitDashPosition = transform.position + transform.right * 200;
+                    Vector2 LimitDashPosition = transform.position + transform.right * 300;
                     for (int i = 0; i < 3; i++)
                     {
                         if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
@@ -559,11 +560,11 @@ public class SpikeyController : MonoBehaviour
                     Vector2 positionup = new Vector2(bc2d.bounds.min.x, bc2d.bounds.max.y);
                     Vector2 positiondown = new Vector2(bc2d.bounds.min.x, bc2d.bounds.min.y);
 
-                    RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right * -1, 200, LayerDashLimit);
-                    RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right * -1, 200, LayerDashLimit);
-                    RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right * -1, 200, LayerDashLimit);
+                    RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right * -1, 300, LayerDashLimit);
+                    RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right * -1, 300, LayerDashLimit);
+                    RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right * -1, 300, LayerDashLimit);
                     RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
-                    Vector2 LimitDashPosition = transform.position + transform.right * 200 * -1;
+                    Vector2 LimitDashPosition = transform.position + transform.right * 300 * -1;
                     for (int i = 0; i < 3; i++)
                     {
                         if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
@@ -597,12 +598,12 @@ public class SpikeyController : MonoBehaviour
                 Vector2 poscenter = new Vector2(bc2d.bounds.center.x, bc2d.bounds.max.y);
                 Vector2 left = new Vector2(bc2d.bounds.min.x, bc2d.bounds.max.y);
 
-                RaycastHit2D hitscenter = Physics2D.Raycast(right, Vector2.up, 200, LayerDashLimit);
-                RaycastHit2D hitsup = Physics2D.Raycast(poscenter, Vector2.up, 200, LayerDashLimit);
-                RaycastHit2D hitsdown = Physics2D.Raycast(left, Vector2.up, 200, LayerDashLimit);
+                RaycastHit2D hitscenter = Physics2D.Raycast(right, Vector2.up, 300, LayerDashLimit);
+                RaycastHit2D hitsup = Physics2D.Raycast(poscenter, Vector2.up, 300, LayerDashLimit);
+                RaycastHit2D hitsdown = Physics2D.Raycast(left, Vector2.up, 300, LayerDashLimit);
                 RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
 
-                Vector2 LimitDashPosition = transform.position + transform.up * 200;
+                Vector2 LimitDashPosition = transform.position + transform.up * 300;
                 for (int i = 0; i < 3; i++)
                 {
                     if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
@@ -655,12 +656,12 @@ public class SpikeyController : MonoBehaviour
                     Vector2 positionup = new Vector2(bc2d.bounds.max.x, bc2d.bounds.max.y);
                     Vector2 positiondown = new Vector2(bc2d.bounds.max.x, bc2d.bounds.min.y);
 
-                    RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right, 200, LayerDashLimit);
-                    RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right, 200, LayerDashLimit);
-                    RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right, 200, LayerDashLimit);
+                    RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right, 300, LayerDashLimit);
+                    RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right, 300, LayerDashLimit);
+                    RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right, 300, LayerDashLimit);
                     RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
 
-                    Vector2 LimitDashPosition = transform.position + transform.right * 200;
+                    Vector2 LimitDashPosition = transform.position + transform.right * 300;
                     for (int i = 0; i < 3; i++)
                     {
                         if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
@@ -681,11 +682,11 @@ public class SpikeyController : MonoBehaviour
                     Vector2 positionup = new Vector2(bc2d.bounds.min.x, bc2d.bounds.max.y);
                     Vector2 positiondown = new Vector2(bc2d.bounds.min.x, bc2d.bounds.min.y);
 
-                    RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right * -1, 200, LayerDashLimit);
-                    RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right * -1, 200, LayerDashLimit);
-                    RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right * -1, 200, LayerDashLimit);
+                    RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right * -1, 300, LayerDashLimit);
+                    RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right * -1, 300, LayerDashLimit);
+                    RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right * -1, 300, LayerDashLimit);
                     RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
-                    Vector2 LimitDashPosition = transform.position + transform.right * 200 * -1;
+                    Vector2 LimitDashPosition = transform.position + transform.right * 300 * -1;
                     for (int i = 0; i < 3; i++)
                     {
                         if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
@@ -710,12 +711,12 @@ public class SpikeyController : MonoBehaviour
                 Vector2 poscenter = new Vector2(bc2d.bounds.center.x, bc2d.bounds.max.y);
                 Vector2 left = new Vector2(bc2d.bounds.min.x, bc2d.bounds.max.y);
 
-                RaycastHit2D hitscenter = Physics2D.Raycast(right, Vector2.up, 200, LayerDashLimit);
-                RaycastHit2D hitsup = Physics2D.Raycast(poscenter, Vector2.up, 200, LayerDashLimit);
-                RaycastHit2D hitsdown = Physics2D.Raycast(left, Vector2.up, 200, LayerDashLimit);
+                RaycastHit2D hitscenter = Physics2D.Raycast(right, Vector2.up, 300, LayerDashLimit);
+                RaycastHit2D hitsup = Physics2D.Raycast(poscenter, Vector2.up, 300, LayerDashLimit);
+                RaycastHit2D hitsdown = Physics2D.Raycast(left, Vector2.up, 300, LayerDashLimit);
                 RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
 
-                Vector2 LimitDashPosition = transform.position + transform.up * 200;
+                Vector2 LimitDashPosition = transform.position + transform.up * 300;
                 for (int i = 0; i < 3; i++)
                 {
                     if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
@@ -750,12 +751,12 @@ public class SpikeyController : MonoBehaviour
                     Vector2 positionup = new Vector2(bc2d.bounds.max.x, bc2d.bounds.max.y);
                     Vector2 positiondown = new Vector2(bc2d.bounds.max.x, bc2d.bounds.min.y);
 
-                    RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right, 200, LayerDashLimit);
-                    RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right, 200, LayerDashLimit);
-                    RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right, 200, LayerDashLimit);
+                    RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right, 300, LayerDashLimit);
+                    RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right, 300, LayerDashLimit);
+                    RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right, 300, LayerDashLimit);
                     RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
 
-                    Vector2 LimitDashPosition = transform.position + transform.right * 200;
+                    Vector2 LimitDashPosition = transform.position + transform.right * 300;
                     for (int i = 0; i < 3; i++)
                     {
                         if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
@@ -776,11 +777,11 @@ public class SpikeyController : MonoBehaviour
                     Vector2 positionup = new Vector2(bc2d.bounds.min.x, bc2d.bounds.max.y);
                     Vector2 positiondown = new Vector2(bc2d.bounds.min.x, bc2d.bounds.min.y);
 
-                    RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right * -1, 200, LayerDashLimit);
-                    RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right * -1, 200, LayerDashLimit);
-                    RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right * -1, 200, LayerDashLimit);
+                    RaycastHit2D hitscenter = Physics2D.Raycast(positioncenter, Vector2.right * -1, 300, LayerDashLimit);
+                    RaycastHit2D hitsup = Physics2D.Raycast(positionup, Vector2.right * -1, 300, LayerDashLimit);
+                    RaycastHit2D hitsdown = Physics2D.Raycast(positiondown, Vector2.right * -1, 300, LayerDashLimit);
                     RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
-                    Vector2 LimitDashPosition = transform.position + transform.right * 200 * -1;
+                    Vector2 LimitDashPosition = transform.position + transform.right * 300 * -1;
                     for (int i = 0; i < 3; i++)
                     {
                         if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
@@ -802,12 +803,12 @@ public class SpikeyController : MonoBehaviour
                 Vector2 poscenter = new Vector2(bc2d.bounds.center.x, bc2d.bounds.max.y);
                 Vector2 left = new Vector2(bc2d.bounds.min.x, bc2d.bounds.max.y);
 
-                RaycastHit2D hitscenter = Physics2D.Raycast(right, Vector2.up, 200, LayerDashLimit);
-                RaycastHit2D hitsup = Physics2D.Raycast(poscenter, Vector2.up, 200, LayerDashLimit);
-                RaycastHit2D hitsdown = Physics2D.Raycast(left, Vector2.up, 200, LayerDashLimit);
+                RaycastHit2D hitscenter = Physics2D.Raycast(right, Vector2.up, 300, LayerDashLimit);
+                RaycastHit2D hitsup = Physics2D.Raycast(poscenter, Vector2.up, 300, LayerDashLimit);
+                RaycastHit2D hitsdown = Physics2D.Raycast(left, Vector2.up, 300, LayerDashLimit);
                 RaycastHit2D[] array = new RaycastHit2D[] { hitsup, hitscenter, hitsdown };
 
-                Vector2 LimitDashPosition = transform.position + transform.up * 200;
+                Vector2 LimitDashPosition = transform.position + transform.up * 300;
                 for (int i = 0; i < 3; i++)
                 {
                     if (array[i].collider != null && Vector2.Distance(array[i].point, this.transform.position) < Vector2.Distance(LimitDashPosition, this.transform.position))
@@ -962,6 +963,8 @@ public class SpikeyController : MonoBehaviour
         }
         else if (collision.gameObject.tag == "ToxicWater")
         {
+            Vector2 damagedirection = this.transform.position - collision.transform.position;
+            DamageTaken(damagedirection);
             SoundManager.PlaySound("Damage");
             Respawn();
         }

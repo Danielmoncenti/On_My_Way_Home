@@ -34,6 +34,8 @@ public class GameManagerController : MonoBehaviour
     public bool lifeUp = false;
     public bool lifeDown = false;
 
+    //Bools para habilidades
+  
     void Awake()
     {
         if (Instance == null)
