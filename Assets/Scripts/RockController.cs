@@ -4,20 +4,36 @@ using UnityEngine;
 
 public class RockController : MonoBehaviour
 {
+
+    
+    private GameObject Rock;
+    private float angle = 45.0f;
+    private float thurst = 125.0f;
+    private Vector3 speed;
+    private Vector3 direction;
+
+
     private Rigidbody2D _rb2d;
-    public Rigidbody2D rb2d
-    {
-        get
-        {
-            _rb2d = _rb2d ?? GetComponent<Rigidbody2D>();
-            return _rb2d;
-        }
-    }
+    //public Rigidbody2D rb2d
+    //{
+    //    get
+    //    {
+    //        _rb2d = _rb2d ?? GetComponent<Rigidbody2D>();
+    //        return _rb2d;
+    //    }
+    //}
 
     // Start is called before the first frame update
     void Start()
     {
         _rb2d = GetComponent<Rigidbody2D>();
+        direction = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad), 0);
+
+        direction.Normalize();
+
+        speed = direction * thurst;
+
+        _rb2d.AddForce(speed, ForceMode2D.Impulse);
     }
 
     // Update is called once per frame
@@ -25,9 +41,8 @@ public class RockController : MonoBehaviour
     {
     }
 
-    public void setVelocity(Vector2 _velocity)
+    public void setVelocity()
     {
-        rb2d.velocity = _velocity;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -7,6 +7,8 @@ public class MoloController : MonoBehaviour
     private Animator animator;
     private Transform Spikey;
     [SerializeField] GameObject Rock;
+    private GameObject Mole;
+    //[SerializeField] GameObject Rock;
     private float turretRadius = 400.0f;
     private float timer = 0.0f;
     private float bulletSpeed = 250.0f;
@@ -19,6 +21,12 @@ public class MoloController : MonoBehaviour
     private bool isWaiting = false;
     private bool isOut = false;
 
+    private Vector3 speed;
+    private Vector3 direction;
+    private float thurst = 25.0f;
+    private float angle = 45.0f;
+    public float gravity = 9.8f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +36,8 @@ public class MoloController : MonoBehaviour
         attack_animation  = Animator.StringToHash("isAttacking");
         out_animation = Animator.StringToHash("getHitted");
         wait_animation = Animator.StringToHash("isWaiting");
+
+        Mole = GetComponent<GameObject>();
         Spikey = GameObject.Find("Spikey").GetComponent<Transform>();
     }
 
@@ -65,13 +75,16 @@ public class MoloController : MonoBehaviour
         return Vector2.Distance(this.transform.position, Spikey.transform.position) <= this.turretRadius;
     }
 
-    private void shootToPosition(Vector2 target)
-    {
-        Vector2 v = target - (Vector2)this.transform.position;
+    
 
+    
+
+    private void shootToPosition()
+    {
         GameObject inst = Instantiate(Rock, this.transform.position + transform.up * -5, Rock.transform.rotation);
-        RockController bc = inst.GetComponent<RockController>();
-        bc.setVelocity(v.normalized * this.bulletSpeed);
+        //RockController bc = inst.GetComponent<RockController>();
+
+        //bc.setVelocity();
     }
 
     void OnDrawGizmosSelected()
@@ -101,7 +114,7 @@ public class MoloController : MonoBehaviour
 
     private void HoldAnimation() { isWaiting = true; }
 
-    private void ShootToPosition() { shootToPosition(Spikey.transform.position); }
+    private void ShootToPosition() { shootToPosition(); }
 
     private void IsDead() { Destroy(gameObject); }
 
