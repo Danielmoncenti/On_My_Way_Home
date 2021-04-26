@@ -7,9 +7,6 @@ public class CameraFollow : MonoBehaviour
     //Camera
     private Camera _camera;
 
-    //Change valors from another script
-    [SerializeField] CameraReact react;
-
     //What we are following
     private Transform Spikey;
  
@@ -104,25 +101,5 @@ public class CameraFollow : MonoBehaviour
         //using smooth daap we will gradually change the camera transform position to the target position based on the cameras transform velocity and our smooth time
         _camera.transform.position = Vector3.SmoothDamp(_camera.transform.position, targetPos, ref velocity, smoothTime);
 
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Control")
-        {
-            Debug.Log("HOLA");
-            YMaxEnabled = react.YMaxEnabled;
-            YMaxValue = react.YMaxValue;
-
-            YMinEnabled = react.YMinEnabled;
-            YMinValue = react.YMinValue;
-
-            XMaxEnabled = react.XMaxEnabled;
-            XMaxValue = react.XMaxValue;
-
-            XMinEnabled = react.XMinEnabled;
-            XMinValue = react.XMinValue;
-
-        }
     }
 }
