@@ -11,7 +11,7 @@ public class MoloController : MonoBehaviour
     //[SerializeField] GameObject Rock;
     private float turretRadius = 400.0f;
     private float timer = 0.0f;
-    private float bulletSpeed = 250.0f;
+    //private float bulletSpeed = 250.0f;
     private int mad_animaton;
     private int attack_animation;
     private int wait_animation;
@@ -20,13 +20,6 @@ public class MoloController : MonoBehaviour
     private bool isAttacking = false;
     private bool isWaiting = false;
     private bool isOut = false;
-
-    private Vector3 speed;
-    private Vector3 direction;
-    private float thurst = 25.0f;
-    private float angle = 45.0f;
-    public float gravity = 9.8f;
-
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +57,8 @@ public class MoloController : MonoBehaviour
             }
         }
 
+ 
+
         animator.SetBool(mad_animaton, isMad);
         animator.SetBool(attack_animation, isAttacking);
         animator.SetBool(wait_animation, isWaiting);
@@ -74,10 +69,6 @@ public class MoloController : MonoBehaviour
     {
         return Vector2.Distance(this.transform.position, Spikey.transform.position) <= this.turretRadius;
     }
-
-    
-
-    
 
     private void shootToPosition()
     {

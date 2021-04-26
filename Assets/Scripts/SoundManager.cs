@@ -7,16 +7,16 @@ public class SoundManager : MonoBehaviour {
 
     public static SoundManager Instance { get; private set; }
 
+    public GameObject Hijo;
     public static AudioClip Song, SongGame, PlayerJump, PlayerDash, PlayerRevert, PlayerRun, PlayerDamage, PlayerSpike, Rat, Bat, Drop, Trap, Crocodile, ClickMenu, Checkpoint, Button, Cristal, CrossBow, BoundTrap, Water, Coin;
     static AudioSource audiosrc;
+    static AudioSource audiosrc2;
 
     Scene currentScene;
     string sceneName;
 
-    private float introSongTimer;
-    private float gameSongTimer;
-    private float introSong;
-    private float gameSong;
+    private float musicVolume = 0.1f;
+    private float sfxVolume = 0.1f;
 
     //Comprobar para activar sonidos
     /*private int radius = 500;
@@ -100,6 +100,7 @@ public class SoundManager : MonoBehaviour {
         Water = Resources.Load<AudioClip>("Water");
 
         audiosrc = GetComponent<AudioSource>();
+        audiosrc2 = Hijo.GetComponent<AudioSource>();
 
         /*_Ballista = GetComponent<Ballista>();
         _Bat = GetComponent<BatController>();
@@ -119,8 +120,6 @@ public class SoundManager : MonoBehaviour {
         _Thorms = GetComponent<ThormsController>();
         _Trap = GetComponent<TrapController>();*/        
 
-        introSong = Song.length;
-        gameSong = SongGame.length;
     }
     // Update is called once per frame
     void Update()
@@ -139,6 +138,18 @@ public class SoundManager : MonoBehaviour {
             }
         }
 
+        audiosrc.volume = musicVolume;
+
+        audiosrc2.volume = sfxVolume;
+    }
+
+    public void SetVolumeMusic(float vol)
+    {
+        musicVolume = vol;
+    }
+    public void SetVolumeSFX(float vol)
+    {
+        sfxVolume = vol;
     }
 
     /*private void CheckCollisions()
@@ -157,58 +168,58 @@ public class SoundManager : MonoBehaviour {
                 audiosrc.PlayOneShot(SongGame);
                 break;
             case "Jump":
-                audiosrc.PlayOneShot(PlayerJump);
+                audiosrc2.PlayOneShot(PlayerJump);
                 break;
             case "Dash":
-                audiosrc.PlayOneShot(PlayerDash);
+                audiosrc2.PlayOneShot(PlayerDash);
                 break;
             case "DashRevert":
-                audiosrc.PlayOneShot(PlayerRevert);
+                audiosrc2.PlayOneShot(PlayerRevert);
                 break;
             case "Run":
-                audiosrc.PlayOneShot(PlayerRun);
+                audiosrc2.PlayOneShot(PlayerRun);
                 break;
             case "Damage":
-                audiosrc.PlayOneShot(PlayerDamage);
+                audiosrc2.PlayOneShot(PlayerDamage);
                 break;
             case "Spikes":
-                audiosrc.PlayOneShot(PlayerSpike);
+                audiosrc2.PlayOneShot(PlayerSpike);
                 break;
             case "RatChase":
-                audiosrc.PlayOneShot(Rat);
+                audiosrc2.PlayOneShot(Rat);
                 break;
             case "BatChase":
-                audiosrc.PlayOneShot(Bat);
+                audiosrc2.PlayOneShot(Bat);
                 break;
             //case "Drop":
                 //audiosrc.PlayOneShot(Drop);
                // break;
             case "Trap":
-                audiosrc.PlayOneShot(Trap);
+                audiosrc2.PlayOneShot(Trap);
                 break;
             //case "Crocodile":
                 //audiosrc.PlayOneShot(Crocodile);
                 //break;
             case "ClickMenu":
-                audiosrc.PlayOneShot(ClickMenu);
+                audiosrc2.PlayOneShot(ClickMenu);
                 break;
             case "Checkpoint":
-                audiosrc.PlayOneShot(Checkpoint);
+                audiosrc2.PlayOneShot(Checkpoint);
                 break;
             case "Button":
-                audiosrc.PlayOneShot(Button);
+                audiosrc2.PlayOneShot(Button);
                 break;
             case "Cristal":
-                audiosrc.PlayOneShot(Cristal);
+                audiosrc2.PlayOneShot(Cristal);
                 break;
             case "Crossbow":
-                audiosrc.PlayOneShot(CrossBow);
+                audiosrc2.PlayOneShot(CrossBow);
                 break;
             case "BoundTrap":
-                audiosrc.PlayOneShot(BoundTrap);
+                audiosrc2.PlayOneShot(BoundTrap);
                 break;
             case "Water":
-                audiosrc.PlayOneShot(Water);
+                audiosrc2.PlayOneShot(Water);
                 break;
         }
     }
