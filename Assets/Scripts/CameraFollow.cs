@@ -102,12 +102,4 @@ public class CameraFollow : MonoBehaviour
         _camera.transform.position = Vector3.SmoothDamp(_camera.transform.position, targetPos, ref velocity, smoothTime);
 
     }
-
-    /*public float RoundToNearestPixel(float unityUnits)
-    {
-        float valueInPixels = unityUnits * pixelToUnits;
-        valueInPixels = Mathf.Round(valueInPixels);
-        float roundedUnityUnits = valueInPixels * (1 / pixelToUnits);
-        return roundedUnityUnits;
-    }*/
 }

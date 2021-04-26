@@ -970,10 +970,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1994593922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd5687a6467028c438a9294c74721e2b, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ca06b639ed058a4ead270dfa3ccfc64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
+  speed: 200
   quiet: 0
 --- !u!50 &1994593924
 Rigidbody2D:
