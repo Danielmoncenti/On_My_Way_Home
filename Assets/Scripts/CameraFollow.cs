@@ -7,6 +7,9 @@ public class CameraFollow : MonoBehaviour
     //Camera
     private Camera _camera;
 
+    //Change valors from another script
+    [SerializeField] CameraReact react;
+
     //What we are following
     private Transform Spikey;
  
@@ -103,11 +106,23 @@ public class CameraFollow : MonoBehaviour
 
     }
 
-    /*public float RoundToNearestPixel(float unityUnits)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        float valueInPixels = unityUnits * pixelToUnits;
-        valueInPixels = Mathf.Round(valueInPixels);
-        float roundedUnityUnits = valueInPixels * (1 / pixelToUnits);
-        return roundedUnityUnits;
-    }*/
+        if (collision.gameObject.tag == "Control")
+        {
+            Debug.Log("HOLA");
+            YMaxEnabled = react.YMaxEnabled;
+            YMaxValue = react.YMaxValue;
+
+            YMinEnabled = react.YMinEnabled;
+            YMinValue = react.YMinValue;
+
+            XMaxEnabled = react.XMaxEnabled;
+            XMaxValue = react.XMaxValue;
+
+            XMinEnabled = react.XMinEnabled;
+            XMinValue = react.XMinValue;
+
+        }
+    }
 }

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4885091205026297949}
   - component: {fileID: -7327497375496718674}
-  - component: {fileID: 9113280496276331428}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -54,23 +53,3 @@ MonoBehaviour:
   coin: 0
   lifeUp: 0
   lifeDown: 0
---- !u!114 &9113280496276331428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4885091205026297951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fec39e3b2d0e404bb37450e5d83dc32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  YMaxEnabled: 1
-  YMaxValue: 100
-  YMinEnabled: 1
-  YMinValue: -10
-  XMaxEnabled: 0
-  XMaxValue: 0
-  XMinEnabled: 1
-  XMinValue: 0

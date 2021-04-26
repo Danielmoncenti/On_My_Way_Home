@@ -75,10 +75,6 @@ public class MoloController : MonoBehaviour
         return Vector2.Distance(this.transform.position, Spikey.transform.position) <= this.turretRadius;
     }
 
-    
-
-    
-
     private void shootToPosition()
     {
         GameObject inst = Instantiate(Rock, this.transform.position + transform.up * -5, Rock.transform.rotation);
