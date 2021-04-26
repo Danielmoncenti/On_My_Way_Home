@@ -26,16 +26,16 @@ public class DropController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rigidBody.velocity.y > 100)
+        if (rigidBody.velocity.y < -450)
         {
-            rigidBody.drag = 0;
-            rigidBody.velocity = new Vector2(0.0f, 100.0f);
+            //rigidBody.drag = 0;
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, -450.0f);
         }
 
         if (stop)
         {
-            rigidBody.velocity = Vector3.zero;
             rigidBody.gravityScale = 0;
+            rigidBody.velocity = Vector2.zero;
         }
 
         animator.SetBool(hold_animation, isHolding);

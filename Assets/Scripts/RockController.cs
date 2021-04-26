@@ -4,24 +4,14 @@ using UnityEngine;
 
 public class RockController : MonoBehaviour
 {
+    Rigidbody2D _rb2d;
+    GameObject Rock;
+    float angle = 45.0f;
+    float thurst = 125.0f;
+    Vector3 speed;
+    Vector3 direction;
 
-    
-    private GameObject Rock;
-    private float angle = 45.0f;
-    private float thurst = 125.0f;
-    private Vector3 speed;
-    private Vector3 direction;
-
-
-    private Rigidbody2D _rb2d;
-    //public Rigidbody2D rb2d
-    //{
-    //    get
-    //    {
-    //        _rb2d = _rb2d ?? GetComponent<Rigidbody2D>();
-    //        return _rb2d;
-    //    }
-    //}
+    [SerializeField] GameObject Spikey;
 
     // Start is called before the first frame update
     void Start()
