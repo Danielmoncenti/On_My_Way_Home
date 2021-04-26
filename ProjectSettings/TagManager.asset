@@ -84,3 +84,6 @@ TagManager:
   - name: Water
     uniqueID: 895198193
     locked: 0
+  - name: GUI
+    uniqueID: 456993437
+    locked: 0

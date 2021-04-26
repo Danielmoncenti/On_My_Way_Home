@@ -74,7 +74,7 @@ public class SoundManager : MonoBehaviour {
     void Start()
     {
         Song = Resources.Load<AudioClip> ("Song");
-        SongGame = Resources.Load<AudioClip> ("SongGame");
+        //SongGame = Resources.Load<AudioClip> ("SongGame");
         PlayerJump = Resources.Load<AudioClip> ("Jump");
         PlayerDash = Resources.Load<AudioClip>("Dash");
         PlayerRevert = Resources.Load<AudioClip>("DashRevert");
