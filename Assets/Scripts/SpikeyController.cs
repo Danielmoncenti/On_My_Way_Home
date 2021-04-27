@@ -14,7 +14,7 @@ public class SpikeyController : MonoBehaviour
     //public bool doubleDashActivated;
     private bool sprinting;
     public float dashCD = 0;
-    private float baseSpeed = 135.0f;
+    private float baseSpeed = 250.0f;
     public float sprintSpeed = 450.0f;
     private float currentSpeedV;
     public float dashspeed;
@@ -113,8 +113,7 @@ public class SpikeyController : MonoBehaviour
         damagetimer += Time.deltaTime;
         invulnerabilitytimer += Time.deltaTime;
 
-        currentSpeedV = rigidBody.velocity.y;
-        currentSpeedH = rigidBody.velocity.x;
+        
 
 
         if (rigidBody.velocity.y > 1000)
@@ -356,7 +355,7 @@ public class SpikeyController : MonoBehaviour
             }
 
         }
-        if (Input.GetKeyUp(sprintButton))
+        if (Input.GetKeyUp(sprintButton) || Jumping ==true)
         {
             sprinting = false;
         }
@@ -369,6 +368,7 @@ public class SpikeyController : MonoBehaviour
         animator.SetBool(gethurt_animation, isHurt);
         animator.SetBool(climbing_animation, isClimbing);
         animator.SetBool(attacking_animation, isAttacking);
+       
 
     }
 
@@ -431,10 +431,11 @@ public class SpikeyController : MonoBehaviour
 
         if (climbing == false)
         {
-            float delta = Time.fixedDeltaTime * 1000;
-            //rigidBody.AddForce(transform.up * thrust * delta, ForceMode2D.Impulse);
-            rigidBody.velocity = rigidBody.velocity + Vector2.up * thrust;
             Jumping = true;
+            float delta = Time.fixedDeltaTime * 1000;
+            rigidBody.AddForce(transform.up * thrust * delta, ForceMode2D.Impulse);
+            //rigidBody.velocity = rigidBody.velocity + Vector2.up * thrust;
+            
         }
         else 
         {
@@ -442,18 +443,20 @@ public class SpikeyController : MonoBehaviour
             climbing = false;
             if (FacingDirection == Direction.LEFT)
             {
+                Jumping = true;
                 FacingDirection = Direction.RIGHT;
                 rigidBody.AddForce((new Vector2(30 * delta, 5 * delta)), ForceMode2D.Impulse);
 
-                Jumping = true;
+               
 
             }
             else if (FacingDirection == Direction.RIGHT)
             {
+                Jumping = true;
                 FacingDirection = Direction.LEFT;
                 rigidBody.AddForce((new Vector2(30 * delta * -1, 5 * delta)), ForceMode2D.Impulse);
 
-                Jumping = true;
+                
 
             }
         }
@@ -845,6 +848,8 @@ public class SpikeyController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        currentSpeedV = rigidBody.velocity.y;
+        currentSpeedH = rigidBody.velocity.x;
         float delta = Time.fixedDeltaTime * 1000;
         if (!dashing && !takingdamage && !stucked) { 
         switch (FacingDirection)
@@ -894,15 +899,15 @@ public class SpikeyController : MonoBehaviour
                 }
                 break;
             case Direction.NONE:
-                if (climbing)
+                if (climbing && !Jumping)
                 {
-                    rigidBody.velocity = new Vector2(0, 0);
+                   rigidBody.velocity = new Vector2(0, 0);
                 }
-                else if(Jumping)
+                else if(Jumping && !climbing)
                 {
                     rigidBody.velocity = new Vector2(currentSpeedH, currentSpeedV);
                 }
-                else
+                else if (!Jumping && !climbing)
                 {
                         rigidBody.velocity = new Vector2(0, 0);
                     }
