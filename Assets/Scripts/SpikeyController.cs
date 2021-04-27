@@ -14,7 +14,7 @@ public class SpikeyController : MonoBehaviour
     //public bool doubleDashActivated;
     private bool sprinting;
     public float dashCD = 0;
-    private float baseSpeed = 250.0f;
+    private float baseSpeed = 320.0f;
     public float sprintSpeed = 450.0f;
     private float currentSpeedV;
     public float dashspeed;
@@ -899,15 +899,15 @@ public class SpikeyController : MonoBehaviour
                 }
                 break;
             case Direction.NONE:
-                if (climbing && !Jumping)
-                {
-                   rigidBody.velocity = new Vector2(0, 0);
-                }
-                else if(Jumping && !climbing)
+                //if (climbing)
+                //{
+                //   rigidBody.velocity = new Vector2(0, 0);
+                //}
+               if(Jumping)
                 {
                     rigidBody.velocity = new Vector2(currentSpeedH, currentSpeedV);
                 }
-                else if (!Jumping && !climbing)
+                else 
                 {
                         rigidBody.velocity = new Vector2(0, 0);
                     }
@@ -954,8 +954,8 @@ public class SpikeyController : MonoBehaviour
                 bool col3 = false;
                 float centerx = (bc2d.bounds.min.x + bc2d.bounds.max.x) / 2;
                 Vector2 centerPosition = new Vector2(centerx, bc2d.bounds.min.y);
-                Vector2 leftPosition = new Vector2(bc2d.bounds.min.x + 3, bc2d.bounds.min.y);
-                Vector2 rightPosition = new Vector2(bc2d.bounds.max.x - 3, bc2d.bounds.min.y);
+                Vector2 leftPosition = new Vector2(bc2d.bounds.min.x, bc2d.bounds.min.y);
+                Vector2 rightPosition = new Vector2(bc2d.bounds.max.x, bc2d.bounds.min.y);
 
                 RaycastHit2D[] hits = Physics2D.RaycastAll(centerPosition, -Vector2.up, 2);
                 if (checkRaycastWithScenarioJump(hits)) { col1 = true; }
