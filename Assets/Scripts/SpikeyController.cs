@@ -64,13 +64,6 @@ public class SpikeyController : MonoBehaviour
 
     //Animaciones
     private Animator animator;
-    private int walking_animation;
-    private int running_animation;
-    private int jumping_animation;
-    private int climbing_animation;
-    private int gethurt_animation;
-    private int dashing_animation;
-    private int attacking_animation;
     bool isWalking = false;
     bool isRunning = false;
     bool isJumping = false;
@@ -91,13 +84,6 @@ public class SpikeyController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         bc2d = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
-        walking_animation = Animator.StringToHash("isWalking");
-        running_animation = Animator.StringToHash("isRunning");
-        jumping_animation = Animator.StringToHash("isJumping");
-        climbing_animation = Animator.StringToHash("isClimbing");
-        gethurt_animation = Animator.StringToHash("isHurt");
-        dashing_animation = Animator.StringToHash("isDashing");
-        attacking_animation = Animator.StringToHash("isAttacking");
         lastCheckpoint = rigidBody.transform.position;
         //audio = GetComponent<AudioSource>();        
         shadowExists = false;
@@ -134,6 +120,7 @@ public class SpikeyController : MonoBehaviour
 
             dashCD = 0;
         }
+
         isWalking = false;
         isRunning = false;
         isJumping = false;
@@ -227,6 +214,7 @@ public class SpikeyController : MonoBehaviour
                             FacingDirection = Direction.RIGHT;
                         
                         isWalking = true;
+                        isAttacking = false;
                     }
                     else if (Input.GetKey(leftButton) && climbing == false)
                     {
@@ -247,6 +235,7 @@ public class SpikeyController : MonoBehaviour
                             FacingDirection = Direction.LEFT;
                         }
                         isWalking = true;
+                        isAttacking = false;
                     }
 
                     if (Input.GetKeyDown(spaceButton) && Jumping == false)
@@ -257,6 +246,7 @@ public class SpikeyController : MonoBehaviour
                     //{
                     //    climbjump();
                     //}
+
                     if (Jumping)
                     {
                         isWalking = false;
@@ -265,10 +255,9 @@ public class SpikeyController : MonoBehaviour
                     }
 
 
-                    if (Input.GetKey/*Down*/(attackButton))
+                    if (Input.GetKey(attackButton))
                     {
                         isAttacking = true;
-                        //attack();
                     }
 
                     //if (Input.GetKeyDown(shadowButton))
@@ -339,11 +328,7 @@ public class SpikeyController : MonoBehaviour
             {
                 isRunning = false;
             }
-            else if (isDashing)
-            {
-                isRunning = false;
-            }
-            else if (Jumping)
+            else if (isDashing || Jumping || isClimbing)
             {
                 isRunning = false;
             }
@@ -361,15 +346,14 @@ public class SpikeyController : MonoBehaviour
         }
 
         transform.localScale = Spikeyscale;
-        animator.SetBool(walking_animation, isWalking);
-        animator.SetBool(running_animation, isRunning);
-        animator.SetBool(jumping_animation, isJumping);
-        animator.SetBool(dashing_animation, isDashing);
-        animator.SetBool(gethurt_animation, isHurt);
-        animator.SetBool(climbing_animation, isClimbing);
-        animator.SetBool(attacking_animation, isAttacking);
-       
 
+        animator.SetBool("isWalking", isWalking);
+        animator.SetBool("isRunning", isRunning);
+        animator.SetBool("isJumping", isJumping);
+        animator.SetBool("isDashing", isDashing);
+        animator.SetBool("isHurt", isHurt);
+        animator.SetBool("isClimbing", isClimbing);
+        animator.SetBool("isAttacking", isAttacking);
     }
 
     private void Respawn()
