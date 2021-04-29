@@ -89,4 +89,6 @@ public class HeartsController : MonoBehaviour
     private void SetTryAgain() { GameManagerController.Instance.TryAgain = false; }
 
     private void LifeDown() { GameManagerController.Instance.OneDown = false; }
+
+    private void LifeUp() { GameManagerController.Instance.OneUp = false; }
 }

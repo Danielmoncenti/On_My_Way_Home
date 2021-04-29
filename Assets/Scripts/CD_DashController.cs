@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class CD_DashController : MonoBehaviour
 {
-    private Animator animator;
+    Animator animator;
     public bool isUsed = false;
-    private bool isComing = false;
 
     private void Awake()
     {
@@ -20,10 +19,7 @@ public class CD_DashController : MonoBehaviour
         //isUsed = true
 
         animator.SetBool("isUsed", isUsed);
-        animator.SetBool("isComing", isComing);
     }
 
-    private void Recharge() { isComing = true; }
-
-    private void SettoIddle() { isUsed = false; isComing = false; }
+    private void SettoIddle() { isUsed = false;}
 }

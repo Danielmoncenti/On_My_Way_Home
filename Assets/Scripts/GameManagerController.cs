@@ -34,7 +34,8 @@ public class GameManagerController : MonoBehaviour
     public bool lifeUp = false;
     public bool lifeDown = false;
 
-    //Bools para habilidades
+    //Variable para sumar una vida cada 100 monedas
+    public int internPoints = 0;
   
     void Awake()
     {
@@ -64,25 +65,37 @@ public class GameManagerController : MonoBehaviour
         if (coin)
         {
             points++;
+            internPoints++;
             coin = false;
         }
         else if (bigCoin)
         {
             points += 20;
+            internPoints += 20;
             bigCoin = false;
         }
-        else if (lifeUp)
+
+        if (internPoints >= 100)
+        {
+            internPoints = 0;
+            lifeUp = true;
+        }
+
+
+        if (lifeUp)
         {
             if (life == 6)
             {
-                points += 20;
+                totalLifes++;
+                life = 3;
+                OneUp = true;
+                TryAgain = true;
                 lifeUp = false;
             }
             else if (life < 6)
             {
                 life++;
                 OneUp = true;
-                //Iddle = false;
                 lifeUp = false;
             }
         }
@@ -100,15 +113,15 @@ public class GameManagerController : MonoBehaviour
             {
                 life--;
                 OneDown = true;
-                //Iddle = false;
                 lifeDown = false;
 
             }
 
         }
+
         CheckTotalLifes();
 
-        Lifes_text.text = string.Format("{0:00}", life);
+        Lifes_text.text = string.Format("{0:00}", totalLifes);
         Point_text.text = string.Format("{0:000}", points);
     }
 

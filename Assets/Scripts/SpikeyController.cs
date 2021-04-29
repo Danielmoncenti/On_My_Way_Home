@@ -63,9 +63,11 @@ public class SpikeyController : MonoBehaviour
     public GameObject dashtrigger;
     public GameObject shadow;
     public GameObject movingPlataform;
-    public CD_AttackController cd_attack;
-    public CD_DashController cd_dash;
-   //private ShadowController shadowcontroller;
+    [SerializeField] CD_AttackController cd_attack;
+    [SerializeField] GameObject obj_cd_attack;
+    [SerializeField] CD_DashController cd_dash;
+    [SerializeField] GameObject obj_cd_dash;
+    //private ShadowController shadowcontroller;
 
 
     //Animaciones
@@ -95,6 +97,8 @@ public class SpikeyController : MonoBehaviour
         shadowExists = false;
         dashing = false;
         stucked = false;
+        obj_cd_attack.SetActive(false);
+        obj_cd_dash.SetActive(false);
         Spikeyscale = transform.localScale;
     }
 
@@ -104,9 +108,6 @@ public class SpikeyController : MonoBehaviour
         float delta = Time.deltaTime * 1000;
         damagetimer += Time.deltaTime;
         invulnerabilitytimer += Time.deltaTime;
-
-        
-
 
         if (rigidBody.velocity.y > 1000)
         {
@@ -270,11 +271,6 @@ public class SpikeyController : MonoBehaviour
                     if (Input.GetKey(attackButton) && canAttack)
                     {
                         isAttacking = true;
-                        cd_attack.isUsed = true;
-                    }
-                    else
-                    {
-                        cd_attack.isUsed = false;
                     }
 
                     //if (Input.GetKeyDown(shadowButton))
@@ -308,7 +304,9 @@ public class SpikeyController : MonoBehaviour
                         {
                             isDashing = true;
                             basicDash();
+                            obj_cd_dash.SetActive(true);
                             cd_dash.isUsed = true;
+                            
                         }
                         //else if (shadowDashActivated)
                         //{
@@ -325,6 +323,9 @@ public class SpikeyController : MonoBehaviour
                         //}
                     }
                 }
+
+                if (!cd_attack.isUsed) obj_cd_attack.SetActive(false);
+                if (!cd_dash.isUsed) obj_cd_dash.SetActive(false);
 
             }
             else
@@ -485,8 +486,20 @@ public class SpikeyController : MonoBehaviour
         GameObject Pua7 = Instantiate(pua, transform.position + transform.up * 2, Quaternion.Euler(0, 0, 270));
         GameObject Pua8 = Instantiate(pua, transform.position + transform.up * 2, Quaternion.Euler(0, 0, 315));
         GameObject Pua9 = Instantiate(pua, transform.position + transform.up * 2, Quaternion.Euler(0, 0, 360));
-
+        
+        obj_cd_attack.SetActive(true);
+        cd_attack.isUsed = true;
         canAttack = false;
+        
+        Destroy(Pua1, 3);
+        Destroy(Pua2, 3);
+        Destroy(Pua3, 3);
+        Destroy(Pua4, 3);
+        Destroy(Pua5, 3);
+        Destroy(Pua6, 3);
+        Destroy(Pua7, 3);
+        Destroy(Pua8, 3);
+        Destroy(Pua9, 3);
     }
 
     //private void shadowdash()
