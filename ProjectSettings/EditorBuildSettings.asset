@@ -11,25 +11,28 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/Nivel1Moncayo.unity
+    guid: 685137a963a39654db029206212d20cf
+  - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: f96d2af0ee271b440b8577e31789f211
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Level11.unity
     guid: c084774bfbfd901489f570f0e4aad4a5
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Level12.unity
     guid: 5f1c6a2372f814549928fed958431d52
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: ed4553c4e8424fe4baa94df9963d2971
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/level5.unity
     guid: 5477fe678442ac84c9539ad4ed144991
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Win.unity
     guid: ba913c505c3e4a345b7c72b3f02770d8
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 78364f53fc0afd0499528749c5c805fc
   m_configObjects: {}

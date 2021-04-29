@@ -20,7 +20,7 @@ public class BatController : MonoBehaviour
     private int dead_animation;
 
     private bool isMad = false;
-    private bool isFalling = false;
+    public bool isFalling = false;
     private bool isDead = false;
 
     private Transform Spikey;
