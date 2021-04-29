@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RotateTrapController : MonoBehaviour
 {
+    public float rotation;
     
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,6 @@ public class RotateTrapController : MonoBehaviour
     {
         float delta = Time.fixedDeltaTime * 1000;
 
-        this.transform.Rotate(0, 0, 2);
+        this.transform.Rotate(0, 0, rotation);
     }
 }

@@ -9,7 +9,7 @@ public class RatController : MonoBehaviour
 
     private float currentSpeedH = 0.0f;
 
-    private int ratRadius = 300;
+    private int ratRadius = 1000;
     private Transform Spikey;
 
     private Rigidbody2D rigidBody;
