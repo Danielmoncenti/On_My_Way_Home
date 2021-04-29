@@ -4,19 +4,13 @@ using UnityEngine;
 
 public class CD_AttackController : MonoBehaviour
 {
-    private Animator animator;
-    private int used_animation;
-    private int coming_animation;
-    private bool isUsed = false;
-    private bool isComing = false;
+    Animator animator;
+    public bool isUsed = false;
+    bool isComing = false;
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
-        used_animation = Animator.StringToHash("isUsed");
-        coming_animation = Animator.StringToHash("isComing");
     }
 
     // Update is called once per frame
@@ -26,13 +20,11 @@ public class CD_AttackController : MonoBehaviour
         //isUsed = true;
 
 
-        animator.SetBool(used_animation, isUsed);
-        animator.SetBool(coming_animation, isComing);
+        animator.SetBool("isUsed", isUsed);
+        animator.SetBool("isComing", isComing);
     }
 
+    private void Recharge() { isComing = true; }
 
-    private void SetToIddle() { isComing = true; }
-
-
-    private void Recharge() { isUsed = false; }
+    private void SettoIddle() { isUsed = false; isComing = false; }
 }

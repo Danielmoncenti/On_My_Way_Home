@@ -47,14 +47,15 @@ public class GameManagerController : MonoBehaviour
         {
             Debug.Log("Warning: multiple " + this + " in scene!!");
         }
-       
+
+        Point_text = GameObject.FindGameObjectWithTag("Points").GetComponent<Text>();
+        Lifes_text = GameObject.FindGameObjectWithTag("Lifes").GetComponent<Text>();
     }
 
     //Start is called before the first frame update
     void Start()
     {
-        Point_text = GameObject.FindGameObjectWithTag("Points").GetComponent<Text>();
-        Lifes_text = GameObject.FindGameObjectWithTag("Lifes").GetComponent<Text>();
+        
     }
 
     // Update is called once per frame
@@ -107,8 +108,8 @@ public class GameManagerController : MonoBehaviour
         }
         CheckTotalLifes();
 
-        Point_text.text = points.ToString();
-        Lifes_text.text = totalLifes.ToString();
+        Lifes_text.text = string.Format("{0:00}", life);
+        Point_text.text = string.Format("{0:000}", points);
     }
 
     private void CheckTotalLifes()

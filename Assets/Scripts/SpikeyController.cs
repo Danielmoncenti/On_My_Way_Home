@@ -24,11 +24,13 @@ public class SpikeyController : MonoBehaviour
     public float stuckedtimer = 0;
     public LayerMask LayerDashLimit;
     private float currentSpeedH = 0.0f;
-    public float thrust = 200.0f;
+    [SerializeField] float thrust = 30.0f;
     public int life = 5;
     private bool canWalk = true;
     public bool Jumping = true;
     public bool canClimb = true;
+    public bool canAttack = true;
+    public float cdattack = 0;
    
     public bool climbing = false;
     public bool takingdamage = false;
@@ -61,6 +63,8 @@ public class SpikeyController : MonoBehaviour
     public GameObject dashtrigger;
     public GameObject shadow;
     public GameObject movingPlataform;
+    public CD_AttackController cd_attack;
+    public CD_DashController cd_dash;
    //private ShadowController shadowcontroller;
 
 
@@ -119,7 +123,6 @@ public class SpikeyController : MonoBehaviour
         }
         else if (dashCD <= 0)
         {
-
             dashCD = 0;
         }
 
@@ -169,8 +172,6 @@ public class SpikeyController : MonoBehaviour
         {
             if (stucked == false)
             {
-
-
                 if (dashing == false)
                 {
                     SpikeyDirection = Direction.NONE;
@@ -256,10 +257,24 @@ public class SpikeyController : MonoBehaviour
                         isJumping = true;
                     }
 
-
-                    if (Input.GetKey(attackButton))
+                    if (!canAttack)
+                    {
+                        cdattack += delta;
+                        if (cdattack > 5000)
+                        {
+                            canAttack = true;
+                            cdattack = 0;
+                        }
+                    }
+                    
+                    if (Input.GetKey(attackButton) && canAttack)
                     {
                         isAttacking = true;
+                        cd_attack.isUsed = true;
+                    }
+                    else
+                    {
+                        cd_attack.isUsed = false;
                     }
 
                     //if (Input.GetKeyDown(shadowButton))
@@ -279,20 +294,21 @@ public class SpikeyController : MonoBehaviour
 
                 if (Input.GetKeyDown(dashButton))
                 {
-                    //if (doubleDashActivated)
+                    /*if (doubleDashActivated)
                     //{
                     //    if (dashCD <= 5000)
                     //    {
                     //        isDashing = true;
                     //        doubleDash();
                     //    }
-                    //}
+                    }*/
                     if (dashCD <= 0)
                     {
                         if (basicDashActivated)
                         {
                             isDashing = true;
                             basicDash();
+                            cd_dash.isUsed = true;
                         }
                         //else if (shadowDashActivated)
                         //{
@@ -366,7 +382,6 @@ public class SpikeyController : MonoBehaviour
 
         life = 5;
     }
-
 
     private bool Walk()
     {
@@ -471,15 +486,7 @@ public class SpikeyController : MonoBehaviour
         GameObject Pua8 = Instantiate(pua, transform.position + transform.up * 2, Quaternion.Euler(0, 0, 315));
         GameObject Pua9 = Instantiate(pua, transform.position + transform.up * 2, Quaternion.Euler(0, 0, 360));
 
-        Destroy(Pua1, 3);
-        Destroy(Pua2, 3);
-        Destroy(Pua3, 3);
-        Destroy(Pua4, 3);
-        Destroy(Pua5, 3);
-        Destroy(Pua6, 3);
-        Destroy(Pua7, 3);
-        Destroy(Pua8, 3);
-        Destroy(Pua9, 3);
+        canAttack = false;
     }
 
     //private void shadowdash()
@@ -612,7 +619,7 @@ public class SpikeyController : MonoBehaviour
 
         if (dashing == false)
         {
-            dashCD = 5000;
+            dashCD = 3000;
             dashing = true;
             if (VerticalDashDirection == Direction.NONE)
             {
@@ -670,7 +677,7 @@ public class SpikeyController : MonoBehaviour
             }
             else if (VerticalDashDirection == Direction.UP)
             {
-                dashCD = 5000;
+                dashCD = 3000;
                 dashing = true;
                
                 float center = (bc2d.bounds.min.y + bc2d.bounds.max.y) / 2;
@@ -849,82 +856,81 @@ public class SpikeyController : MonoBehaviour
             }
 
             switch (FacingDirection)
-        {
-            default:
-                Spikeyscale.x = 2f;
-                break;
-            case Direction.RIGHT:
-                Spikeyscale.x = 2f;
-                break;
-            case Direction.LEFT:
-                Spikeyscale.x = -2f;
-                break;
+            {
+                default:
+                    Spikeyscale.x = 2f;
+                    break;
+                case Direction.RIGHT:
+                    Spikeyscale.x = 2f;
+                    break;
+                case Direction.LEFT:
+                    Spikeyscale.x = -2f;
+                    break;
 
+            }
+
+            switch (SpikeyDirection)
+            {
+                default: break;
+                case Direction.UP:
+                    rigidBody.velocity = new Vector2(0, 90);
+                    break;
+                case Direction.DOWN:
+                    rigidBody.velocity = new Vector2(0, -90);
+                    break;
+                case Direction.RIGHT:
+                        //rigidBody.AddForce(transform.right * baseSpeed * delta);
+                    if (Jumping)
+                    {
+                            rigidBody.AddForce(transform.right * 50 * delta);
+                    }
+
+                  else  if (!sprinting)
+                  {
+                        rigidBody.velocity = new Vector2(baseSpeed, currentSpeedV);
+                  }
+                    else
+                    {
+                        rigidBody.velocity = new Vector2(sprintSpeed, currentSpeedV);
+                    }
+                    break;
+                case Direction.LEFT:
+                        //rigidBody.AddForce((transform.right * baseSpeed * delta) * -1);
+
+                   if (Jumping)
+                   {
+                            rigidBody.AddForce(transform.right * 50*-1 * delta);
+                   }
+                   else if (!sprinting)
+                   {
+                        rigidBody.velocity = new Vector2(baseSpeed * -1, currentSpeedV);
+                   }
+                   else
+                   {
+                        rigidBody.velocity = new Vector2(sprintSpeed * -1, currentSpeedV);
+                   }
+                    break;
+                case Direction.NONE:
+                        //if (climbing)
+                        //{
+                        //   rigidBody.velocity = new Vector2(0, 0);
+                        //}
+                   if (movingPlataform != null)
+                   {
+                            rigidBody.velocity = new Vector2(movingPlataform.GetComponent<Rigidbody2D>().velocity.x, currentSpeedV);
+                   }
+
+                   else if(Jumping)
+                   {
+                        rigidBody.velocity = new Vector2(currentSpeedH, currentSpeedV);
+                   }
+                   else 
+                   {
+                           rigidBody.velocity = new Vector2(0, 0);
+                   }
+                   break;
+            }
         }
-
-        switch (SpikeyDirection)
-        {
-
-            default: break;
-            case Direction.UP:
-                rigidBody.velocity = new Vector2(0, 90);
-                break;
-            case Direction.DOWN:
-                rigidBody.velocity = new Vector2(0, -90);
-                break;
-            case Direction.RIGHT:
-                    //rigidBody.AddForce(transform.right * baseSpeed * delta);
-                if (Jumping)
-                {
-                        rigidBody.AddForce(transform.right * 50 * delta);
-                }
-
-              else  if (!sprinting)
-              {
-                    rigidBody.velocity = new Vector2(baseSpeed, currentSpeedV);
-              }
-                else
-                {
-                    rigidBody.velocity = new Vector2(sprintSpeed, currentSpeedV);
-                }
-                break;
-            case Direction.LEFT:
-                    //rigidBody.AddForce((transform.right * baseSpeed * delta) * -1);
-
-               if (Jumping)
-               {
-                        rigidBody.AddForce(transform.right * 50*-1 * delta);
-               }
-               else if (!sprinting)
-               {
-                    rigidBody.velocity = new Vector2(baseSpeed * -1, currentSpeedV);
-               }
-               else
-               {
-                    rigidBody.velocity = new Vector2(sprintSpeed * -1, currentSpeedV);
-               }
-                break;
-            case Direction.NONE:
-                    //if (climbing)
-                    //{
-                    //   rigidBody.velocity = new Vector2(0, 0);
-                    //}
-               if (movingPlataform != null)
-               {
-                        rigidBody.velocity = new Vector2(movingPlataform.GetComponent<Rigidbody2D>().velocity.x, currentSpeedV);
-               }
-
-               else if(Jumping)
-               {
-                    rigidBody.velocity = new Vector2(currentSpeedH, currentSpeedV);
-               }
-               else 
-               {
-                       rigidBody.velocity = new Vector2(0, 0);
-               }
-               break;
-        }
-    }
 
     }
 

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class RatController : MonoBehaviour
 {
-    private float baseSpeed = 3.0f;
-    private float maxSpeed = 8.0f;
+    private float baseSpeed = 5.0f;
+    private float maxSpeed = 10.0f;
 
     private float currentSpeedH = 0.0f;
 
@@ -126,12 +126,12 @@ public class RatController : MonoBehaviour
 
         if (currentSpeedH == baseSpeed)
         {
-            RaycastHit2D hits = Physics2D.Raycast(rightPosition, Vector2.right, 200);
+            RaycastHit2D hits = Physics2D.Raycast(rightPosition, Vector2.right, 500);
             if (checkRaycastWithScenario(hits)) { rightCollision = true; }
         }
         else if (currentSpeedH == -baseSpeed)
         {
-            RaycastHit2D hits = Physics2D.Raycast(leftPosition, -Vector2.right, 200);
+            RaycastHit2D hits = Physics2D.Raycast(leftPosition, -Vector2.right, 500);
             if (checkRaycastWithScenario(hits)) { leftCollision = true; }
         }
         
