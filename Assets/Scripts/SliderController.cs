@@ -19,7 +19,6 @@ public class SliderController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         aMusic = GameObject.FindGameObjectWithTag("MusicSlider");
         aSFX = GameObject.FindGameObjectWithTag("SFXSlider");
         Volume_Cont = GetComponent<SoundManager>();
@@ -86,7 +85,6 @@ public class SliderController : MonoBehaviour
             Volume_Cont.SetVolumeMusic(Music);
             Volume_Cont.SetVolumeSFX(SFX);
         }
-
     }
     public float GetMusicVol()
     {
