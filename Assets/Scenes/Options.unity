@@ -599,7 +599,7 @@ GameObject:
   - component: {fileID: 1227459222}
   - component: {fileID: 1227459223}
   m_Layer: 5
-  m_Name: Slider (1)
+  m_Name: Slider
   m_TagString: SFXSlider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -770,8 +770,8 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_Camera: {fileID: 1489978106}
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
