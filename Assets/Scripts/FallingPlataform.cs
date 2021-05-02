@@ -5,15 +5,19 @@ using UnityEngine;
 public class FallingPlataform : MonoBehaviour
 {
     private Rigidbody2D rb2d;
+    private Animator animator;
+    private int fallingID;
     public bool falling = false;
     public float falltimer = 0;
-    public float startshake = 3;
-    public float fall = 6;
+    public float startshake = 1;
+    public float fall = 3;
     private Vector2 initialpos;
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        fallingID = Animator.StringToHash("Falling");
         initialpos = this.transform.position;
     }
 
@@ -23,15 +27,16 @@ public class FallingPlataform : MonoBehaviour
         if (falling)
         {
             falltimer += Time.deltaTime;
+            if (falltimer >= 1)
+            {
+                animator.SetBool(fallingID, true);
+            }
             if (falltimer >= 3)
             {
-                //poner animacion shake
-            }
-            if (falltimer >= 6)
-            {
+                animator.SetBool(fallingID, false);
                 rb2d.gravityScale = 100;
             }
-            if (falltimer >= 10)
+            if (falltimer >= 6)
             {
                 falling = false;
                 rb2d.gravityScale = 0;
@@ -58,6 +63,7 @@ public class FallingPlataform : MonoBehaviour
         {
             falling = false;
             falltimer = 0;
+            animator.SetBool(fallingID, false);
         }
     }
     //private void OnCollisionExit2D(Collision2D collision)
