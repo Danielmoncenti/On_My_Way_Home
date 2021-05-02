@@ -24,6 +24,7 @@ public class BatController : MonoBehaviour
     private bool isDead = false;
 
     private Transform Spikey;
+    [SerializeField] SpikeyController obj_Spikey;
 
     
     // Start is called before the first frame update
@@ -96,7 +97,7 @@ public class BatController : MonoBehaviour
             }
             currentSpeedV *= -1;
         }
-        if (collision.gameObject.tag == "Water")
+        else if (collision.gameObject.tag == "Water")
         {
             if (isFalling)
             {
@@ -106,10 +107,14 @@ public class BatController : MonoBehaviour
             }
             currentSpeedV *= -1;
         }
-        if (collision.gameObject.tag == "Puas")
+        else if (collision.gameObject.tag == "Puas")
         {
             isFalling = true;
             currentSpeedV = -maxSpeed;
+        }
+        else if (collision.gameObject.tag == "Spikey" && obj_Spikey.killedByDash)
+        {
+            isFalling = true; 
         }
 
     }

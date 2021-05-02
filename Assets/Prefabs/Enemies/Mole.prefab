@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rock: {fileID: 4301033416577344875, guid: c8b5bdcb2c7cd3b4c8aacb09de7f91aa, type: 3}
+  obj_Spikey: {fileID: 0}
 --- !u!95 &1634062939
 Animator:
   serializedVersion: 3

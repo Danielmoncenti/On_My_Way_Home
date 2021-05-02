@@ -24,7 +24,7 @@ public class SpikeyController : MonoBehaviour
     public float stuckedtimer = 0;
     public LayerMask LayerDashLimit;
     private float currentSpeedH = 0.0f;
-    [SerializeField] float thrust = 30.0f;
+    [SerializeField] float thrust = 35.0f;
     public int life = 5;
     private bool canWalk = true;
     public bool Jumping = true;
@@ -47,7 +47,7 @@ public class SpikeyController : MonoBehaviour
     KeyCode spaceButton = KeyCode.Space;
     KeyCode attackButton = KeyCode.L;
     KeyCode dashButton = KeyCode.K;
-    KeyCode shadowButton = KeyCode.Q;
+    //KeyCode shadowButton = KeyCode.Q;
     KeyCode sprintButton = KeyCode.J;
     KeyCode respawnButton = KeyCode.Z;
 
@@ -69,6 +69,8 @@ public class SpikeyController : MonoBehaviour
     [SerializeField] GameObject obj_cd_dash;
     //private ShadowController shadowcontroller;
 
+    //Para que los enemigos hagan la animacion de muerte cuando mueren con un dash
+    public bool killedByDash = false;
 
     //Animaciones
     private Animator animator;
@@ -177,6 +179,7 @@ public class SpikeyController : MonoBehaviour
                 {
                     SpikeyDirection = Direction.NONE;
                     VerticalDashDirection = Direction.NONE;
+                    killedByDash = false;
                     if (climbing)
                     {
                         isClimbing = true;
@@ -286,6 +289,7 @@ public class SpikeyController : MonoBehaviour
                 else
                 {
                     isDashing = true;
+                    killedByDash = true;
                 }
 
                 if (Input.GetKeyDown(dashButton))
@@ -306,7 +310,6 @@ public class SpikeyController : MonoBehaviour
                             basicDash();
                             obj_cd_dash.SetActive(true);
                             cd_dash.isUsed = true;
-                            
                         }
                         //else if (shadowDashActivated)
                         //{
@@ -993,12 +996,8 @@ public class SpikeyController : MonoBehaviour
 
             }
         }
-       
-
-
-
-
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Crocodile")
@@ -1027,8 +1026,7 @@ public class SpikeyController : MonoBehaviour
         }
         else if(collision.gameObject.tag == "Enemies" && dashing==true)
         {
-            Destroy(collision.gameObject);
-            //collision.gameObject.isFalling = true;
+
             cancelDash();
             if (basicDashActivated)
             {
