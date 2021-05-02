@@ -1052,7 +1052,7 @@ public class SpikeyController : MonoBehaviour
         if (collision.gameObject.tag == "BoundTrap")
         {
             rigidBody.velocity = Vector2.zero;
-            rigidBody.AddForce(new Vector2(-700, 500), ForceMode2D.Impulse);
+            rigidBody.AddForce(new Vector2(-1000, 500), ForceMode2D.Impulse);
         }
         else if(collision.gameObject.tag == "BoundTrapReverse")
         {
