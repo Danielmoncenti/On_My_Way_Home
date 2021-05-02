@@ -41,6 +41,8 @@ TagManager:
   - Quit
   - Resume
   - Control
+  - MusicSlider
+  - SFXSlider
   layers:
   - Default
   - TransparentFX

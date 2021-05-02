@@ -48,7 +48,7 @@ public class MenuController : MonoBehaviour
                     // si hay partida guardada ir a ese nivel
                     break;
                 case 2:
-                    // menu de opciones
+                    SceneManager.LoadScene("Options");
                     break;
                 case 3:
                     SceneManager.LoadScene("Credits");

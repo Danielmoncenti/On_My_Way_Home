@@ -326,7 +326,6 @@ public class SpikeyController : MonoBehaviour
 
                 if (!cd_attack.isUsed) obj_cd_attack.SetActive(false);
                 if (!cd_dash.isUsed) obj_cd_dash.SetActive(false);
-
             }
             else
             {
@@ -421,11 +420,6 @@ public class SpikeyController : MonoBehaviour
         }
         return false;
     }
-
-
-
-
-
 
     private void jump()
     {
@@ -1034,21 +1028,19 @@ public class SpikeyController : MonoBehaviour
         else if(collision.gameObject.tag == "Enemies" && dashing==true)
         {
             Destroy(collision.gameObject);
+            //collision.gameObject.isFalling = true;
             cancelDash();
             if (basicDashActivated)
             {
                 dashCD = 0;
+                cd_dash.isUsed = false;
             }
             SoundManager.PlaySound("Damage");
         }
-   
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-     
-
         if (collision.gameObject.tag == "BoundTrap")
         {
             rigidBody.velocity = Vector2.zero;
@@ -1068,7 +1060,6 @@ public class SpikeyController : MonoBehaviour
             cancelDash();
             rigidBody.velocity = Vector2.zero;
             stucked = true;
-
         }
         else if(collision.gameObject.tag == "Enemies")
         {
@@ -1109,12 +1100,6 @@ public class SpikeyController : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Crocodile")
-        {
-            movingPlataform = null;
-        }
-
-
         if (collision.gameObject.tag == "Tilemap")
         {
             Jumping = true;
@@ -1127,6 +1112,7 @@ public class SpikeyController : MonoBehaviour
         else if(collision.gameObject.tag == "Crocodile")
         {
             Jumping = true;
+            movingPlataform = null;
         }
         else if(collision.gameObject.tag == "Wall")
         {

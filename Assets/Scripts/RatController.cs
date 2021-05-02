@@ -22,7 +22,7 @@ public class RatController : MonoBehaviour
 
     private bool isMad = false;
     private bool isBitting = false;
-    private bool isFalling = false;
+    public bool isFalling = false;
     Vector3 ratScale;
 
     // Start is called before the first frame update

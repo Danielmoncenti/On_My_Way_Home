@@ -4,32 +4,34 @@ using UnityEngine;
 
 public class RockController : MonoBehaviour
 {
+    private Transform Rock;
+    private GameObject Spikey;
 
-    
-    private GameObject Rock;
     private float angle = 45.0f;
-    private float thurst = 215.0f;
+    private float thurst = 0.6f;
     private Vector3 speed;
+    private Vector3 distance;
+    private Vector3 targetposition;
     private Vector3 direction;
 
 
     private Rigidbody2D _rb2d;
-    //public Rigidbody2D rb2d
-    //{
-    //    get
-    //    {
-    //        _rb2d = _rb2d ?? GetComponent<Rigidbody2D>();
-    //        return _rb2d;
-    //    }
-    //}
 
     // Start is called before the first frame update
     void Start()
     {
+        Spikey = GameObject.FindGameObjectWithTag("Spikey");
+
+        Rock = GetComponent<Transform>();
         _rb2d = GetComponent<Rigidbody2D>();
+
+        distance = Rock.transform.position - Spikey.transform.position;
+
         direction = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad) * -1, Mathf.Cos(angle * Mathf.Deg2Rad), 0);
 
         direction.Normalize();
+
+        thurst = thurst * distance.x;
 
         speed = direction * thurst;
 
