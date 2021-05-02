@@ -9,8 +9,9 @@ public class RatController : MonoBehaviour
 
     private float currentSpeedH = 0.0f;
 
-    private int ratRadius = 1000;
+    private int ratRadius = 500;
     private Transform Spikey;
+    [SerializeField] SpikeyController obj_Spikey;
 
     private Rigidbody2D rigidBody;
     private BoxCollider2D boxCollider2D;
@@ -86,7 +87,14 @@ public class RatController : MonoBehaviour
         }
         if (collision.gameObject.tag == "Spikey")
         {
-            isBitting = true;
+            if (obj_Spikey.killedByDash)
+            {
+                isFalling = true;
+            }
+            else
+            {
+                isBitting = true;
+            }
         }
     }
 
@@ -121,8 +129,8 @@ public class RatController : MonoBehaviour
     {
         bool rightCollision = false;
         bool leftCollision = false;
-        Vector2 rightPosition = new Vector2(boxCollider2D.bounds.max.x, boxCollider2D.bounds.max.y);
-        Vector2 leftPosition = new Vector2(boxCollider2D.bounds.min.x, boxCollider2D.bounds.max.y);
+        Vector2 rightPosition = new Vector2(boxCollider2D.bounds.max.x, boxCollider2D.bounds.min.y);
+        Vector2 leftPosition = new Vector2(boxCollider2D.bounds.min.x, boxCollider2D.bounds.min.y);
 
         if (currentSpeedH == baseSpeed)
         {

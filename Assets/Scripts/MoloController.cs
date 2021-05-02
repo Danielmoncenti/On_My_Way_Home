@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class MoloController : MonoBehaviour
 {
-    private Animator animator;
-    private Transform Spikey;
+    Animator animator;
+    Transform Spikey;
     [SerializeField] GameObject Rock;
-    private GameObject Mole;
+    [SerializeField] SpikeyController obj_Spikey;
+    GameObject Mole;
     //[SerializeField] GameObject Rock;
-    private float turretRadius = 400.0f;
-    private float timer = 0.0f;
-    //private float bulletSpeed = 250.0f;
-    private int mad_animaton;
-    private int attack_animation;
-    private int wait_animation;
-    private int out_animation;
-    private bool isMad = false;
-    private bool isAttacking = false;
-    private bool isWaiting = false;
-    private bool isOut = false;
+    float turretRadius = 400.0f;
+    float timer = 0.0f;
+    //float bulletSpeed = 250.0f;
+    int mad_animaton;
+    int attack_animation;
+    int wait_animation;
+    int out_animation;
+    bool isMad = false;
+    bool isAttacking = false;
+    bool isWaiting = false;
+    bool isOut = false;
 
     // Start is called before the first frame update
     void Start()
@@ -57,8 +58,6 @@ public class MoloController : MonoBehaviour
             }
         }
 
- 
-
         animator.SetBool(mad_animaton, isMad);
         animator.SetBool(attack_animation, isAttacking);
         animator.SetBool(wait_animation, isWaiting);
@@ -87,6 +86,11 @@ public class MoloController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Puas")
+        {
+            isOut = true;
+            gameObject.layer = 21;
+        }
+        else if (collision.gameObject.tag == "Spikey" && obj_Spikey.killedByDash)
         {
             isOut = true;
             gameObject.layer = 21;
