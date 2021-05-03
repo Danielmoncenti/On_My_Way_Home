@@ -53,10 +53,11 @@ public class SpikeyController : MonoBehaviour
 
 
     //Get Components
-    private BoxCollider2D bc2d;
-    private Rigidbody2D rigidBody;
-    private GameObject shadowOndash;
-    private GameObject limitdash;
+    BoxCollider2D bc2d;
+    Rigidbody2D rigidBody;
+    GameObject shadowOndash;
+    GameObject limitdash;
+    SpriteRenderer spriteRenderer;
 
     //Get Components de fuera del script
     public GameObject pua;
@@ -67,6 +68,7 @@ public class SpikeyController : MonoBehaviour
     [SerializeField] GameObject obj_cd_attack;
     [SerializeField] CD_DashController cd_dash;
     [SerializeField] GameObject obj_cd_dash;
+    [SerializeField] PauseMenu script_pause;
     //private ShadowController shadowcontroller;
 
     //Para que los enemigos hagan la animacion de muerte cuando mueren con un dash
@@ -94,6 +96,7 @@ public class SpikeyController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         bc2d = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         lastCheckpoint = rigidBody.transform.position;
         //audio = GetComponent<AudioSource>();        
         shadowExists = false;
@@ -107,274 +110,285 @@ public class SpikeyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float delta = Time.deltaTime * 1000;
-        damagetimer += Time.deltaTime;
-        invulnerabilitytimer += Time.deltaTime;
+        if (script_pause.ispaused)
+        {
 
-        if (rigidBody.velocity.y > 1000)
-        {
-         rigidBody.velocity = new Vector2(currentSpeedH, 1000);
         }
-        if (rigidBody.velocity.y < -600)
+        else
         {
-            rigidBody.velocity = new Vector2(currentSpeedH, -600);
-        }
-       
-        if (dashCD > 0)
-        {
-            dashCD -= delta;
-        }
-        else if (dashCD <= 0)
-        {
-            dashCD = 0;
-        }
+            float delta = Time.deltaTime * 1000;
+            damagetimer += Time.deltaTime;
+            invulnerabilitytimer += Time.deltaTime;
 
-        isWalking = false;
-        isRunning = false;
-        isJumping = false;
-        isClimbing = false;
-        isHurt = false;
-        isDashing = false;
-        isAttacking = false;
+            if (rigidBody.velocity.y > 1000)
+            {
+                rigidBody.velocity = new Vector2(currentSpeedH, 1000);
+            }
+            if (rigidBody.velocity.y < -600)
+            {
+                rigidBody.velocity = new Vector2(currentSpeedH, -600);
+            }
 
-        if (Input.GetKeyDown(respawnButton))
-        {
-            this.transform.position = lastCheckpoint;
-        }
-     
-        if (takingdamage)
-        {
-            //no se cumple la animacion porq se siguen aceptando los inputs
+            if (dashCD > 0)
+            {
+                dashCD -= delta;
+            }
+            else if (dashCD <= 0)
+            {
+                dashCD = 0;
+            }
+
             isWalking = false;
             isRunning = false;
             isJumping = false;
             isClimbing = false;
-            isHurt = true;
+            isHurt = false;
             isDashing = false;
             isAttacking = false;
-            if (damagetimer >= 0.5)
-            {
-                takingdamage = false;
 
-                damagetimer = 0;
+            if (Input.GetKeyDown(respawnButton))
+            {
+                this.transform.position = lastCheckpoint;
             }
-        }
-        if (invulnerability)
-        {
 
-            if (invulnerabilitytimer >= 3)
+            if (takingdamage)
             {
-                gameObject.layer = 8;
-                invulnerability = false;
-            }
-        }
-
-        
-     
-        if (takingdamage == false)
-        {
-            if (stucked == false)
-            {
-                if (dashing == false)
+                //no se cumple la animacion porq se siguen aceptando los inputs
+                isWalking = false;
+                isRunning = false;
+                isJumping = false;
+                isClimbing = false;
+                isHurt = true;
+                isDashing = false;
+                isAttacking = false;
+                if (damagetimer >= 0.5)
                 {
-                    SpikeyDirection = Direction.NONE;
-                    VerticalDashDirection = Direction.NONE;
-                    killedByDash = false;
-                    if (climbing)
+                    takingdamage = false;
+
+                    damagetimer = 0;
+                }
+            }
+
+            if (invulnerability)
+            {
+                spriteRenderer.color = Color.Lerp(new Color(0.2f, 0.2f, 0.2f), Color.white, invulnerabilitytimer / 3);
+                if (invulnerabilitytimer >= 3)
+                {
+                    gameObject.layer = 8;
+                    invulnerability = false;
+                }
+            }
+            else
+            {
+                spriteRenderer.color = Color.white;
+            }
+
+            if (takingdamage == false)
+            {
+                if (stucked == false)
+                {
+                    if (dashing == false)
                     {
-                        isClimbing = true;
+                        SpikeyDirection = Direction.NONE;
+                        VerticalDashDirection = Direction.NONE;
+                        killedByDash = false;
+                        if (climbing)
+                        {
+                            isClimbing = true;
+                            if (Input.GetKey(upButton))
+                            {
+                                VerticalDashDirection = Direction.UP;
+                                SpikeyDirection = Direction.UP;
+
+                            }
+                            else if (Input.GetKey(downButton))
+                            {
+                                SpikeyDirection = Direction.DOWN;
+
+                            }
+                        }
+
                         if (Input.GetKey(upButton))
                         {
                             VerticalDashDirection = Direction.UP;
-                            SpikeyDirection = Direction.UP;
+
 
                         }
-                        else if (Input.GetKey(downButton))
+
+                        if (Input.GetKey(rightButton) && climbing == false)
                         {
-                            SpikeyDirection = Direction.DOWN;
+                            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+                            currentSpeedH = rigidBody.velocity.x;
+                            //if (currentSpeedH > sprintSpeed)
+                            //{
+                            //    canWalk = false;
+                            //}
+                            //else
+                            //{
+                            //    canWalk = true;
+                            //}
 
-                        }
-                    }
-          
-                    if (Input.GetKey(upButton))
-                    {
-                        VerticalDashDirection = Direction.UP;
 
-
-                    }
-
-                    if (Input.GetKey(rightButton) && climbing == false)
-                    {
-                        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-                        currentSpeedH = rigidBody.velocity.x;
-                        //if (currentSpeedH > sprintSpeed)
-                        //{
-                        //    canWalk = false;
-                        //}
-                        //else
-                        //{
-                        //    canWalk = true;
-                        //}
-
-                  
                             SpikeyDirection = Direction.RIGHT;
                             FacingDirection = Direction.RIGHT;
-                        
-                        isWalking = true;
-                        isAttacking = false;
-                    }
-                    else if (Input.GetKey(leftButton) && climbing == false)
-                    {
-                        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-                        currentSpeedH = rigidBody.velocity.x;
-                        //if (currentSpeedH < sprintSpeed * -1)
-                        //{
-                        //    canWalk = false;
-                        //}
-                        //else
-                        //{
-                        //    canWalk = true;
-                        //}
 
-                        if (canWalk)
-                        {
-                            SpikeyDirection = Direction.LEFT;
-                            FacingDirection = Direction.LEFT;
+                            isWalking = true;
+                            isAttacking = false;
                         }
-                        isWalking = true;
-                        isAttacking = false;
-                    }
-
-                    if (Input.GetKeyDown(spaceButton) && Jumping == false)
-                    {
-                        jump();
-                    }
-                    //if (Input.GetKeyDown(spaceButton) && Jumping == true && climbing==true)
-                    //{
-                    //    climbjump();
-                    //}
-
-                    if (Jumping)
-                    {
-                        isWalking = false;
-                        isRunning = false;
-                        isJumping = true;
-                    }
-
-                    if (!canAttack)
-                    {
-                        cdattack += delta;
-                        if (cdattack > 5000)
+                        else if (Input.GetKey(leftButton) && climbing == false)
                         {
-                            canAttack = true;
-                            cdattack = 0;
+                            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+                            currentSpeedH = rigidBody.velocity.x;
+                            //if (currentSpeedH < sprintSpeed * -1)
+                            //{
+                            //    canWalk = false;
+                            //}
+                            //else
+                            //{
+                            //    canWalk = true;
+                            //}
+
+                            if (canWalk)
+                            {
+                                SpikeyDirection = Direction.LEFT;
+                                FacingDirection = Direction.LEFT;
+                            }
+                            isWalking = true;
+                            isAttacking = false;
+                        }
+
+                        if (Input.GetKeyDown(spaceButton) && Jumping == false)
+                        {
+                            jump();
+                        }
+                        //if (Input.GetKeyDown(spaceButton) && Jumping == true && climbing==true)
+                        //{
+                        //    climbjump();
+                        //}
+
+                        if (Jumping)
+                        {
+                            isWalking = false;
+                            isRunning = false;
+                            isJumping = true;
+                        }
+
+                        if (!canAttack)
+                        {
+                            cdattack += delta;
+                            if (cdattack > 5000)
+                            {
+                                canAttack = true;
+                                cdattack = 0;
+                            }
+                        }
+
+                        if (Input.GetKey(attackButton) && canAttack)
+                        {
+                            isAttacking = true;
+                        }
+
+                        //if (Input.GetKeyDown(shadowButton))
+                        //{
+                        //    if (shadowExists == true && dashing == false)
+                        //    {
+                        //        shadowcontroller.startReturn = true;
+                        //        dashCD = 10000;
+                        //        SoundManager.PlaySound("DashRevert");
+                        //    }
+                        //}
+                    }
+                    else
+                    {
+                        isDashing = true;
+                        killedByDash = true;
+                    }
+
+                    if (Input.GetKeyDown(dashButton))
+                    {
+                        /*if (doubleDashActivated)
+                        //{
+                        //    if (dashCD <= 5000)
+                        //    {
+                        //        isDashing = true;
+                        //        doubleDash();
+                        //    }
+                        }*/
+                        if (dashCD <= 0)
+                        {
+                            if (basicDashActivated)
+                            {
+                                isDashing = true;
+                                basicDash();
+                                obj_cd_dash.SetActive(true);
+                                cd_dash.isUsed = true;
+                            }
+                            //else if (shadowDashActivated)
+                            //{
+                            //    if (shadowExists == false)
+                            //    {
+                            //        isDashing = true;
+                            //        shadowdash();
+
+                            //    }
+                            //    else if (shadowExists == true && dashing == false)
+                            //    {
+                            //        goToshadow();
+                            //    }
+                            //}
                         }
                     }
-                    
-                    if (Input.GetKey(attackButton) && canAttack)
-                    {
-                        isAttacking = true;
-                    }
 
-                    //if (Input.GetKeyDown(shadowButton))
-                    //{
-                    //    if (shadowExists == true && dashing == false)
-                    //    {
-                    //        shadowcontroller.startReturn = true;
-                    //        dashCD = 10000;
-                    //        SoundManager.PlaySound("DashRevert");
-                    //    }
-                    //}
+                    if (!cd_attack.isUsed) obj_cd_attack.SetActive(false);
+                    if (!cd_dash.isUsed) obj_cd_dash.SetActive(false);
                 }
                 else
                 {
-                    isDashing = true;
-                    killedByDash = true;
-                }
-
-                if (Input.GetKeyDown(dashButton))
-                {
-                    /*if (doubleDashActivated)
-                    //{
-                    //    if (dashCD <= 5000)
-                    //    {
-                    //        isDashing = true;
-                    //        doubleDash();
-                    //    }
-                    }*/
-                    if (dashCD <= 0)
+                    isHurt = true;
+                    stuckedtimer += Time.deltaTime * 1000;
+                    if (stuckedtimer >= 2000)
                     {
-                        if (basicDashActivated)
-                        {
-                            isDashing = true;
-                            basicDash();
-                            obj_cd_dash.SetActive(true);
-                            cd_dash.isUsed = true;
-                        }
-                        //else if (shadowDashActivated)
-                        //{
-                        //    if (shadowExists == false)
-                        //    {
-                        //        isDashing = true;
-                        //        shadowdash();
-
-                        //    }
-                        //    else if (shadowExists == true && dashing == false)
-                        //    {
-                        //        goToshadow();
-                        //    }
-                        //}
+                        stucked = false;
+                        stuckedtimer = 0;
                     }
                 }
-
-                if (!cd_attack.isUsed) obj_cd_attack.SetActive(false);
-                if (!cd_dash.isUsed) obj_cd_dash.SetActive(false);
             }
-            else
+
+
+            if (Input.GetKey(sprintButton))
             {
-                isHurt = true;
-                stuckedtimer += Time.deltaTime * 1000;
-                if (stuckedtimer >= 2000)
+                if (rigidBody.velocity == new Vector2(0, 0))
                 {
-                    stucked = false;
-                    stuckedtimer = 0;
+                    isRunning = false;
                 }
+                else if (isDashing || Jumping || isClimbing)
+                {
+                    isRunning = false;
+                }
+                else
+                {
+                    isWalking = false;
+                    isRunning = true;
+                    sprinting = true;
+                }
+
             }
-        }
-
-
-        if (Input.GetKey(sprintButton))
-        {
-            if (rigidBody.velocity == new Vector2(0, 0))
+            if (Input.GetKeyUp(sprintButton) || Jumping == true)
             {
-                isRunning = false;
-            }
-            else if (isDashing || Jumping || isClimbing)
-            {
-                isRunning = false;
-            }
-            else
-            {
-                isWalking = false;
-                isRunning = true;
-                sprinting = true;
+                sprinting = false;
             }
 
+            transform.localScale = Spikeyscale;
+
+            animator.SetBool("isWalking", isWalking);
+            animator.SetBool("isRunning", isRunning);
+            animator.SetBool("isJumping", isJumping);
+            animator.SetBool("isDashing", isDashing);
+            animator.SetBool("isHurt", isHurt);
+            animator.SetBool("isClimbing", isClimbing);
+            animator.SetBool("isAttacking", isAttacking);
         }
-        if (Input.GetKeyUp(sprintButton) || Jumping ==true)
-        {
-            sprinting = false;
-        }
-
-        transform.localScale = Spikeyscale;
-
-        animator.SetBool("isWalking", isWalking);
-        animator.SetBool("isRunning", isRunning);
-        animator.SetBool("isJumping", isJumping);
-        animator.SetBool("isDashing", isDashing);
-        animator.SetBool("isHurt", isHurt);
-        animator.SetBool("isClimbing", isClimbing);
-        animator.SetBool("isAttacking", isAttacking);
+        
     }
 
     private void Respawn()

@@ -89,3 +89,6 @@ TagManager:
   - name: GUI
     uniqueID: 456993437
     locked: 0
+  - name: Menus
+    uniqueID: 3888863411
+    locked: 0

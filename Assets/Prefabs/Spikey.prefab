@@ -306,6 +306,8 @@ MonoBehaviour:
   obj_cd_attack: {fileID: 2446039671858693649}
   cd_dash: {fileID: 3222494229626938236}
   obj_cd_dash: {fileID: 3222494229626938215}
+  script_pause: {fileID: 0}
+  killedByDash: 0
 --- !u!95 &1026869074
 Animator:
   serializedVersion: 3

@@ -7,7 +7,8 @@ public class PauseMenu : MonoBehaviour
 {
     // Start is called before the first frame update
     public static bool gameispaused = false;
-    public GameObject pauseMenu;
+    public bool ispaused;
+    public GameObject pauseCanvas;
 
     // Update is called once per frame
     void Update()
@@ -15,30 +16,40 @@ public class PauseMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (gameispaused) {
-                resume();
+                Resume();
             }
             else {
                 pause();
             }
         }
 
-         void pause() { 
-            pauseMenu.SetActive(true);
+         void pause() {
             Time.timeScale = 0;
+            pauseCanvas.SetActive(true);
             gameispaused = true;
             //SoundManager.StopSound();
          }
+
+        ispaused = gameispaused;
   
     }
+
     public void Quit()
     {
         Application.Quit();
     }
-    public void resume()
+
+    public void Resume()
     {
-        pauseMenu.SetActive(false);
         Time.timeScale = 1;
+        pauseCanvas.SetActive(false);
         gameispaused = false;
         //SoundManager.PlaySound("GameSong");
     }
+
+    public void GoMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
 }
