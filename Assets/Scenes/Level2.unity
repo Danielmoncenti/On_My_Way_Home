@@ -2461,6 +2461,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6747562058694654055, guid: 39cd47dde4a6b8b43acc5644f28eb1a9,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39cd47dde4a6b8b43acc5644f28eb1a9, type: 3}
 --- !u!4 &937949601 stripped
@@ -4713,14 +4718,22 @@ CompositeCollider2D:
         Y: 0
       - X: 65280000000
         Y: 0
-    - - X: 36480000000
-        Y: 3200000000
-      - X: 34560000000
-        Y: 3200000000
-      - X: 34560000000
-        Y: 2560000000
-      - X: 36480000000
-        Y: 2560000000
+    - - X: 37120000100
+        Y: 1919999959
+      - X: 37120000100
+        Y: 2560000041
+      - X: 37120000041
+        Y: 2560000100
+      - X: 35199999959
+        Y: 2560000100
+      - X: 35199999900
+        Y: 2560000041
+      - X: 35199999900
+        Y: 1919999959
+      - X: 35199999959
+        Y: 1919999900
+      - X: 37120000041
+        Y: 1919999900
     - - X: 69120000000
         Y: 2560000000
       - X: 67200000000
@@ -4853,10 +4866,10 @@ CompositeCollider2D:
       - {x: 4160, y: 320}
       - {x: 3776, y: 319.99997}
       - {x: 3776, y: 0}
-    - - {x: 3648, y: 256}
-      - {x: 3648, y: 320}
-      - {x: 3456, y: 319.99997}
-      - {x: 3456, y: 256}
+    - - {x: 3712, y: 191.99998}
+      - {x: 3712, y: 256}
+      - {x: 3520, y: 255.99998}
+      - {x: 3520, y: 191.99998}
     - - {x: 6912, y: 192}
       - {x: 6912, y: 256}
       - {x: 6720, y: 255.99998}
@@ -24869,6 +24882,33 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
+  - first: {x: 55, y: 3, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 16
+      m_TileSpriteIndex: 12
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
+  - first: {x: 56, y: 3, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 15
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
+  - first: {x: 57, y: 3, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 12
+      m_TileSpriteIndex: 10
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
   - first: {x: 59, y: 3, z: 0}
     second:
       serializedVersion: 2
@@ -25486,33 +25526,6 @@ Tilemap:
       serializedVersion: 2
       m_TileIndex: 3
       m_TileSpriteIndex: 2
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
-  - first: {x: 54, y: 4, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 16
-      m_TileSpriteIndex: 12
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
-  - first: {x: 55, y: 4, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 15
-      m_TileSpriteIndex: 11
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
-  - first: {x: 56, y: 4, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 12
-      m_TileSpriteIndex: 10
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -31230,6 +31243,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6747562058694654055, guid: 39cd47dde4a6b8b43acc5644f28eb1a9,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39cd47dde4a6b8b43acc5644f28eb1a9, type: 3}
