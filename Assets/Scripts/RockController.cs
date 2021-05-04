@@ -44,7 +44,7 @@ public class RockController : MonoBehaviour
             thurst = thurst * distance.x;
 
             speed = direction * thurst;
-            speed.y = speed.y * -1; 
+            speed.y = speed.y * -1;
             _rb2d.AddForce(speed, ForceMode2D.Impulse);
         }
     }
