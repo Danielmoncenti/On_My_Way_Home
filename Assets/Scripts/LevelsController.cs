@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class LevelsController : MonoBehaviour
 {
+    public GameObject manager;
+
     bool canLevel1;
     bool canLevel2;
     bool canLevel3;
@@ -63,6 +65,7 @@ public class LevelsController : MonoBehaviour
 
     public void Tutorial()
     {
+        
         SceneManager.LoadScene("Tutorial");
     }
 

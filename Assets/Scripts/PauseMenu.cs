@@ -29,7 +29,8 @@ public class PauseMenu : MonoBehaviour
             gameispaused = true;
             //SoundManager.StopSound();
          }
-
+        
+        if (!gameispaused) pauseCanvas.SetActive(false);
         ispaused = gameispaused;
   
     }

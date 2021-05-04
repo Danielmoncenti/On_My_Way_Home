@@ -1983,6 +1983,28 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 214023819864496064, guid: 63dde05892ee9674c8cdb33e7aba1d39,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6558288748273047425, guid: b4b323f59e4eb154a9591e1c5450ca13,
+        type: 3}
+    - target: {fileID: 214023819864496064, guid: 63dde05892ee9674c8cdb33e7aba1d39,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3883399388480350083, guid: 63dde05892ee9674c8cdb33e7aba1d39,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6558288748273047425, guid: b4b323f59e4eb154a9591e1c5450ca13,
+        type: 3}
+    - target: {fileID: 3883399388480350083, guid: 63dde05892ee9674c8cdb33e7aba1d39,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Quit
+      objectReference: {fileID: 0}
     - target: {fileID: 3883399388499599622, guid: 63dde05892ee9674c8cdb33e7aba1d39,
         type: 3}
       propertyPath: m_Camera
@@ -2102,9 +2124,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 6558288748273047425, guid: b4b323f59e4eb154a9591e1c5450ca13,
+        type: 3}
+    - target: {fileID: 3883399389817950020, guid: 63dde05892ee9674c8cdb33e7aba1d39,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Resume
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63dde05892ee9674c8cdb33e7aba1d39, type: 3}
+--- !u!1 &575343691 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3883399388499599643, guid: 63dde05892ee9674c8cdb33e7aba1d39,
+    type: 3}
+  m_PrefabInstance: {fileID: 575343690}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &578035896
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3440,6 +3474,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6558288748273047425, guid: b4b323f59e4eb154a9591e1c5450ca13,
+        type: 3}
+      propertyPath: pauseCanvas
+      value: 
+      objectReference: {fileID: 575343691}
     - target: {fileID: 6558288748273047426, guid: b4b323f59e4eb154a9591e1c5450ca13,
         type: 3}
       propertyPath: m_Name

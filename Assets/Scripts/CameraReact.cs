@@ -39,7 +39,7 @@ public class CameraReact : MonoBehaviour
     {
         if (collision.gameObject.tag == "Control")
         {
-            Debug.Log("HOLA");
+            //Debug.Log("HOLA");
             _camera.YMaxEnabled = YMaxEnabled;
             _camera.YMaxValue = YMaxValue;
 

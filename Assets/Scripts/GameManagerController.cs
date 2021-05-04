@@ -62,6 +62,9 @@ public class GameManagerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Point_text = GameObject.FindGameObjectWithTag("Points").GetComponent<Text>();
+        Lifes_text = GameObject.FindGameObjectWithTag("Lifes").GetComponent<Text>();
+
         if (coin)
         {
             points++;

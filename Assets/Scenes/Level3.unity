@@ -183,6 +183,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6558288748273047425, guid: b4b323f59e4eb154a9591e1c5450ca13,
+        type: 3}
+      propertyPath: pauseCanvas
+      value: 
+      objectReference: {fileID: 717989548}
     - target: {fileID: 6558288748273047426, guid: b4b323f59e4eb154a9591e1c5450ca13,
         type: 3}
       propertyPath: m_Name
@@ -596,7 +601,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 625498438}
     - target: {fileID: 3883399388499599623, guid: 63dde05892ee9674c8cdb33e7aba1d39,
         type: 3}
       propertyPath: m_Pivot.x
@@ -720,6 +725,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63dde05892ee9674c8cdb33e7aba1d39, type: 3}
+--- !u!1 &717989548 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3883399388499599643, guid: 63dde05892ee9674c8cdb33e7aba1d39,
+    type: 3}
+  m_PrefabInstance: {fileID: 717989547}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &937734741
 GameObject:
   m_ObjectHideFlags: 0
