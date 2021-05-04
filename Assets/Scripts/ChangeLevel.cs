@@ -24,24 +24,27 @@ public class ChangeLevel : MonoBehaviour
         {
             switch (sceneName)
             {
-                case "Level1":
+                case "Tutorial":
                     LevelsManager.Instance.canLevel1 = true;
+                    break;
+                case "Level1":
+                    LevelsManager.Instance.canLevel2 = true;
                     break;
                 case "Level2":
-                    LevelsManager.Instance.canLevel1 = true;
+                    LevelsManager.Instance.canLevel3 = true;
                     break;
                 case "Level3":
-                    LevelsManager.Instance.canLevel1 = true;
+                    LevelsManager.Instance.canLevel4 = true;
                     break;
                 case "Level4":
-                    LevelsManager.Instance.canLevel1 = true;
+                    LevelsManager.Instance.canLevel5 = true;
                     break;
                 case "Level5":
-                    LevelsManager.Instance.canLevel1 = true;
+                    LevelsManager.Instance.canLevel6 = true;
                     break;
-                case "Level6":
-                    LevelsManager.Instance.canLevel1 = true;
-                    break;
+                //case "Level6":
+                  //  LevelsManager.Instance.canLevel1 = true;
+                    //break;
             }
             SceneManager.LoadScene(nextlevel);
         }

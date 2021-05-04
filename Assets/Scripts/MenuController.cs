@@ -14,7 +14,7 @@ public class MenuController : MonoBehaviour
     {
         SoundManager.StopSound();
         SoundManager.PlaySound("SongGame");
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Tutorial");
     }
     public void GoLevels()
     {

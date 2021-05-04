@@ -286,7 +286,7 @@ MonoBehaviour:
   LayerDashLimit:
     serializedVersion: 2
     m_Bits: 2048
-  thrust: 30
+  thrust: 35
   life: 5
   Jumping: 1
   canClimb: 1

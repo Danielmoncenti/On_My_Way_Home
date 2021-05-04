@@ -18,7 +18,7 @@ public class LevelsController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        canLevel1 = true;
+        canLevel1 = false;
         canLevel2 = false;
         canLevel3 = false;
         canLevel4 = false;
@@ -41,7 +41,6 @@ public class LevelsController : MonoBehaviour
         switch (tagg)
         {
             case "Level1":
-                
                 if (!canLevel1) GetComponent<Button>().interactable = false; 
                 break;
             case "Level2":
@@ -60,6 +59,11 @@ public class LevelsController : MonoBehaviour
                 if (!canLevel6) GetComponent<Button>().interactable = false;
                 break;
         }
+    }
+
+    public void Tutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
     }
 
     public void Level1 ()

@@ -49,6 +49,7 @@ public class PauseMenu : MonoBehaviour
 
     public void GoMainMenu()
     {
+        Destroy(GameManagerController.Instance.gameObject);
         SceneManager.LoadScene("MainMenu");
     }
 

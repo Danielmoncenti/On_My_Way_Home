@@ -31,7 +31,7 @@ public class LevelsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        canLevel1 = true;
+        canLevel1 = false;
         canLevel2 = false;
         canLevel3 = false;
         canLevel4 = false;
