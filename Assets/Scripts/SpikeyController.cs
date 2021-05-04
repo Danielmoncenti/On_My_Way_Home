@@ -120,9 +120,9 @@ public class SpikeyController : MonoBehaviour
             damagetimer += Time.deltaTime;
             invulnerabilitytimer += Time.deltaTime;
 
-            if (rigidBody.velocity.y > 550)
+            if (rigidBody.velocity.y > 700)
             {
-                rigidBody.velocity = new Vector2(currentSpeedH, 550);
+                rigidBody.velocity = new Vector2(currentSpeedH, 700);
             }
             if (rigidBody.velocity.y < -500)
             {

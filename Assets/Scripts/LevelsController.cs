@@ -65,7 +65,6 @@ public class LevelsController : MonoBehaviour
 
     public void Tutorial()
     {
-        
         SceneManager.LoadScene("Tutorial");
     }
 

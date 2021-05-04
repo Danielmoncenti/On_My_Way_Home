@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class HeartsController : MonoBehaviour
 {
+    bool change;
+    int life;
+
     //Animacion de las vidas
     private Animator animator;
     private int One_to_N_animation;
@@ -28,10 +31,27 @@ public class HeartsController : MonoBehaviour
     public bool OneDown = false;
     public bool TryAgain = false;
 
+
+    bool ONE;
+    bool TWO;
+    bool FOUR;
+    bool FIVE;
+    bool SIX;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        change = true;
+        life = GameManagerController.Instance.life;
+        ONE = false;
+        TWO = false;
+        FOUR = false;
+        FIVE = false;
+        SIX = false;
         One_to_N_animation = Animator.StringToHash("OneDown");
         One_Iddle_animation = Animator.StringToHash("Iddle");
         One_to_Two_animation = Animator.StringToHash("OneUp");
@@ -50,11 +70,46 @@ public class HeartsController : MonoBehaviour
         Five_to_Six_animation = Animator.StringToHash("OneUp");
         Six_to_Five_animation = Animator.StringToHash("OneDown");
         Six_Iddle_animation = Animator.StringToHash("Iddle");
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (change)
+        {
+            switch (life)
+            {
+                case 1:
+                    ONE = true;
+                    break;
+                case 2:
+                    TWO = true;
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    FOUR = true;
+                    break;
+                case 5:
+                    FIVE = true;
+                    break;
+                case 6:
+                    SIX = true;
+                    break;
+            }
+            change = false;
+        }
+        else
+        {
+            ONE = false;
+            TWO = false;
+            FOUR = false;
+            FIVE = false;
+            SIX = false;
+        }
+        
+
         OneUp = GameManagerController.Instance.OneUp;
         OneDown = GameManagerController.Instance.OneDown;
         TryAgain = GameManagerController.Instance.TryAgain;
@@ -77,6 +132,13 @@ public class HeartsController : MonoBehaviour
         animator.SetBool(Five_to_Six_animation, OneUp);
         animator.SetBool(Six_to_Five_animation, OneDown);
         animator.SetBool(Six_Iddle_animation, Iddle);
+
+
+        animator.SetBool("ONE", ONE);
+        animator.SetBool("TWO", TWO);
+        animator.SetBool("FOUR", FOUR);
+        animator.SetBool("FIVE", FIVE);
+        animator.SetBool("SIX", SIX);
     }
 
     public void SetToIddle() 

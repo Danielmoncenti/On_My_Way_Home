@@ -570,6 +570,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 40464943}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &40464945 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 214023819864496064, guid: 63dde05892ee9674c8cdb33e7aba1d39,
+    type: 3}
+  m_PrefabInstance: {fileID: 40464943}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &54652846
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85058,6 +85070,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6558288748273047425, guid: b4b323f59e4eb154a9591e1c5450ca13,
+        type: 3}
+      propertyPath: Menu
+      value: 
+      objectReference: {fileID: 40464945}
     - target: {fileID: 6558288748273047425, guid: b4b323f59e4eb154a9591e1c5450ca13,
         type: 3}
       propertyPath: pauseCanvas
