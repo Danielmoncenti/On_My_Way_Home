@@ -120,9 +120,9 @@ public class SpikeyController : MonoBehaviour
             damagetimer += Time.deltaTime;
             invulnerabilitytimer += Time.deltaTime;
 
-            if (rigidBody.velocity.y > 550)
+            if (rigidBody.velocity.y > 1000)
             {
-                rigidBody.velocity = new Vector2(currentSpeedH, 550);
+                rigidBody.velocity = new Vector2(currentSpeedH, 1000);
             }
             if (rigidBody.velocity.y < -500)
             {
@@ -896,10 +896,10 @@ public class SpikeyController : MonoBehaviour
             {
                 default: break;
                 case Direction.UP:
-                    rigidBody.velocity = new Vector2(0, 90);
+                    rigidBody.velocity = new Vector2(0, 180);
                     break;
                 case Direction.DOWN:
-                    rigidBody.velocity = new Vector2(0, -90);
+                    rigidBody.velocity = new Vector2(0, -180);
                     break;
                 case Direction.RIGHT:
                         //rigidBody.AddForce(transform.right * baseSpeed * delta);
@@ -1027,8 +1027,9 @@ public class SpikeyController : MonoBehaviour
         {
             Vector2 damagedirection = this.transform.position - collision.transform.position;
             DamageTaken(damagedirection);
-            SoundManager.PlaySound("Damage");
             Respawn();
+            SoundManager.PlaySound("Damage");
+            
         }
         else if(collision.gameObject.tag == "Enemies" && dashing==false)
         {
