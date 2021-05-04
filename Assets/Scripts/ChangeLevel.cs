@@ -6,21 +6,43 @@ using UnityEngine.SceneManagement;
 public class ChangeLevel : MonoBehaviour
 {
     public string nextlevel;
+
+    Scene currentScene;
+    string sceneName;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        currentScene = SceneManager.GetActiveScene();
+        sceneName = currentScene.name;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Spikey")
         {
+            switch (sceneName)
+            {
+                case "Level1":
+                    LevelsManager.Instance.canLevel1 = true;
+                    break;
+                case "Level2":
+                    LevelsManager.Instance.canLevel1 = true;
+                    break;
+                case "Level3":
+                    LevelsManager.Instance.canLevel1 = true;
+                    break;
+                case "Level4":
+                    LevelsManager.Instance.canLevel1 = true;
+                    break;
+                case "Level5":
+                    LevelsManager.Instance.canLevel1 = true;
+                    break;
+                case "Level6":
+                    LevelsManager.Instance.canLevel1 = true;
+                    break;
+            }
             SceneManager.LoadScene(nextlevel);
         }
     }
