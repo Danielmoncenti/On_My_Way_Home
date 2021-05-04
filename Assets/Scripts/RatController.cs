@@ -4,25 +4,21 @@ using UnityEngine;
 
 public class RatController : MonoBehaviour
 {
-    private float baseSpeed = 5.0f;
-    private float maxSpeed = 10.0f;
+    float baseSpeed = 5.0f;
+    float maxSpeed = 10.0f;
 
-    private float currentSpeedH = 0.0f;
+    public float currentSpeedH = 0.0f;
 
-    private int ratRadius = 500;
-    private Transform Spikey;
+    int ratRadius = 500;
+    Transform Spikey;
     [SerializeField] SpikeyController obj_Spikey;
 
-    private Rigidbody2D rigidBody;
-    private BoxCollider2D boxCollider2D;
-    private Animator animator;
+    Rigidbody2D rigidBody;
+    BoxCollider2D boxCollider2D;
+    Animator animator;
 
-    private int mad_animation;
-    private int bite_animation;
-    private int falling_animation;
-
-    private bool isMad = false;
-    private bool isBitting = false;
+    bool isMad = false;
+    bool isBitting = false;
     public bool isFalling = false;
     Vector3 ratScale;
 
@@ -32,9 +28,6 @@ public class RatController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
-        mad_animation = Animator.StringToHash("isMad");
-        bite_animation = Animator.StringToHash("isBitting");
-        falling_animation = Animator.StringToHash("isFalling");
         Spikey = GameObject.Find("Spikey").GetComponent<Transform>();
         ratScale = transform.localScale;
         currentSpeedH = -baseSpeed;
@@ -63,9 +56,9 @@ public class RatController : MonoBehaviour
             gameObject.layer = 21;
         }
 
-        animator.SetBool(mad_animation, isMad);
-        animator.SetBool(bite_animation, isBitting);
-        animator.SetBool(falling_animation, isFalling);
+        animator.SetBool("isMad", isMad);
+        animator.SetBool("isBitting", isBitting);
+        animator.SetBool("isFalling", isFalling);
     }
 
     private void FixedUpdate()
@@ -116,12 +109,15 @@ public class RatController : MonoBehaviour
         }
     }
 
-    private bool checkRaycastWithScenario(RaycastHit2D hits)
+    private bool checkRaycastWithScenario(RaycastHit2D[] hits)
     {
-       if (hits.collider != null)
-       {
-           if(hits.collider.gameObject.tag == "Spikey") { return true; }
-       }  
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.collider != null)
+            {
+                if (hit.collider.gameObject.tag == "Spikey") { return true; }
+            }
+        }
         return false;
     }
 
@@ -129,18 +125,20 @@ public class RatController : MonoBehaviour
     {
         bool rightCollision = false;
         bool leftCollision = false;
-        Vector2 rightPosition = new Vector2(boxCollider2D.bounds.max.x, boxCollider2D.bounds.min.y);
-        Vector2 leftPosition = new Vector2(boxCollider2D.bounds.min.x, boxCollider2D.bounds.min.y);
+        Vector2 rightPosition = new Vector2(boxCollider2D.bounds.max.x, boxCollider2D.bounds.center.y);
+        Vector2 leftPosition = new Vector2(boxCollider2D.bounds.min.x, boxCollider2D.bounds.center.y);
 
         if (currentSpeedH == baseSpeed)
         {
-            RaycastHit2D hits = Physics2D.Raycast(rightPosition, Vector2.right, 500);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(rightPosition, Vector2.right, 400);
             if (checkRaycastWithScenario(hits)) { rightCollision = true; }
         }
         else if (currentSpeedH == -baseSpeed)
         {
-            RaycastHit2D hits = Physics2D.Raycast(leftPosition, -Vector2.right, 500);
-            if (checkRaycastWithScenario(hits)) { leftCollision = true; }
+            RaycastHit2D[] hits = Physics2D.RaycastAll(leftPosition, -Vector2.right, 400);
+            if (checkRaycastWithScenario(hits)) { 
+                leftCollision = true; 
+            }
         }
         
         if (rightCollision) { 
