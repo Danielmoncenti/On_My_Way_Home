@@ -510,7 +510,7 @@ PrefabInstance:
         type: 3}
       propertyPath: script_pause
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1664362294}
     - target: {fileID: 3751320106580556461, guid: ae037e2e96dec9e409553190f936d51b,
         type: 3}
       propertyPath: m_RootOrder
