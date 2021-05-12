@@ -12,7 +12,7 @@ public class SpikeyController : MonoBehaviour
     public bool basicDashActivated;
     //public bool shadowDashActivated;
     //public bool doubleDashActivated;
-    private bool sprinting;
+    public bool sprinting;
     public float dashCD = 0;
     private float baseSpeed = 320.0f;
     public float sprintSpeed = 450.0f;
@@ -122,11 +122,11 @@ public class SpikeyController : MonoBehaviour
 
             if (rigidBody.velocity.y > 1000)
             {
-                rigidBody.velocity = new Vector2(currentSpeedH, 1000);
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x, 1000);
             }
             if (rigidBody.velocity.y < -500)
             {
-                rigidBody.velocity = new Vector2(currentSpeedH, -500);
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x, -500);
             }
 
             if (dashCD > 0)
@@ -869,11 +869,11 @@ public class SpikeyController : MonoBehaviour
         if (!dashing && !takingdamage && !stucked) {
             currentSpeedV = rigidBody.velocity.y;
             currentSpeedH = rigidBody.velocity.x;
-            if (Jumping && rigidBody.velocity.x > baseSpeed)
+            if (Jumping && rigidBody.velocity.x >= baseSpeed)
             {
                 rigidBody.velocity = new Vector2(baseSpeed, currentSpeedV);
             }
-            else if (Jumping && rigidBody.velocity.x < baseSpeed * -1)
+            else if (Jumping && rigidBody.velocity.x <= baseSpeed * -1)
             {
                 rigidBody.velocity = new Vector2(baseSpeed * -1, currentSpeedV);
             }
@@ -905,33 +905,35 @@ public class SpikeyController : MonoBehaviour
                         //rigidBody.AddForce(transform.right * baseSpeed * delta);
                     if (Jumping)
                     {
-                            rigidBody.AddForce(transform.right * 50 * delta);
+                            rigidBody.AddForce(transform.right * 100 * delta);
                     }
-
-                  else  if (!sprinting)
-                  {
-                        rigidBody.velocity = new Vector2(baseSpeed, currentSpeedV);
-                  }
-                    else
+                    else if (sprinting)
                     {
                         rigidBody.velocity = new Vector2(sprintSpeed, currentSpeedV);
                     }
+
+                    else  if (!sprinting && !Jumping)
+                  {
+                        rigidBody.velocity = new Vector2(baseSpeed, currentSpeedV);
+                  }
+               
                     break;
                 case Direction.LEFT:
                         //rigidBody.AddForce((transform.right * baseSpeed * delta) * -1);
 
                    if (Jumping)
                    {
-                            rigidBody.AddForce(transform.right * 50*-1 * delta);
+                            rigidBody.AddForce(transform.right * 100*-1 * delta);
                    }
-                   else if (!sprinting)
+                    else if (sprinting)
+                    {
+                        rigidBody.velocity = new Vector2(sprintSpeed * -1, currentSpeedV);
+                    }
+                    else if (!sprinting && !Jumping)
                    {
                         rigidBody.velocity = new Vector2(baseSpeed * -1, currentSpeedV);
                    }
-                   else
-                   {
-                        rigidBody.velocity = new Vector2(sprintSpeed * -1, currentSpeedV);
-                   }
+               
                     break;
                 case Direction.NONE:
                         //if (climbing)
