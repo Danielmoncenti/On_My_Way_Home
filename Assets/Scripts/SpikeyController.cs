@@ -391,14 +391,7 @@ public class SpikeyController : MonoBehaviour
         
     }
 
-    private void Respawn()
-    {
-        gameObject.layer = 8;
-        rigidBody.transform.position = lastCheckpoint;
-        rigidBody.velocity = new Vector2(0, 0);
 
-        life = 5;
-    }
 
     private bool Walk()
     {
@@ -832,6 +825,14 @@ public class SpikeyController : MonoBehaviour
     //    SoundManager.PlaySound("Dash");
     //}
 
+    private void Respawn()
+    {
+        gameObject.layer = 8;
+        rigidBody.transform.position = lastCheckpoint;
+        rigidBody.velocity = new Vector2(0, 0);
+
+
+    }
     private void DamageTaken(Vector2 damageDirection)
     {
         if (takingdamage == false && invulnerability== false)
@@ -842,7 +843,7 @@ public class SpikeyController : MonoBehaviour
             invulnerabilitytimer = 0.0f;
             takingdamage = true;
             invulnerability = true;
-            life--;
+          
             
             if (damageDirection.x > 0)
             {
@@ -855,12 +856,13 @@ public class SpikeyController : MonoBehaviour
                 rigidBody.AddForce(new Vector2(-300, 300),ForceMode2D.Impulse);
             }
         }
-        else if(life <= 0)
+        else if(GameManagerController.Instance.life == 1)
         {
             Respawn();
         }
         SoundManager.PlaySound("Daño");
     }
+   
 
     private void FixedUpdate()
     {
