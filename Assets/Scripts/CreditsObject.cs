@@ -37,6 +37,11 @@ public class CreditsObject : MonoBehaviour
                 SceneManager.LoadScene("MainMenu"); 
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
