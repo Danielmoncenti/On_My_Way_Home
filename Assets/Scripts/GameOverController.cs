@@ -16,12 +16,12 @@ public class GameOverController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("Level1");
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            SceneManager.LoadScene("MainMenu");
         }
 
     }
