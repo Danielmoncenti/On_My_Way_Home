@@ -1036,6 +1036,7 @@ public class SpikeyController : MonoBehaviour
         {
             Vector2 damagedirection = this.transform.position - collision.transform.position;
             DamageTaken(damagedirection);
+            GameManagerController.Instance.lifeDown = true;
             Respawn();
             SoundManager.PlaySound("Damage");
             
