@@ -6,6 +6,7 @@ public class AwakeController : MonoBehaviour
 {
     public GameObject SoundManager;
     private int trueawake = 0;
+    float timer;
     private void Awake()
     {
         if (trueawake == 0)
@@ -13,8 +14,13 @@ public class AwakeController : MonoBehaviour
             Instantiate(SoundManager);
             trueawake++;
         }
+    }
 
-        SceneManager.LoadScene("MainMenu");
+    private void Update()
+    {
+        float delta = Time.deltaTime;
+        timer += delta;
+        if (timer > 2) SceneManager.LoadScene("MainMenu");
     }
 }
 

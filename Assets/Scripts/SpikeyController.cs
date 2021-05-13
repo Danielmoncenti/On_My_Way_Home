@@ -65,9 +65,9 @@ public class SpikeyController : MonoBehaviour
     public GameObject shadow;
     public GameObject movingPlataform;
     [SerializeField] CD_AttackController cd_attack;
-    [SerializeField] GameObject obj_cd_attack;
+    [SerializeField] CD_Run cd_run;
     [SerializeField] CD_DashController cd_dash;
-    [SerializeField] GameObject obj_cd_dash;
+    [SerializeField] CD_Jump cd_jump;
     [SerializeField] PauseMenu script_pause;
     //private ShadowController shadowcontroller;
 
@@ -102,8 +102,6 @@ public class SpikeyController : MonoBehaviour
         shadowExists = false;
         dashing = false;
         stucked = false;
-        obj_cd_attack.SetActive(false);
-        obj_cd_dash.SetActive(false);
         Spikeyscale = transform.localScale;
     }
 
@@ -271,6 +269,12 @@ public class SpikeyController : MonoBehaviour
                             isWalking = false;
                             isRunning = false;
                             isJumping = true;
+                            cd_jump.isUsed = true;
+                            cd_run.isUsed = false;
+                        }
+                        else
+                        {
+                            cd_jump.isUsed = false;
                         }
 
                         if (!canAttack)
@@ -320,7 +324,6 @@ public class SpikeyController : MonoBehaviour
                             {
                                 isDashing = true;
                                 basicDash();
-                                obj_cd_dash.SetActive(true);
                                 cd_dash.isUsed = true;
                             }
                             //else if (shadowDashActivated)
@@ -338,9 +341,6 @@ public class SpikeyController : MonoBehaviour
                             //}
                         }
                     }
-
-                    if (!cd_attack.isUsed) obj_cd_attack.SetActive(false);
-                    if (!cd_dash.isUsed) obj_cd_dash.SetActive(false);
                 }
                 else
                 {
@@ -370,9 +370,15 @@ public class SpikeyController : MonoBehaviour
                     isWalking = false;
                     isRunning = true;
                     sprinting = true;
+                    cd_run.isUsed = true;
                 }
 
             }
+            else
+            {
+                cd_run.isUsed = false;
+            }
+
             if (Input.GetKeyUp(sprintButton) || Jumping == true)
             {
                 sprinting = false;
@@ -491,7 +497,6 @@ public class SpikeyController : MonoBehaviour
         GameObject Pua8 = Instantiate(pua, transform.position + transform.up * 2, Quaternion.Euler(0, 0, 315));
         GameObject Pua9 = Instantiate(pua, transform.position + transform.up * 2, Quaternion.Euler(0, 0, 360));
         
-        obj_cd_attack.SetActive(true);
         cd_attack.isUsed = true;
         canAttack = false;
         

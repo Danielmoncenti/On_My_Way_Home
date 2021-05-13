@@ -12,7 +12,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseCanvas;
     public Button Menu;
 
-    bool canMenu = false;
+    //bool canMenu = false;
 
     // Update is called once per frame
     void Update()
@@ -60,7 +60,7 @@ public class PauseMenu : MonoBehaviour
             //SoundManager.StopSound();
          }
 
-        if (!canMenu) Menu.interactable = false;
+        //if (!canMenu) Menu.interactable = false;
 
         if (!gameispaused) pauseCanvas.SetActive(false);
         ispaused = gameispaused;
@@ -82,7 +82,10 @@ public class PauseMenu : MonoBehaviour
 
     public void GoMainMenu()
     {
-        Destroy(GameManagerController.Instance.gameObject);
+        Time.timeScale = 1;
+        pauseCanvas.SetActive(false);
+        gameispaused = false;
+        //Destroy(GameManagerController.Instance.gameObject);
         SceneManager.LoadScene("MainMenu");
     }
 
