@@ -60,9 +60,10 @@ public class BatController : MonoBehaviour
         }
         else if (!checkSpikeyPosition() && !actNormal)
         {
-             currentSpeedV = -baseSpeed;
-             actNormal = true;
-             isMad = false;
+            if (currentSpeedV == -maxSpeed) currentSpeedV = -baseSpeed;
+            else { currentSpeedV = baseSpeed; }
+            actNormal = true;
+            isMad = false;
         }
 
         if (isFalling || isDead)
@@ -112,19 +113,18 @@ public class BatController : MonoBehaviour
             isFalling = true;
             currentSpeedV = -maxSpeed;
         }
-        else if (collision.gameObject.tag == "Spikey" && obj_Spikey.killedByDash)
+        else if (collision.gameObject.tag == "Spikey")
         {
-            isFalling = true; 
+            if (obj_Spikey.killedByDash)
+            {
+                isFalling = true;
+            }
+            else
+            {
+                currentSpeedV *= -1;
+            }
         }
 
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Shadow")
-        {
-            isFalling = true;
-            currentSpeedV = -baseSpeed;
-        }
     }
 
     private bool checkRaycastWithScenario(RaycastHit2D[] hits)
@@ -154,11 +154,12 @@ public class BatController : MonoBehaviour
         if (checkRaycastWithScenario(hits)) { leftCollision = true; }
       
         if (rightCollision || leftCollision) { 
-            currentSpeedV = -maxSpeed; actNormal = false;
+            if (currentSpeedV == -baseSpeed) currentSpeedV = -maxSpeed;
+            else if (currentSpeedV == baseSpeed) { currentSpeedV = -maxSpeed; }
+            actNormal = false;
             isMad = true;
             SoundManager.PlaySound("BatChase");
         }
-
     }
     private bool checkSpikeyPosition()
     {
