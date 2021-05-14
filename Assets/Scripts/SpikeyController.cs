@@ -457,7 +457,7 @@ public class SpikeyController : MonoBehaviour
             {
                 Jumping = true;
                 FacingDirection = Direction.RIGHT;
-                rigidBody.AddForce((new Vector2(30 * delta, 5 * delta)), ForceMode2D.Impulse);
+                rigidBody.AddForce((new Vector2(30 * delta, 20 * delta)), ForceMode2D.Impulse);
 
                
 
@@ -466,7 +466,7 @@ public class SpikeyController : MonoBehaviour
             {
                 Jumping = true;
                 FacingDirection = Direction.LEFT;
-                rigidBody.AddForce((new Vector2(30 * delta * -1, 5 * delta)), ForceMode2D.Impulse);
+                rigidBody.AddForce((new Vector2(30 * delta * -1, 20 * delta)), ForceMode2D.Impulse);
 
                 
 
@@ -861,7 +861,7 @@ public class SpikeyController : MonoBehaviour
                 rigidBody.AddForce(new Vector2(-300, 300),ForceMode2D.Impulse);
             }
         }
-        else if(GameManagerController.Instance.life == 1)
+        if(GameManagerController.Instance.life <= 1)
         {
             Respawn();
         }

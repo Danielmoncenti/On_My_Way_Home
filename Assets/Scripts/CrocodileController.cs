@@ -10,7 +10,7 @@ public class CrocodileController : MonoBehaviour
     public bool isBiting = false;
 
     private float timer = 0.0f;
-    private float baseSpeed = 3.0f;
+    private float baseSpeed = 10.0f;
     private float currentSpeedH = 0.0f;
     private float currentSpeedV = 0.0f;
     private bool canAttack = true;
