@@ -128,7 +128,7 @@ public class SoundManager : MonoBehaviour {
         if (!audiosrc.isPlaying) {
             currentScene = SceneManager.GetActiveScene();
             sceneName = currentScene.name;
-            if ((sceneName == "MainMenu" || sceneName == "GameOver" || sceneName == "Win"))
+            if ((sceneName == "MainMenu" || sceneName == "GameOver" || sceneName == "Win" || sceneName == "Start"))
             {
                 PlaySound("Song");
             }
@@ -192,13 +192,13 @@ public class SoundManager : MonoBehaviour {
                 audiosrc2.PlayOneShot(Bat);
                 break;
             //case "Drop":
-                //audiosrc.PlayOneShot(Drop);
+                //audiosrc2.PlayOneShot(Drop);
                // break;
             case "Trap":
                 audiosrc2.PlayOneShot(Trap);
                 break;
             //case "Crocodile":
-                //audiosrc.PlayOneShot(Crocodile);
+                //audiosrc2.PlayOneShot(Crocodile);
                 //break;
             case "ClickMenu":
                 audiosrc2.PlayOneShot(ClickMenu);
