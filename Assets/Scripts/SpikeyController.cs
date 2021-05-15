@@ -323,6 +323,7 @@ public class SpikeyController : MonoBehaviour
                             if (basicDashActivated)
                             {
                                 isDashing = true;
+                                SoundManager.PlaySound("Dash");
                                 basicDash();
                                 cd_dash.isUsed = true;
                             }

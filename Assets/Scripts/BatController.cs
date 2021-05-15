@@ -111,7 +111,6 @@ public class BatController : MonoBehaviour
             {
                 currentSpeedV *= -1;
             }
-            
         }
         else if (collision.gameObject.tag == "Puas")
         {
@@ -129,7 +128,6 @@ public class BatController : MonoBehaviour
                 currentSpeedV *= -1;
             }
         }
-
     }
 
     private bool checkRaycastWithScenario(RaycastHit2D[] hits)
@@ -170,5 +168,4 @@ public class BatController : MonoBehaviour
     {
         return Vector2.Distance(this.transform.position, Spikey.transform.position) <= this.batRadius;
     }
-    
 }

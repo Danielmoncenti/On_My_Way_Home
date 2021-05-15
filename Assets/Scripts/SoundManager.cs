@@ -8,7 +8,7 @@ public class SoundManager : MonoBehaviour {
     public static SoundManager Instance { get; private set; }
 
     public GameObject Hijo;
-    public static AudioClip Song, SongGame, PlayerJump, PlayerDash, PlayerRevert, PlayerRun, PlayerDamage, PlayerSpike, Rat, Bat, Drop, Trap, Crocodile, ClickMenu, Checkpoint, Button, Cristal, CrossBow, BoundTrap, Water, Coin;
+    public static AudioClip Song, SongGame, IntroSong, PlayerJump, PlayerDash, PlayerRevert, PlayerRun, PlayerDamage, PlayerSpike, Rat, Bat, Drop, Trap, Crocodile, ClickMenu, Checkpoint, Button, Cristal, CrossBow, BoundTrap, Water, Coin;
     static AudioSource audiosrc;
     static AudioSource audiosrc2;
 
@@ -75,9 +75,9 @@ public class SoundManager : MonoBehaviour {
     {
         Song = Resources.Load<AudioClip> ("Song");
         SongGame = Resources.Load<AudioClip> ("SongGame");
+        IntroSong = Resources.Load<AudioClip> ("IntroSong");
         PlayerJump = Resources.Load<AudioClip> ("Jump");
         PlayerDash = Resources.Load<AudioClip>("Dash");
-        PlayerRevert = Resources.Load<AudioClip>("DashRevert");
         PlayerDamage = Resources.Load<AudioClip>("Damage");
         Rat = Resources.Load<AudioClip>("RatChase");
         Bat = Resources.Load<AudioClip>("BatChase");
@@ -125,19 +125,23 @@ public class SoundManager : MonoBehaviour {
     void Update()
     {
         //CheckCollisions();
+        currentScene = SceneManager.GetActiveScene();
+        sceneName = currentScene.name;
         if (!audiosrc.isPlaying) {
-            currentScene = SceneManager.GetActiveScene();
-            sceneName = currentScene.name;
-            if ((sceneName == "MainMenu" || sceneName == "GameOver" || sceneName == "Win" || sceneName == "Start"))
+            if ((sceneName == "MainMenu" || sceneName == "GameOver" || sceneName == "Win" || sceneName == "Intro3"))
             {
                 PlaySound("Song");
+            }
+            else if (sceneName == "Start")
+            {
+                PlaySound("IntroSong");
             }
             else
             {
                 PlaySound("SongGame");
             }
         }
-
+        
         audiosrc.volume = musicVolume;
 
         audiosrc2.volume = sfxVolume;
@@ -166,15 +170,15 @@ public class SoundManager : MonoBehaviour {
                 break;
             case "SongGame":
                 audiosrc.PlayOneShot(SongGame);
+                break;            
+            case "IntroSong":
+                audiosrc.PlayOneShot(IntroSong);
                 break;
             case "Jump":
                 audiosrc2.PlayOneShot(PlayerJump);
                 break;
             case "Dash":
                 audiosrc2.PlayOneShot(PlayerDash);
-                break;
-            case "DashRevert":
-                audiosrc2.PlayOneShot(PlayerRevert);
                 break;
             case "Run":
                 audiosrc2.PlayOneShot(PlayerRun);
