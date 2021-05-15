@@ -64,11 +64,11 @@ public class PauseMenu : MonoBehaviour
 
         if (!gameispaused) pauseCanvas.SetActive(false);
         ispaused = gameispaused;
-  
     }
 
     public void Quit()
     {
+        SoundManager.PlaySound("ClickMenu");
         Application.Quit();
     }
 
@@ -77,6 +77,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         pauseCanvas.SetActive(false);
         gameispaused = false;
+        SoundManager.PlaySound("ClickMenu");
         //SoundManager.PlaySound("GameSong");
     }
 
@@ -86,7 +87,9 @@ public class PauseMenu : MonoBehaviour
         pauseCanvas.SetActive(false);
         gameispaused = false;
         //Destroy(GameManagerController.Instance.gameObject);
+        SoundManager.StopSound();
+        SoundManager.PlaySound("ClickMenu");
+        SoundManager.PlaySound("Song");
         SceneManager.LoadScene("MainMenu");
     }
-
 }
