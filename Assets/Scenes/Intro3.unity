@@ -150,8 +150,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ec94f56fe084e44b457bb7aa8a3e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  story_text: "Ca\xEDda la noche, Spikey esta completamente perdido y no sabe como
-    volver a casa. \n"
+  story_text: 'At night, Spikey is completely lost and does not know how to get home.
+
+    Somehow
+    he must go home...'
   text_to_show: {fileID: 468414697}
   text_space: {fileID: 1084290730}
   text_esc: {fileID: 499199376}
@@ -239,8 +241,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Ca\xEDda la noche, Spikey esta completamente perdido y no sabe como volver
-    a casa.  De algun modo u otro debera volver a casa...\n"
+  m_Text: 
 --- !u!222 &468414698
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -716,6 +717,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1655011630, guid: fd7715397254c6544803df5f972491d7, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680987130947465056, guid: fd7715397254c6544803df5f972491d7,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4680987130947465057, guid: fd7715397254c6544803df5f972491d7,
