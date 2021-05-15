@@ -8,7 +8,7 @@ public class SoundManager : MonoBehaviour {
     public static SoundManager Instance { get; private set; }
 
     public GameObject Hijo;
-    public static AudioClip Song, SongGame, IntroSong, PlayerJump, PlayerDash, PlayerRevert, PlayerRun, PlayerDamage, PlayerSpike, Rat, Bat, Drop, Trap, Crocodile, ClickMenu, Checkpoint, Button, Cristal, CrossBow, BoundTrap, Water, Coin, Boing, LifeUp;
+    public static AudioClip Song, SongGame, IntroSong, PlayerJump, PlayerDash, PlayerRevert, PlayerRun, PlayerDamage, PlayerSpike, Rat, Bat, Trap, Crocodile, ClickMenu, Checkpoint, Button, Cristal, CrossBow, BoundTrap, Water, Coin, Boing, LifeUp;
     static AudioSource audiosrc;
     static AudioSource audiosrc2;
 
@@ -94,7 +94,6 @@ public class SoundManager : MonoBehaviour {
         //Crocodile = Resources.Load<AudioClip>("Crocodile"); HAY QUE
         
         // NO USADOS / IMPLEMENTADOS
-        Drop = Resources.Load<AudioClip>("Drop");
         BoundTrap = Resources.Load<AudioClip>("BoundTrap");
         CrossBow = Resources.Load<AudioClip>("Crossbow");
         Cristal = Resources.Load<AudioClip>("Cristal");
