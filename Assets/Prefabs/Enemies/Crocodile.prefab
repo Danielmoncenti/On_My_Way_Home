@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6774740133399369970}
   - component: {fileID: 8121195860672227100}
   - component: {fileID: 1720152924}
-  m_Layer: 10
+  m_Layer: 23
   m_Name: Crocodile
   m_TagString: Crocodile
   m_Icon: {fileID: 0}
