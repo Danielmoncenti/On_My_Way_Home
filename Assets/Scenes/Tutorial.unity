@@ -1603,6 +1603,11 @@ PrefabInstance:
       propertyPath: XMinValue
       value: -600
       objectReference: {fileID: 0}
+    - target: {fileID: 4680987130947465056, guid: fd7715397254c6544803df5f972491d7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4680987130947465057, guid: fd7715397254c6544803df5f972491d7,
         type: 3}
       propertyPath: m_RootOrder

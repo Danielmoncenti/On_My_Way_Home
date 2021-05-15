@@ -68,7 +68,8 @@ public class BatController : MonoBehaviour
 
         if (isFalling || isDead)
         {
-             gameObject.layer = 21;
+            currentSpeedV = -baseSpeed;
+            gameObject.layer = 21;
         }
 
         animator.SetBool(mad_animation, isMad);
@@ -106,7 +107,11 @@ public class BatController : MonoBehaviour
                 currentSpeedV = 0.0f;
                 Destroy(gameObject, 2);
             }
-            currentSpeedV *= -1;
+            else
+            {
+                currentSpeedV *= -1;
+            }
+            
         }
         else if (collision.gameObject.tag == "Puas")
         {

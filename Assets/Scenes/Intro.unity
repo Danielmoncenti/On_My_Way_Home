@@ -534,7 +534,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 126.46, y: -61.559998}
+  m_AnchoredPosition: {x: 126.45999, y: -61.559998}
   m_SizeDelta: {x: 1316.9797, y: 273.01318}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1149421906
@@ -607,8 +607,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ec94f56fe084e44b457bb7aa8a3e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  story_text: 'Spikey es un erizo adolescente de vientre blanco que vive con su familia
-    en un bosque a las afueras de la ciudad. '
+  story_text: "Spikey is a teen white-bellied hedgehog that\r lives in the woods
+    on the outskirts of town."
   text_to_show: {fileID: 194592531}
   text_space: {fileID: 667546056}
   text_esc: {fileID: 1149421906}
@@ -636,6 +636,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1655011630, guid: fd7715397254c6544803df5f972491d7, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680987130947465056, guid: fd7715397254c6544803df5f972491d7,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4680987130947465057, guid: fd7715397254c6544803df5f972491d7,

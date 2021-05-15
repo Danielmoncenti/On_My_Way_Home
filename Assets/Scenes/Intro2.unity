@@ -304,6 +304,11 @@ PrefabInstance:
       propertyPath: YMinEnabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4680987130947465056, guid: fd7715397254c6544803df5f972491d7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4680987130947465057, guid: fd7715397254c6544803df5f972491d7,
         type: 3}
       propertyPath: m_RootOrder
@@ -806,8 +811,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ec94f56fe084e44b457bb7aa8a3e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  story_text: Por culpa de un gran incendio Spikey y su familia se vieron obligados
-    a huir del bosque a toda prisa y acabaron separados.
+  story_text: Due to a large fire, Spikey and his family were forced to flee the
+    forest in a hurry and ended up separated.
   text_to_show: {fileID: 280182598}
   text_space: {fileID: 667501479}
   text_esc: {fileID: 181076953}
