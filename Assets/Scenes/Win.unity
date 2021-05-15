@@ -318,7 +318,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 126.45999, y: -61.559998}
+  m_AnchoredPosition: {x: 126.45996, y: -61.559998}
   m_SizeDelta: {x: 1316.9797, y: 273.01318}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &618976848
@@ -622,7 +622,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1652507013}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -711,6 +711,12 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: '''Space'' to continue'
+--- !u!20 &1652507013 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4680987130947465062, guid: fd7715397254c6544803df5f972491d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1999101444}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1819164204
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,12 +794,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Well done! With every step Spikey is getting closer to his house!
-
-    Stay
-    tuned to next worlds coming soon..
-
-'
+  m_Text: 
 --- !u!1 &1845183040
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,7 +824,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ec94f56fe084e44b457bb7aa8a3e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  story_text: 'Well done! '
+  story_text: 'Well done! With every step Spikey is getting closer to his house!
+
+    Stay
+    tuned to next worlds coming soon..
+
+'
   text_to_show: {fileID: 1819164207}
   text_space: {fileID: 1456245843}
   text_esc: {fileID: 345735349}
@@ -849,6 +855,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1655011630, guid: fd7715397254c6544803df5f972491d7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4680987130947465056, guid: fd7715397254c6544803df5f972491d7,
         type: 3}
       propertyPath: m_Enabled

@@ -5,7 +5,7 @@ using UnityEngine;
 public class RatController : MonoBehaviour
 {
     float baseSpeed = 5.0f;
-    float maxSpeed = 10.0f;
+    float maxSpeed = 13.0f;
 
     public float currentSpeedH = 0.0f;
 
