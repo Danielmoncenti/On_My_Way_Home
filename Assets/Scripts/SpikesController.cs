@@ -12,6 +12,7 @@ public class SpikesController : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.velocity = transform.up * thurst;
+        SoundManager.PlaySound("Spikes");
     }
 
     // Update is called once per frame

@@ -8,7 +8,7 @@ public class SoundManager : MonoBehaviour {
     public static SoundManager Instance { get; private set; }
 
     public GameObject Hijo;
-    public static AudioClip Song, SongGame, IntroSong, PlayerJump, PlayerDash, PlayerRevert, PlayerRun, PlayerDamage, PlayerSpike, Rat, Bat, Drop, Trap, Crocodile, ClickMenu, Checkpoint, Button, Cristal, CrossBow, BoundTrap, Water, Coin;
+    public static AudioClip Song, SongGame, IntroSong, PlayerJump, PlayerDash, PlayerRevert, PlayerRun, PlayerDamage, PlayerSpike, Rat, Bat, Drop, Trap, Crocodile, ClickMenu, Checkpoint, Button, Cristal, CrossBow, BoundTrap, Water, Coin, Boing, LifeUp;
     static AudioSource audiosrc;
     static AudioSource audiosrc2;
 
@@ -79,24 +79,26 @@ public class SoundManager : MonoBehaviour {
         PlayerJump = Resources.Load<AudioClip> ("Jump");
         PlayerDash = Resources.Load<AudioClip>("Dash");
         PlayerDamage = Resources.Load<AudioClip>("Damage");
+        PlayerSpike = Resources.Load<AudioClip>("Spikes");
+        PlayerRun = Resources.Load<AudioClip> ("Step");
         Rat = Resources.Load<AudioClip>("RatChase");
         Bat = Resources.Load<AudioClip>("BatChase");
-        Drop = Resources.Load<AudioClip>("Drop");
         Trap = Resources.Load<AudioClip>("Trap");
         ClickMenu = Resources.Load<AudioClip>("ClickMenu");
         Checkpoint = Resources.Load<AudioClip>("Checkpoint");
         Coin = Resources.Load<AudioClip>("Coin");
+        Boing = Resources.Load<AudioClip>("Boing");
+        LifeUp = Resources.Load<AudioClip>("LifeUp");
 
-        BoundTrap = Resources.Load<AudioClip>("BoundTrap"); // AL FINAL NO SE USARA?
-        CrossBow = Resources.Load<AudioClip>("Crossbow"); // AL FINAL NO SE USARA?
 
         //Crocodile = Resources.Load<AudioClip>("Crocodile"); HAY QUE
         
         // NO USADOS / IMPLEMENTADOS
-        //PlayerSpike = Resources.Load<AudioClip>("Spikes");
+        Drop = Resources.Load<AudioClip>("Drop");
+        BoundTrap = Resources.Load<AudioClip>("BoundTrap");
+        CrossBow = Resources.Load<AudioClip>("Crossbow");
         Cristal = Resources.Load<AudioClip>("Cristal");
         Button = Resources.Load<AudioClip>("Button");
-        PlayerRun = Resources.Load<AudioClip> ("Step");
         Water = Resources.Load<AudioClip>("Water");
 
         audiosrc = GetComponent<AudioSource>();
@@ -181,7 +183,7 @@ public class SoundManager : MonoBehaviour {
                 audiosrc2.PlayOneShot(PlayerDash);
                 break;
             case "Run":
-                audiosrc2.PlayOneShot(PlayerRun);
+                if (!audiosrc2.isPlaying) { audiosrc2.PlayOneShot(PlayerRun); }
                 break;
             case "Damage":
                 audiosrc2.PlayOneShot(PlayerDamage);
@@ -193,17 +195,11 @@ public class SoundManager : MonoBehaviour {
                 audiosrc2.PlayOneShot(Rat);
                 break;
             case "BatChase":
-                audiosrc2.PlayOneShot(Bat);
+                if (!audiosrc2.isPlaying) { audiosrc2.PlayOneShot(Bat); }
                 break;
-            //case "Drop":
-                //audiosrc2.PlayOneShot(Drop);
-               // break;
             case "Trap":
                 audiosrc2.PlayOneShot(Trap);
                 break;
-            //case "Crocodile":
-                //audiosrc2.PlayOneShot(Crocodile);
-                //break;
             case "ClickMenu":
                 audiosrc2.PlayOneShot(ClickMenu);
                 break;
@@ -213,17 +209,17 @@ public class SoundManager : MonoBehaviour {
             case "Button":
                 audiosrc2.PlayOneShot(Button);
                 break;
-            case "Cristal":
-                audiosrc2.PlayOneShot(Cristal);
-                break;
             case "Crossbow":
                 audiosrc2.PlayOneShot(CrossBow);
                 break;
-            case "BoundTrap":
-                audiosrc2.PlayOneShot(BoundTrap);
+            case "Coin":
+                audiosrc2.PlayOneShot(Coin);
                 break;
-            case "Water":
-                audiosrc2.PlayOneShot(Water);
+            case "Boing":
+                audiosrc2.PlayOneShot(Boing);
+                break;
+            case "LifeUp":
+                audiosrc2.PlayOneShot(LifeUp);
                 break;
         }
     }

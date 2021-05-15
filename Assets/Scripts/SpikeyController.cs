@@ -394,6 +394,7 @@ public class SpikeyController : MonoBehaviour
             animator.SetBool("isHurt", isHurt);
             animator.SetBool("isClimbing", isClimbing);
             animator.SetBool("isAttacking", isAttacking);
+            if (isWalking || sprinting) { SoundManager.PlaySound("Run"); }
         }
         
     }
@@ -411,7 +412,9 @@ public class SpikeyController : MonoBehaviour
         else
         {
             canWalk = true;
+            SoundManager.PlaySound("Run");
         }
+
         return canWalk;
     }
 
@@ -1119,6 +1122,7 @@ public class SpikeyController : MonoBehaviour
         {
             GameManagerController.Instance.lifeUp = true;
             Destroy(collision.gameObject);
+            SoundManager.PlaySound("LifeUp");
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
