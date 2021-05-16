@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour
     public static bool gameispaused = false;
     public bool ispaused;
     public GameObject pauseCanvas;
-    public Button Menu;
+    //public Button Menu;
 
     //bool canMenu = false;
 
