@@ -1753,7 +1753,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1655011633, guid: fd7715397254c6544803df5f972491d7, type: 3}
       propertyPath: XMaxValue
-      value: 9200
+      value: 8650
       objectReference: {fileID: 0}
     - target: {fileID: 1655011633, guid: fd7715397254c6544803df5f972491d7, type: 3}
       propertyPath: YMaxValue

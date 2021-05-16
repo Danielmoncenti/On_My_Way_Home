@@ -89,17 +89,7 @@ public class BatController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Tilemap" || collision.gameObject.tag == "Wall")
-        {
-            if (isFalling)
-            {
-                isDead = true;
-                currentSpeedV = 0.0f;
-                Destroy(gameObject, 2);
-            }
-            currentSpeedV *= -1;
-        }
-        else if (collision.gameObject.tag == "Water")
+        if (collision.gameObject.tag == "Tilemap" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "ToxicWater" || collision.gameObject.tag == "Water")
         {
             if (isFalling)
             {
