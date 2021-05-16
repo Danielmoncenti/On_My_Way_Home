@@ -12,8 +12,8 @@ public class DropController : MonoBehaviour
     private bool splash = false;
     private bool stop = false;
 
-    public static AudioClip Drop;
-    static AudioSource audiosrc;
+    //public static AudioClip Drop;
+    //static AudioSource audiosrc;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +22,9 @@ public class DropController : MonoBehaviour
         hold_animation = Animator.StringToHash("isHolding");
         splash_animation = Animator.StringToHash("Splash");
 
-        Drop = Resources.Load<AudioClip>("Drop");
-        audiosrc = GetComponent<AudioSource>();
-        audiosrc.maxDistance = 300;
+        //Drop = Resources.Load<AudioClip>("Drop");
+        //audiosrc = GetComponent<AudioSource>();
+        //audiosrc.maxDistance = 300;
     }
 
     // Update is called once per frame
@@ -50,7 +50,7 @@ public class DropController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Tilemap")
         {
-            audiosrc.PlayOneShot(Drop);
+            //audiosrc.PlayOneShot(Drop);
             stop = true;
             splash = true;
         }

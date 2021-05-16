@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3751320106580556459}
   - component: {fileID: 3751320106580556460}
   - component: {fileID: 1026869074}
-  - component: {fileID: 5607934240277207638}
   m_Layer: 8
   m_Name: Spikey
   m_TagString: Spikey
@@ -202,11 +201,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!81 &5607934240277207638
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3751320106580556463}
-  m_Enabled: 1
