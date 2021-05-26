@@ -68,7 +68,7 @@ public class BatController : MonoBehaviour
 
         if (isFalling || isDead)
         {
-            currentSpeedV = -baseSpeed;
+            currentSpeedV = -maxSpeed;
             gameObject.layer = 21;
         }
 

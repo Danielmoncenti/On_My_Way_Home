@@ -69,6 +69,8 @@ public class SpikeyController : MonoBehaviour
     [SerializeField] CD_DashController cd_dash;
     [SerializeField] CD_Jump cd_jump;
     [SerializeField] PauseMenu script_pause;
+    [SerializeField] ParticleSystem JumpDust;
+    [SerializeField] ParticleSystem DashDust;
     //private ShadowController shadowcontroller;
 
     //Para que los enemigos hagan la animacion de muerte cuando mueren con un dash
@@ -373,7 +375,6 @@ public class SpikeyController : MonoBehaviour
                     sprinting = true;
                     cd_run.isUsed = true;
                 }
-
             }
             else
             {
@@ -451,7 +452,8 @@ public class SpikeyController : MonoBehaviour
             float delta = Time.fixedDeltaTime * 1000;
             rigidBody.AddForce(transform.up * thrust * delta, ForceMode2D.Impulse);
             //rigidBody.velocity = rigidBody.velocity + Vector2.up * thrust;
-            
+            CreateJumpDust();
+
         }
         else 
         {
@@ -639,7 +641,6 @@ public class SpikeyController : MonoBehaviour
     //    SoundManager.PlaySound("DashRevert");
     //}
 
-
     private void basicDash()
     {
 
@@ -729,6 +730,7 @@ public class SpikeyController : MonoBehaviour
             //        rigidBody.gravityScale = 0;
             //    }
             //}
+            CreateDashDust();
             SoundManager.PlaySound("Dash");
         }
     }
@@ -970,6 +972,9 @@ public class SpikeyController : MonoBehaviour
 
     }
 
+    void CreateJumpDust() { JumpDust.Play(); }
+
+    void CreateDashDust() { DashDust.Play(); }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -1116,7 +1121,6 @@ public class SpikeyController : MonoBehaviour
         {
             GameManagerController.Instance.bigCoin = true;
             Destroy(collision.gameObject);
-            SoundManager.PlaySound("Coin");
         }
         else if (collision.gameObject.tag == "LifeUp")
         {

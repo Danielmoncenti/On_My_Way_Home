@@ -36,7 +36,12 @@ public class GameManagerController : MonoBehaviour
 
     //Variable para sumar una vida cada 100 monedas
     public int internPoints = 0;
-  
+    bool count = false;
+
+    //
+    float timer = 0;
+    int innerPoints = 0;
+
     void Awake()
     {
         if (Instance == null)
@@ -53,12 +58,6 @@ public class GameManagerController : MonoBehaviour
         Lifes_text = GameObject.FindGameObjectWithTag("Lifes").GetComponent<Text>();
     }
 
-    //Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -73,7 +72,7 @@ public class GameManagerController : MonoBehaviour
         }
         else if (bigCoin)
         {
-            points += 20;
+            count = true;
             internPoints += 20;
             bigCoin = false;
         }
@@ -82,6 +81,25 @@ public class GameManagerController : MonoBehaviour
         {
             internPoints = 0;
             lifeUp = true;
+        }
+
+        timer += Time.deltaTime;
+
+        if (count)
+        {
+            
+            if (timer > 0.1)
+            {
+                points++;
+                innerPoints++;
+                timer = 0;
+                if (innerPoints % 2 == 0) { SoundManager.PlaySound("Coin"); }
+            }
+            if (innerPoints >= 20)
+            {
+                count = false;
+                innerPoints = 0;
+            }
         }
 
 
@@ -135,5 +153,22 @@ public class GameManagerController : MonoBehaviour
             SceneManager.LoadScene("GameOver");
             Destroy(this);
         }
+    }
+
+    void BigCoin()
+    {
+        int innerPoints = 0;
+        do
+        {
+            timer += Time.deltaTime * 1000;
+            if (timer > 2)
+            {
+                points++;
+                innerPoints++;
+                timer = 0;
+                SoundManager.PlaySound("Coin");
+            }
+
+        } while (innerPoints < 20);
     }
 }
