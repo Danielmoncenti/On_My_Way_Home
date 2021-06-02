@@ -96,7 +96,7 @@ Animator:
   m_GameObject: {fileID: 8671883224909745305}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a79df968436f1e0439c70e792b34c67f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f801893d73be5b44b69dcab64ba8051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextlevel: Win
+  nextlevel: Level1
 --- !u!61 &8788328508093703056
 BoxCollider2D:
   m_ObjectHideFlags: 0

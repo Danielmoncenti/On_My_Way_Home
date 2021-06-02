@@ -54,6 +54,7 @@ TagManager:
   - Tutorial
   - MovingPTrigger
   - MovingP
+  - Transitor
   layers:
   - Default
   - TransparentFX

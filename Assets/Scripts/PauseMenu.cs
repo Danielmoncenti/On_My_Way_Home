@@ -15,7 +15,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject DASH;
     public GameObject JUMP;
 
-    //bool canMenu = false;
+    [SerializeField] TransitionsController transition;
 
     // Update is called once per frame
     void Update()
@@ -96,11 +96,13 @@ public class PauseMenu : MonoBehaviour
         pauseCanvas.SetActive(false);
         AbilitysHUD_ON();
         gameispaused = false;
+        transition.a_out = true;
+        transition.nextscene = "MainMenu";
         //Destroy(GameManagerController.Instance.gameObject);
         SoundManager.StopSound();
         SoundManager.PlaySound("ClickMenu");
         SoundManager.PlaySound("Song");
-        SceneManager.LoadScene("MainMenu");
+        
     }
 
     void AbilitysHUD_ON()

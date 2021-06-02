@@ -5,33 +5,45 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
-    //SoundManager.PlaySound("ClickMenu");
+    [SerializeField] TransitionsController transition;
+
+    /*private void Awake()
+    {
+        transition = GameObject.FindGameObjectWithTag("Transitor").GetComponent<TransitionsController>();
+    }*/
+
     public void GoMenu()
     {
         SoundManager.PlaySound("ClickMenu");
-        SceneManager.LoadScene("MainMenu");
+        transition.a_out = true;
+        transition.nextscene = "MainMenu";
     }
+
     public void GoStart()
     {
         SoundManager.StopSound();
         SoundManager.PlaySound("SongGame");
         SoundManager.PlaySound("ClickMenu");
-        SceneManager.LoadScene("Tutorial");
+        transition.a_out = true;
+        transition.nextscene = "Tutorial";
     }
     public void GoLevels()
     {
         SoundManager.PlaySound("ClickMenu");
-        SceneManager.LoadScene("Levels");
+        transition.a_out = true;
+        transition.nextscene = "Levels";
     }
     public void GoOptions()
     {
         SoundManager.PlaySound("ClickMenu");
-        SceneManager.LoadScene("Options");
+        transition.a_out = true;
+        transition.nextscene = "Options";
     }
     public void GoCredits()
     {
         SoundManager.PlaySound("ClickMenu");
-        SceneManager.LoadScene("Credits");
+        transition.a_out = true;
+        transition.nextscene = "Credits";
     }
     public void Quit()
     {

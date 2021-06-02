@@ -121,6 +121,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &357363036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 357363038}
+  - component: {fileID: 357363037}
+  m_Layer: 0
+  m_Name: Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &357363037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357363036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eef0c3d77ec944943a61b029ed9a4237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transition: {fileID: 2031040493}
+--- !u!4 &357363038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357363036}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &610951380
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,8 +475,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6836604508405126353, guid: cd0b2142edfc21d44bc637153f8821c1,
-          type: 3}
+      - m_Target: {fileID: 357363037}
         m_MethodName: GoCredits
         m_Mode: 1
         m_Arguments:
@@ -582,8 +625,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6836604508405126353, guid: cd0b2142edfc21d44bc637153f8821c1,
-          type: 3}
+      - m_Target: {fileID: 357363037}
         m_MethodName: GoLevels
         m_Mode: 1
         m_Arguments:
@@ -776,8 +818,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6836604508405126353, guid: cd0b2142edfc21d44bc637153f8821c1,
-          type: 3}
+      - m_Target: {fileID: 357363037}
         m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
@@ -927,8 +968,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6836604508405126353, guid: cd0b2142edfc21d44bc637153f8821c1,
-          type: 3}
+      - m_Target: {fileID: 357363037}
         m_MethodName: GoStart
         m_Mode: 1
         m_Arguments:
@@ -1078,8 +1118,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6836604508405126353, guid: cd0b2142edfc21d44bc637153f8821c1,
-          type: 3}
+      - m_Target: {fileID: 357363037}
         m_MethodName: GoOptions
         m_Mode: 1
         m_Arguments:
@@ -1540,7 +1579,7 @@ GameObject:
   - component: {fileID: 2031040493}
   m_Layer: 0
   m_Name: Transiter
-  m_TagString: Untagged
+  m_TagString: Transitor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1592,8 +1631,8 @@ CanvasGroup:
   m_GameObject: {fileID: 2031040487}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &2031040491
 MonoBehaviour:

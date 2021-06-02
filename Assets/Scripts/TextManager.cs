@@ -11,7 +11,7 @@ public class TextManager : MonoBehaviour
     public Text text_to_show;
     public Text text_space;
     public Text text_esc;
-    public TransitionsController transition;
+
     float timer;
     int index;
     int text_length;
@@ -22,6 +22,12 @@ public class TextManager : MonoBehaviour
     bool isComplete;
     bool escaped;
 
+    TransitionsController transition;
+
+    private void Awake()
+    {
+        transition = GameObject.FindGameObjectWithTag("Transitor").GetComponent<TransitionsController>();
+    }
     // Start is called before the first frame update
     void Start()
     {

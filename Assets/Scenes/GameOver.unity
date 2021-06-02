@@ -774,7 +774,7 @@ GameObject:
   - component: {fileID: 1243935354}
   m_Layer: 0
   m_Name: Transiter
-  m_TagString: Untagged
+  m_TagString: Transitor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
