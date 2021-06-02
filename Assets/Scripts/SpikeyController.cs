@@ -395,7 +395,7 @@ public class SpikeyController : MonoBehaviour
             animator.SetBool("isHurt", isHurt);
             animator.SetBool("isClimbing", isClimbing);
             animator.SetBool("isAttacking", isAttacking);
-            if (isWalking || sprinting) { SoundManager.PlaySound("Run"); }
+            if ((isWalking || sprinting) && currentSpeedH != 0) { SoundManager.PlaySound("Run"); }
         }
         
     }
