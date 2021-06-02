@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4024828109061250666}
   - component: {fileID: 4024828109061250676}
   - component: {fileID: 4024828109061250667}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: DeepToxicWater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
