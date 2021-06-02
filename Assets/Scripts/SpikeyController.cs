@@ -64,6 +64,7 @@ public class SpikeyController : MonoBehaviour
     public GameObject dashtrigger;
     public GameObject shadow;
     public GameObject movingPlataform;
+    public GameObject movingPlataformV;
     [SerializeField] CD_AttackController cd_attack;
     [SerializeField] CD_Run cd_run;
     [SerializeField] CD_DashController cd_dash;
@@ -425,7 +426,19 @@ public class SpikeyController : MonoBehaviour
         {
             if (hit.collider != null)
             {
-                if (hit.collider.gameObject.tag == "Tilemap" || hit.collider.gameObject.tag == "Wall" || hit.collider.gameObject.tag == "Crocodile" || hit.collider.gameObject.tag == "Water") { return true; }
+                if (hit.collider.gameObject.tag == "Tilemap" || hit.collider.gameObject.tag == "Wall" || hit.collider.gameObject.tag == "Crocodile" || hit.collider.gameObject.tag == "Water"||hit.collider.tag == "MovingP") { return true; }
+            }
+        }
+        return false;
+    }
+
+    private bool checkRaycastMovingP(RaycastHit2D[] hits)
+    {
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.collider != null)
+            {
+                if (hit.collider.tag == "MovingP") { return true; }
             }
         }
         return false;
@@ -443,7 +456,9 @@ public class SpikeyController : MonoBehaviour
     }
 
     private void jump()
-    {
+    {   
+        movingPlataformV = null;
+        rigidBody.velocity = new Vector2(currentSpeedH, 0);
         //rigidBody.transform.position.y = new Vector3(transform.position.x, transform.position.y + 5, 0);
 
         if (climbing == false)
@@ -452,7 +467,6 @@ public class SpikeyController : MonoBehaviour
             float delta = Time.fixedDeltaTime * 1000;
             rigidBody.AddForce(transform.up * thrust * delta, ForceMode2D.Impulse);
             //rigidBody.velocity = rigidBody.velocity + Vector2.up * thrust;
-            CreateJumpDust();
 
         }
         else 
@@ -478,6 +492,7 @@ public class SpikeyController : MonoBehaviour
 
             }
         }
+        CreateJumpDust();
         SoundManager.PlaySound("Jump");
     }
     //private void climbjump()
@@ -737,7 +752,14 @@ public class SpikeyController : MonoBehaviour
     private void cancelDash()
     {
         dashing = false;
-        gameObject.layer = 8;
+        if (invulnerability)
+        {
+            gameObject.layer = 14;
+        }
+        else
+        {
+            gameObject.layer = 8;
+        }
         Destroy(limitdash);
         rigidBody.velocity = Vector2.zero;
         rigidBody.gravityScale = 100;
@@ -920,16 +942,24 @@ public class SpikeyController : MonoBehaviour
                     {
                             rigidBody.AddForce(transform.right * 100 * delta);
                     }
-                    else if (sprinting)
+                    else if (sprinting && movingPlataformV==null)
                     {
                         rigidBody.velocity = new Vector2(sprintSpeed, currentSpeedV);
                     }
+                    else if (sprinting && movingPlataformV != null)
+                    {
+                        rigidBody.velocity = new Vector2(sprintSpeed, movingPlataformV.GetComponent<Rigidbody2D>().velocity.y);
+                    }
 
-                    else  if (!sprinting && !Jumping)
+                    else  if (!sprinting && !Jumping && movingPlataformV == null)
                   {
                         rigidBody.velocity = new Vector2(baseSpeed, currentSpeedV);
                   }
-               
+                    else if (!sprinting && !Jumping && movingPlataformV != null)
+                    {
+                        rigidBody.velocity = new Vector2(baseSpeed, movingPlataformV.GetComponent<Rigidbody2D>().velocity.y);
+                    }
+
                     break;
                 case Direction.LEFT:
                         //rigidBody.AddForce((transform.right * baseSpeed * delta) * -1);
@@ -938,15 +968,24 @@ public class SpikeyController : MonoBehaviour
                    {
                             rigidBody.AddForce(transform.right * 100*-1 * delta);
                    }
-                    else if (sprinting)
+                    else if (sprinting && movingPlataformV == null)
                     {
                         rigidBody.velocity = new Vector2(sprintSpeed * -1, currentSpeedV);
                     }
-                    else if (!sprinting && !Jumping)
+                    else if (sprinting && movingPlataformV != null)
+                    {
+                        rigidBody.velocity = new Vector2(sprintSpeed*-1, movingPlataformV.GetComponent<Rigidbody2D>().velocity.y);
+                    }
+                    else if (!sprinting && !Jumping && movingPlataformV == null)
                    {
                         rigidBody.velocity = new Vector2(baseSpeed * -1, currentSpeedV);
                    }
-               
+                    else if (!sprinting && !Jumping && movingPlataformV != null)
+                    {
+                        rigidBody.velocity = new Vector2(baseSpeed * -1, movingPlataformV.GetComponent<Rigidbody2D>().velocity.y);
+                    }
+           
+
                     break;
                 case Direction.NONE:
                         //if (climbing)
@@ -957,8 +996,12 @@ public class SpikeyController : MonoBehaviour
                    {
                             rigidBody.velocity = new Vector2(movingPlataform.GetComponent<Rigidbody2D>().velocity.x, currentSpeedV);
                    }
+                    else if (movingPlataformV != null)
+                    {
+                        rigidBody.velocity = new Vector2(0, movingPlataformV.GetComponent<Rigidbody2D>().velocity.y);
+                    }
 
-                   else if(Jumping)
+                    else if(Jumping)
                    {
                         rigidBody.velocity = new Vector2(currentSpeedH, currentSpeedV);
                    }
@@ -982,7 +1025,7 @@ public class SpikeyController : MonoBehaviour
         {
             //sprintSpeed = 80;
         }
-        else if(collision.gameObject.tag == "Tilemap" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Crocodile"|| collision.gameObject.tag == "Water")
+         if(collision.gameObject.tag == "Tilemap" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Crocodile"|| collision.gameObject.tag == "Water" || collision.gameObject.tag == "MovingP")
         {
             if (collision.gameObject.tag == "Wall")
             {
@@ -1002,6 +1045,29 @@ public class SpikeyController : MonoBehaviour
                     if (checkRaycastWithScenarioClimb(hits2)) { col = true; }
                 }
                 if (col && canClimb == true) { climbing = true; Jumping = false; }
+
+            }
+            if (collision.gameObject.tag == "MovingP")
+            {
+                bool col1 = false;
+                bool col2 = false;
+                bool col3 = false;
+                float centerx = (bc2d.bounds.min.x + bc2d.bounds.max.x) / 2;
+                Vector2 centerPosition = new Vector2(centerx, bc2d.bounds.min.y);
+                Vector2 leftPosition = new Vector2(bc2d.bounds.min.x, bc2d.bounds.min.y);
+                Vector2 rightPosition = new Vector2(bc2d.bounds.max.x, bc2d.bounds.min.y);
+
+                RaycastHit2D[] hits = Physics2D.RaycastAll(centerPosition, -Vector2.up, 2);
+                if (checkRaycastWithScenarioJump(hits)) { col1 = true; }
+                hits = Physics2D.RaycastAll(leftPosition, -Vector2.up, 2);
+                if (checkRaycastWithScenarioJump(hits)) { col2 = true; }
+                hits = Physics2D.RaycastAll(rightPosition, -Vector2.up, 2);
+                if (checkRaycastWithScenarioJump(hits)) { col3 = true; }
+
+                if (col1 || col2 || col3) {
+                    movingPlataformV = collision.gameObject ;
+}
+                else { movingPlataformV = null; }
 
             }
             if (Jumping == true)
@@ -1134,6 +1200,19 @@ public class SpikeyController : MonoBehaviour
         if (collision.gameObject.tag == "Tilemap")
         {
             Jumping = true;
+        }
+        if (collision.gameObject.tag == "MovingP")
+        {
+            Jumping = true;
+            movingPlataformV = null;
+            if (dashing && FacingDirection==Direction.RIGHT)
+            {
+                rigidBody.velocity = new Vector2(dashspeed, 0);
+            }
+            else if (dashing && FacingDirection == Direction.LEFT)
+            {
+                rigidBody.velocity = new Vector2(dashspeed*-1, 0);
+            }
         }
         else if(collision.gameObject.tag == "Water")
         {

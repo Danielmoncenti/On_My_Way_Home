@@ -12,6 +12,7 @@ public class DropController : MonoBehaviour
     private bool splash = false;
     private bool stop = false;
 
+    GameObject movingp;
     //public static AudioClip Drop;
     //static AudioSource audiosrc;
     // Start is called before the first frame update
@@ -38,8 +39,16 @@ public class DropController : MonoBehaviour
 
         if (stop)
         {
-            rigidBody.gravityScale = 0;
-            rigidBody.velocity = Vector2.zero;
+            if (movingp == null)
+            {
+                rigidBody.gravityScale = 0;
+                rigidBody.velocity = Vector2.zero;
+            }
+            else
+            {
+                rigidBody.gravityScale = 0;
+                rigidBody.velocity = movingp.GetComponent<Rigidbody2D>().velocity;
+            }
         }
 
         animator.SetBool(hold_animation, isHolding);
@@ -53,6 +62,15 @@ public class DropController : MonoBehaviour
             //audiosrc.PlayOneShot(Drop);
             stop = true;
             splash = true;
+        }
+        if (collision.gameObject.tag == "MovingP")
+        {
+
+            //audiosrc.PlayOneShot(Drop);
+            stop = true;
+            
+            splash = true;
+            movingp = collision.gameObject;
         }
     }
 

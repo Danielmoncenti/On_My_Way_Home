@@ -33,12 +33,6 @@ public class TransitionsController : MonoBehaviour
 
     public void SetNormal() {
         a_normal = true;
-        if (sceneName == "MainMenu")
-        {
-            a_normal = true;
-            this.enabled = false;
-        }
-        
     }
 
     public void SetOut() { a_out = true; }

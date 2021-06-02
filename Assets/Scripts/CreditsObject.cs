@@ -10,6 +10,13 @@ public class CreditsObject : MonoBehaviour
     [SerializeField] bool quiet = false;
     float esc;
 
+    TransitionsController transition;
+
+    private void Awake()
+    {
+        transition = GameObject.FindGameObjectWithTag("Transitor").GetComponent<TransitionsController>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,13 +41,15 @@ public class CreditsObject : MonoBehaviour
                 {
                     Destroy(SoundManager.SoInstance.gameObject);
                 }*/
-                SceneManager.LoadScene("MainMenu"); 
+                transition.a_out = true;
+                transition.nextscene = "MainMenu";
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("MainMenu");
+            transition.a_out = true;
+            transition.nextscene = "MainMenu";
         }
     }
 

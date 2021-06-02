@@ -5,10 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class ChangeLevel : MonoBehaviour
 {
-    public string nextlevel;
-
     Scene currentScene;
     string sceneName;
+
+    TransitionsController transition;
+
+    private void Awake()
+    {
+        transition = GameObject.FindGameObjectWithTag("Transitor").GetComponent<TransitionsController>();
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -46,7 +51,7 @@ public class ChangeLevel : MonoBehaviour
                   //  LevelsManager.Instance.canLevel1 = true;
                     //break;
             }
-            SceneManager.LoadScene(nextlevel);
+            transition.a_out = true;
         }
     }
 }

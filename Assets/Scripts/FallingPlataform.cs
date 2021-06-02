@@ -57,15 +57,15 @@ public class FallingPlataform : MonoBehaviour
             falling = true;
         }
     }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Spikey" && falltimer<3)
-        {
-            falling = false;
-            falltimer = 0;
-            animator.SetBool(fallingID, false);
-        }
-    }
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Spikey" && falltimer<3)
+    //    {
+    //        falling = false;
+    //        falltimer = 0;
+    //        animator.SetBool(fallingID, false);
+    //    }
+    //}
     //private void OnCollisionExit2D(Collision2D collision)
     //{
     //    if (collision.gameObject.tag == "Spikey")

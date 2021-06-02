@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8788328508093703056}
   - component: {fileID: 5498767938742067906}
   m_Layer: 11
-  m_Name: Flag_0
+  m_Name: NextLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1805158079502305607, guid: e1bef2d3d320d5140b9c969a8e888eef,
+  m_Sprite: {fileID: 5311401401569764991, guid: e7a665587733acc41bc733f152a011ac,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -96,7 +96,7 @@ Animator:
   m_GameObject: {fileID: 8671883224909745305}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a79df968436f1e0439c70e792b34c67f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f801893d73be5b44b69dcab64ba8051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextlevel: Win
+  nextlevel: Level1
 --- !u!61 &8788328508093703056
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -135,7 +135,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 48, y: 48}
+    oldSize: {x: 66, y: 66}
     newSize: {x: 48, y: 48}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

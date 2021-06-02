@@ -38,5 +38,9 @@ public class SpikesController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        else if (collision.gameObject.tag == "MovingP")
+        {
+            Destroy(gameObject);
+        }
     }
 }

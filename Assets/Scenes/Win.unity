@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 47945518}
   m_Layer: 0
   m_Name: Transiter
-  m_TagString: Untagged
+  m_TagString: Transitor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -184,8 +184,8 @@ CanvasGroup:
   m_GameObject: {fileID: 47945517}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &47945521
 MonoBehaviour:
@@ -833,7 +833,6 @@ MonoBehaviour:
   text_to_show: {fileID: 1819164207}
   text_space: {fileID: 1456245843}
   text_esc: {fileID: 345735349}
-  transition: {fileID: 47945518}
 --- !u!4 &1845183042
 Transform:
   m_ObjectHideFlags: 0

@@ -10,9 +10,12 @@ public class PauseMenu : MonoBehaviour
     public static bool gameispaused = false;
     public bool ispaused;
     public GameObject pauseCanvas;
-    //public Button Menu;
+    public GameObject ATK;
+    public GameObject RUN;
+    public GameObject DASH;
+    public GameObject JUMP;
 
-    //bool canMenu = false;
+    [SerializeField] TransitionsController transition;
 
     // Update is called once per frame
     void Update()
@@ -56,13 +59,18 @@ public class PauseMenu : MonoBehaviour
          void pause() {
             Time.timeScale = 0;
             pauseCanvas.SetActive(true);
+            AbilitysHUD_OFF();
             gameispaused = true;
             //SoundManager.StopSound();
          }
 
         //if (!canMenu) Menu.interactable = false;
 
-        if (!gameispaused) pauseCanvas.SetActive(false);
+        if (!gameispaused)
+        {
+            pauseCanvas.SetActive(false);
+            AbilitysHUD_ON();
+        }
         ispaused = gameispaused;
     }
 
@@ -76,6 +84,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         pauseCanvas.SetActive(false);
+        AbilitysHUD_ON();
         gameispaused = false;
         SoundManager.PlaySound("ClickMenu");
         //SoundManager.PlaySound("GameSong");
@@ -85,11 +94,30 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         pauseCanvas.SetActive(false);
+        AbilitysHUD_ON();
         gameispaused = false;
+        transition.a_out = true;
+        transition.nextscene = "MainMenu";
         //Destroy(GameManagerController.Instance.gameObject);
         SoundManager.StopSound();
         SoundManager.PlaySound("ClickMenu");
         SoundManager.PlaySound("Song");
-        SceneManager.LoadScene("MainMenu");
+        
+    }
+
+    void AbilitysHUD_ON()
+    {
+        ATK.SetActive(true);
+        DASH.SetActive(true);
+        JUMP.SetActive(true);
+        RUN.SetActive(true);
+    }
+
+    void AbilitysHUD_OFF()
+    {
+        ATK.SetActive(false);
+        DASH.SetActive(false);
+        JUMP.SetActive(false);
+        RUN.SetActive(false);
     }
 }
