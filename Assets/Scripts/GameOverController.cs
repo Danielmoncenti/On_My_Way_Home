@@ -5,24 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class GameOverController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public void GoStart() { 
+        SceneManager.LoadScene("Level1");
+        SoundManager.PlaySound("ClickMenu");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SceneManager.LoadScene("Level1");
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
-
+    public void GoMenu() { 
+        SceneManager.LoadScene("MainMenu");
+        SoundManager.PlaySound("ClickMenu");
     }
 }

@@ -45,4 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ispaused: 0
   pauseCanvas: {fileID: 0}
-  Menu: {fileID: 0}
+  ATK: {fileID: 0}
+  RUN: {fileID: 0}
+  DASH: {fileID: 0}
+  JUMP: {fileID: 0}

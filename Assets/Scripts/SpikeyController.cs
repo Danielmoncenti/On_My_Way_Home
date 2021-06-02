@@ -452,7 +452,6 @@ public class SpikeyController : MonoBehaviour
             float delta = Time.fixedDeltaTime * 1000;
             rigidBody.AddForce(transform.up * thrust * delta, ForceMode2D.Impulse);
             //rigidBody.velocity = rigidBody.velocity + Vector2.up * thrust;
-            CreateJumpDust();
 
         }
         else 
@@ -478,6 +477,7 @@ public class SpikeyController : MonoBehaviour
 
             }
         }
+        CreateJumpDust();
         SoundManager.PlaySound("Jump");
     }
     //private void climbjump()
