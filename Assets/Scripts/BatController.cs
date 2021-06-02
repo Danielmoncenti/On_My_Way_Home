@@ -89,7 +89,7 @@ public class BatController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Tilemap" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "ToxicWater" || collision.gameObject.tag == "Water")
+        if (collision.gameObject.tag == "Tilemap" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "ToxicWater" || collision.gameObject.tag == "Water" || collision.gameObject.tag == "MovingP")
         {
             if (isFalling)
             {

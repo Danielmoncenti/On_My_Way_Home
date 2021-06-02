@@ -21,10 +21,12 @@ public class MoloController : MonoBehaviour
     bool isAttacking = false;
     bool isWaiting = false;
     bool isOut = false;
-
+    Vector3 moleScale;
     // Start is called before the first frame update
     void Start()
     {
+        moleScale = transform.localScale;
+        moleScale.x = 2f;
         animator = GetComponent<Animator>();
         mad_animaton = Animator.StringToHash("isMad");
         attack_animation  = Animator.StringToHash("isAttacking");
@@ -38,6 +40,15 @@ public class MoloController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        this.transform.localScale = moleScale;
+        if (Spikey.transform.position.x > this.transform.position.x)
+        {
+            moleScale.x = -2;
+        }
+        else
+        {
+            moleScale.x = 2;
+        }
         if (checkShipPosition())
         {
             isMad = true;

@@ -752,7 +752,14 @@ public class SpikeyController : MonoBehaviour
     private void cancelDash()
     {
         dashing = false;
-        gameObject.layer = 8;
+        if (invulnerability)
+        {
+            gameObject.layer = 14;
+        }
+        else
+        {
+            gameObject.layer = 8;
+        }
         Destroy(limitdash);
         rigidBody.velocity = Vector2.zero;
         rigidBody.gravityScale = 100;
