@@ -52,6 +52,8 @@ TagManager:
   - Level6
   - Level7
   - Tutorial
+  - MovingPTrigger
+  - MovingP
   layers:
   - Default
   - TransparentFX

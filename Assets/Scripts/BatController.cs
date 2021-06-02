@@ -152,6 +152,7 @@ public class BatController : MonoBehaviour
             actNormal = false;
             isMad = true;
             SoundManager.PlaySound("BatChase");
+
         }
     }
     private bool checkSpikeyPosition()
