@@ -25,7 +25,7 @@ public class SpikeyController : MonoBehaviour
     public LayerMask LayerDashLimit;
     private float currentSpeedH = 0.0f;
     [SerializeField] float thrust = 35.0f;
-    public int life = 5;
+    //public int life = 5;
     private bool canWalk = true;
     public bool Jumping = true;
     public bool canClimb = true;

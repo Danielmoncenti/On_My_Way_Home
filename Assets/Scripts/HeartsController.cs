@@ -108,7 +108,7 @@ public class HeartsController : MonoBehaviour
             FIVE = false;
             SIX = false;
         }
-        
+
         OneUp = GameManagerController.Instance.OneUp;
         OneDown = GameManagerController.Instance.OneDown;
         TryAgain = GameManagerController.Instance.TryAgain;
@@ -140,11 +140,11 @@ public class HeartsController : MonoBehaviour
         animator.SetBool("SIX", SIX);
     }
 
-    public void SetToIddle() 
+    public void SetToIddle()
     {
         GameManagerController.Instance.OneDown = false;
-        GameManagerController.Instance.OneUp = false; 
-        Iddle = true; 
+        GameManagerController.Instance.OneUp = false;
+        Iddle = true;
     }
 
     private void SetTryAgain() { GameManagerController.Instance.TryAgain = false; }
