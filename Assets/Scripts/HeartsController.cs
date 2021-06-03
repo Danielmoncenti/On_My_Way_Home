@@ -31,12 +31,12 @@ public class HeartsController : MonoBehaviour
     public bool OneDown = false;
     public bool TryAgain = false;
 
-    public bool ONE;
-    public bool TWO;
-    public bool THREE;
-    public bool FOUR;
-    public bool FIVE;
-    public bool SIX;
+
+    bool ONE;
+    bool TWO;
+    bool FOUR;
+    bool FIVE;
+    bool SIX;
 
     private void Awake()
     {
@@ -47,14 +47,11 @@ public class HeartsController : MonoBehaviour
     {
         change = true;
         life = GameManagerController.Instance.life;
-
         ONE = false;
         TWO = false;
-        THREE = false;
         FOUR = false;
         FIVE = false;
         SIX = false;
-
         One_to_N_animation = Animator.StringToHash("OneDown");
         One_Iddle_animation = Animator.StringToHash("Iddle");
         One_to_Two_animation = Animator.StringToHash("OneUp");
@@ -73,69 +70,45 @@ public class HeartsController : MonoBehaviour
         Five_to_Six_animation = Animator.StringToHash("OneUp");
         Six_to_Five_animation = Animator.StringToHash("OneDown");
         Six_Iddle_animation = Animator.StringToHash("Iddle");
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch (life)
-        {
-            case 1:
-                ONE = true;
-                TWO = false;
-                THREE = false;
-                FOUR = false;
-                FIVE = false;
-                SIX = false;
-                break;
-            case 2:
-                TWO = true;
-                ONE = false;
-                THREE = false;
-                FOUR = false;
-                FIVE = false;
-                SIX = false;
-                break;
-            case 3:
-                THREE = true;
-                ONE = false;
-                TWO = false;
-                FOUR = false;
-                FIVE = false;
-                SIX = false;
-                break;
-            case 4:
-                FOUR = true;
-                ONE = false;
-                TWO = false;
-                THREE = false;
-                FIVE = false;
-                SIX = false;
-                break;
-            case 5:
-                FIVE = true;
-                ONE = false;
-                TWO = false;
-                THREE = false;
-                FOUR = false;
-                SIX = false;
-                break;
-            case 6:
-                SIX = true;
-                ONE = false;
-                TWO = false;
-                THREE = false;
-                FOUR = false;
-                FIVE = false;
-                break;
-        }
-
-
         if (change)
         {
+            switch (life)
+            {
+                case 1:
+                    ONE = true;
+                    break;
+                case 2:
+                    TWO = true;
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    FOUR = true;
+                    break;
+                case 5:
+                    FIVE = true;
+                    break;
+                case 6:
+                    SIX = true;
+                    break;
+            }
             change = false;
         }
-        
+        else
+        {
+            ONE = false;
+            TWO = false;
+            FOUR = false;
+            FIVE = false;
+            SIX = false;
+        }
+
         OneUp = GameManagerController.Instance.OneUp;
         OneDown = GameManagerController.Instance.OneDown;
         TryAgain = GameManagerController.Instance.TryAgain;
@@ -159,18 +132,24 @@ public class HeartsController : MonoBehaviour
         animator.SetBool(Six_to_Five_animation, OneDown);
         animator.SetBool(Six_Iddle_animation, Iddle);
 
+
+        animator.SetBool("ONE", ONE);
+        animator.SetBool("TWO", TWO);
+        animator.SetBool("FOUR", FOUR);
+        animator.SetBool("FIVE", FIVE);
+        animator.SetBool("SIX", SIX);
     }
 
-    public void SetToIddle() 
+    public void SetToIddle()
     {
         GameManagerController.Instance.OneDown = false;
-        GameManagerController.Instance.OneUp = false; 
+        GameManagerController.Instance.OneUp = false;
         Iddle = true;
     }
 
-    private void SetTryAgain() { GameManagerController.Instance.TryAgain = false; life = GameManagerController.Instance.life; }
+    private void SetTryAgain() { GameManagerController.Instance.TryAgain = false; }
 
-    private void LifeDown() { GameManagerController.Instance.OneDown = false; life--; }
+    private void LifeDown() { GameManagerController.Instance.OneDown = false; }
 
-    private void LifeUp() { GameManagerController.Instance.OneUp = false; life++; }
+    private void LifeUp() { GameManagerController.Instance.OneUp = false; }
 }
