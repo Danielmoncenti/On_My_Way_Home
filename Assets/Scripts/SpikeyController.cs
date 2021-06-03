@@ -1192,7 +1192,6 @@ public class SpikeyController : MonoBehaviour
         {
             GameManagerController.Instance.lifeUp = true;
             Destroy(collision.gameObject);
-            SoundManager.PlaySound("LifeUp");
         }
     }
     private void OnCollisionExit2D(Collision2D collision)

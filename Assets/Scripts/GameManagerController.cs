@@ -79,7 +79,8 @@ public class GameManagerController : MonoBehaviour
 
         if (internPoints >= 100)
         {
-            internPoints = 0;
+            int dif = internPoints - 100;
+            internPoints = dif;
             lifeUp = true;
         }
 
@@ -87,7 +88,6 @@ public class GameManagerController : MonoBehaviour
 
         if (count)
         {
-            
             if (timer > 0.1)
             {
                 points++;
@@ -105,6 +105,7 @@ public class GameManagerController : MonoBehaviour
 
         if (lifeUp)
         {
+            SoundManager.PlaySound("LifeUp");
             if (life == 6)
             {
                 totalLifes++;

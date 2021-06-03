@@ -109,7 +109,6 @@ public class HeartsController : MonoBehaviour
             SIX = false;
         }
         
-
         OneUp = GameManagerController.Instance.OneUp;
         OneDown = GameManagerController.Instance.OneDown;
         TryAgain = GameManagerController.Instance.TryAgain;
