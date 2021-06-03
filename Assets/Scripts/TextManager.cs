@@ -80,7 +80,8 @@ public class TextManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && escaped)
         {
             SceneManager.LoadScene("MainMenu");
-            //CAMBIAR MUSICA
+            SoundManager.StopSound();
+            SoundManager.PlaySound("Song");
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && !escaped)
