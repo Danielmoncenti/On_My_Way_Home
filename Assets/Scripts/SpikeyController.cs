@@ -1116,7 +1116,7 @@ public class SpikeyController : MonoBehaviour
             SoundManager.PlaySound("Damage");
             
         }
-        else if(collision.gameObject.tag == "Enemies" && dashing==false)
+        else if(collision.gameObject.tag == "Enemies" && dashing==false )
         {
             Vector2 damagedirection = this.transform.position-collision.transform.position;
             DamageTaken(damagedirection);
@@ -1132,6 +1132,15 @@ public class SpikeyController : MonoBehaviour
                 dashCD = 0;
                 cd_dash.isUsed = false;
             }
+            SoundManager.PlaySound("Damage");
+        }
+        else if (collision.gameObject.tag == "Hazard")
+        {
+
+            cancelDash();
+            Vector2 damagedirection = this.transform.position - collision.transform.position;
+            DamageTaken(damagedirection);
+            GameManagerController.Instance.lifeDown = true;
             SoundManager.PlaySound("Damage");
         }
     }
@@ -1158,13 +1167,13 @@ public class SpikeyController : MonoBehaviour
             rigidBody.velocity = Vector2.zero;
             stucked = true;
         }
-        else if(collision.gameObject.tag == "Enemies")
-        {
-            Vector2 damagedirection = this.transform.position - collision.transform.position;
-            DamageTaken(damagedirection);
-            GameManagerController.Instance.lifeDown = true;
+        //else if(collision.gameObject.tag == "Enemies")
+        //{
+        //    Vector2 damagedirection = this.transform.position - collision.transform.position;
+        //    DamageTaken(damagedirection);
+        //    GameManagerController.Instance.lifeDown = true;
 
-        }
+        //}
         else if (collision.gameObject.tag == "Arrow")
         {
             Vector2 damagedirection = this.transform.position - collision.transform.position;
