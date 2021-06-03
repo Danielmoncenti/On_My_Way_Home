@@ -10,7 +10,7 @@ public class BatController : MonoBehaviour
     private float maxPositionY;
     private int batRadius = 300;
     private bool actNormal = true;
-
+    public bool cry = false;
     private Rigidbody2D rigidBody;
     private BoxCollider2D boxCollider2D;
     private Animator animator;
@@ -54,6 +54,11 @@ public class BatController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(isMad && !cry)
+        {
+            SoundManager.PlaySound("BatChase");
+            cry = true;
+        }
         if (checkSpikeyPosition())
         {
             StartRayCast();
@@ -64,6 +69,7 @@ public class BatController : MonoBehaviour
             else { currentSpeedV = baseSpeed; }
             actNormal = true;
             isMad = false;
+            cry = false;
         }
 
         if (isFalling || isDead)
@@ -126,7 +132,7 @@ public class BatController : MonoBehaviour
         {
             if (hit.collider != null)
             {
-                if (hit.collider.gameObject.tag == "Spikey") { SoundManager.PlaySound("BatChase"); return true; }
+                if (hit.collider.gameObject.tag == "Spikey") { return true; }
             }
         }
         return false;
