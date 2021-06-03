@@ -14,6 +14,7 @@ public class SoundManager : MonoBehaviour {
 
     Scene currentScene;
     string sceneName;
+    private bool passed = false;
 
     private float musicVolume = 0.1f;
     private float sfxVolume = 0.1f;
@@ -141,6 +142,12 @@ public class SoundManager : MonoBehaviour {
             {
                 PlaySound("SongGame");
             }
+        }
+        if (audiosrc.isPlaying && sceneName == "MainMenu" && !passed)
+        {
+            StopSound();
+            PlaySound("Song");
+            passed = true;
         }
 
         audiosrc.volume = musicVolume;
