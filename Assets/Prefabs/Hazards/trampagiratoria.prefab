@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7189720948302786679}
   m_Layer: 22
   m_Name: trampagiratoria
-  m_TagString: Enemies
+  m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,3 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03decee87701c144fa1ef654412a0fc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: 0
