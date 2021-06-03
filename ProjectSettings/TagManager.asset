@@ -55,6 +55,7 @@ TagManager:
   - MovingPTrigger
   - MovingP
   - Transitor
+  - Hazard
   layers:
   - Default
   - TransparentFX
