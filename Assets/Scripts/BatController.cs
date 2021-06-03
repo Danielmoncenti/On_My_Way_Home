@@ -126,7 +126,7 @@ public class BatController : MonoBehaviour
         {
             if (hit.collider != null)
             {
-                if (hit.collider.gameObject.tag == "Spikey") { return true; }
+                if (hit.collider.gameObject.tag == "Spikey") { SoundManager.PlaySound("BatChase"); return true; }
             }
         }
         return false;
@@ -149,9 +149,13 @@ public class BatController : MonoBehaviour
         if (rightCollision || leftCollision) { 
             if (currentSpeedV == -baseSpeed) currentSpeedV = -maxSpeed;
             else if (currentSpeedV == baseSpeed) { currentSpeedV = -maxSpeed; }
+         
+          
+
             actNormal = false;
+        
             isMad = true;
-            SoundManager.PlaySound("BatChase");
+          
 
         }
     }
