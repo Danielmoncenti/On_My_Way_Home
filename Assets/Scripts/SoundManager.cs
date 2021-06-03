@@ -142,7 +142,7 @@ public class SoundManager : MonoBehaviour {
                 PlaySound("SongGame");
             }
         }
-        
+
         audiosrc.volume = musicVolume;
 
         audiosrc2.volume = sfxVolume;
