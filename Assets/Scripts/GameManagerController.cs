@@ -151,6 +151,7 @@ public class GameManagerController : MonoBehaviour
     {
         if (totalLifes < 0)
         {
+            SoundManager.StopSound();
             SceneManager.LoadScene("GameOver");
             Destroy(this);
         }

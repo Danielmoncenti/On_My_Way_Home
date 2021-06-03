@@ -37,5 +37,12 @@ public class TransitionsController : MonoBehaviour
 
     public void SetOut() { a_out = true; }
 
-    void SetScene() { SceneManager.LoadScene(nextscene); }
+    void SetScene() {
+        if (nextscene == "Win") {
+            SoundManager.StopSound();
+            SceneManager.LoadScene(nextscene);
+        }else { 
+            SceneManager.LoadScene(nextscene); 
+        }
+    }
 }
