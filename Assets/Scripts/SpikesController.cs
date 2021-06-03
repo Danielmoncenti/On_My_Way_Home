@@ -50,5 +50,13 @@ public class SpikesController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        else if (collision.gameObject.tag == "Mushroom")
+        {
+            Destroy(gameObject);
+        }
+        else if (collision.gameObject.tag == "Hazard")
+        {
+            Destroy(gameObject);
+        }
     }
 }
